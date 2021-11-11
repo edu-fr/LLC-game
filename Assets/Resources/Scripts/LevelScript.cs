@@ -1,20 +1,28 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Resources.Scripts
 {
     public class LevelScript : MonoBehaviour
     {
-        public GrammarScript GrammarScript;
-        
+        public GameObject grammarObject;
+        private GrammarScript _grammar;
+        private List<char> _lambdaProducers = new List<char>();
+
         // Start is called before the first frame update
         void Start()
         {
             // Get Current grammar
+            _grammar = grammarObject.GetComponent<GrammarScript>();
             // Analyse productions
-            
+            _grammar.Setup();
+
+
             // Discover productions that could be removed on phase 1
+
             // Discover productions that need to me inserted on phase 1
-            
+
             // Discover productions that could be removed on phase 2
             // Discover productions that need to me inserted on phase 2
         }

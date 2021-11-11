@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b64eba9a-8d7c-43aa-bf83-311efd04a7b2" name="Changes" comment="" />
+    <list default="true" id="1606d9ae-4ab0-4fca-be19-bcdf3ad18500" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/LevelScript.cs" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProjectId" id="200Njm8k5Ynm8MHfteOiNTYawuo" />
+  <component name="ProjectId" id="20jCIFI5KQ6n5yt70IH1g2D5Euy" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -20,6 +17,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -47,22 +45,29 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b64eba9a-8d7c-43aa-bf83-311efd04a7b2" name="Changes" comment="" />
-      <created>1635177685507</created>
+      <changelist id="1606d9ae-4ab0-4fca-be19-bcdf3ad18500" name="Changes" comment="" />
+      <created>1636548530626</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1635177685507</updated>
-      <workItem from="1635177689820" duration="568000" />
-      <workItem from="1635178273864" duration="6844000" />
+      <updated>1636548530626</updated>
+      <workItem from="1636548537421" duration="865000" />
+      <workItem from="1636568009494" duration="5142000" />
+      <workItem from="1636574809908" duration="2777000" />
+      <workItem from="1636577655313" duration="39000" />
+      <workItem from="1636632564110" duration="3408000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

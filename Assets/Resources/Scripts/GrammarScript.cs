@@ -48,13 +48,13 @@ namespace Resources.Scripts
         /* Phase 1 code */
         private void ExecutePhase1()
         {
-            SetLambdaProducers();
-            // DebugPrintLambdaProducers();
+            SetLambdaProducers(); 
+            DebugPrintLambdaProducers();
             SetInsertablePhase1();
-            // DebugPrintPhaseProductions(ProductionsPhase1);
+            DebugPrintPhaseProductions(ProductionsPhase1, 1);
             SetRemovablePhase1();
             RemoveLambdaProductionsFromPhase1();
-            // DebugPrintPhaseProductions(ProductionsPhase1);
+            DebugPrintPhaseProductions(ProductionsPhase1, 1);
         }
 
         private void InitializeLists()
@@ -103,10 +103,28 @@ namespace Resources.Scripts
                     {
                         if (t != lambdaProducer) continue;
                         var newString = new StringBuilder();
-                        for (var j = 0; j < characterChain.Length; j++)
+                        var variableCount = 0;
+                        
+                        for (var j = 0; j < characterChain.Length; j++)         // Count how many variations we be produced
                         {
-                            if (characterChain[j] == t) continue;
-                            newString.Append(characterChain[j]);
+                            if (characterChain[j] == t)
+                            {
+                                variableCount += 1;
+                            }
+                        }
+
+                        for (var k = 0; k < variableCount; k++)                 // Produce each variation
+                        {
+                            var variationCount = variableCount;
+                            for (var j = 0; j < characterChain.Length; j++)
+                            {
+                                if (characterChain[j] == t)
+                                {
+                                    variableCount -= 1;
+                                    continue;
+                                }
+                                newString.Append(characterChain[j]);
+                            }    
                         }
                         ProductionsPhase1.Add(new Production(production._in, newString.ToString()));
                     }
@@ -132,9 +150,9 @@ namespace Resources.Scripts
             }
         }
 
-        private void DebugPrintPhaseProductions(List<Production> phaseProductions)
+        private void DebugPrintPhaseProductions(List<Production> phaseProductions, int phaseNumber)
         {
-            print("Current productions:");
+            print("Productions phase " + phaseNumber + ":");
             foreach (var production in phaseProductions)
             {
                 print(production._in + " => " + production._out);
@@ -150,13 +168,30 @@ namespace Resources.Scripts
                 print(producer);
             }   
         }
+
+        private void DebugPrintPhaseRemovables()
+        {
+            if (LambdaProducers.Count <= 0) return;
+            print("Phase removables: ");
+            foreach (var removable in RemovablePhase1)
+            {
+                print(removable);
+            }
+        }
         
         /* Phase 2 code */
         private void ExecutePhase2()
         {
             SetUnitProductions();
+            DebugPrintUnitProductions();
             SetInsertablePhase2();
-            // DebugPrintUnitProductions();
+            
+            print("PHASE 2 FINAL TEST: ");
+            print("Phase 1: ");
+            DebugPrintPhaseProductions(ProductionsPhase1, 1);
+            
+            print("Phase 2: ");
+            DebugPrintPhaseProductions(ProductionsPhase2, 2);
         }
         
         private void SetUnitProductions()
@@ -201,11 +236,7 @@ namespace Resources.Scripts
                     }
                 }
             }
-            print("Phase 1: ");
-            DebugPrintPhaseProductions(ProductionsPhase1);
-            
-            print("Phase 2: ");
-            DebugPrintPhaseProductions(ProductionsPhase2);
+
         }
         
         public Production[] GetRemovablePhase3()

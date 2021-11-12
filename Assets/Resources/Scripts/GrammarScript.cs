@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Resources.Scripts
@@ -25,14 +26,43 @@ namespace Resources.Scripts
         public Production[] Productions;
         public char StartVariable;
 
+        /* Phase 1 variables */
         [NonSerialized] public List<char> LambdaProducers;
         [NonSerialized] public List<Production> ProductionsPhase1;
+        [NonSerialized] public List<char> RemovablePhase1;
+
+        /* Phase 2 variables */
+        [NonSerialized] public List<Tuple<char, List<char>>> UnitProductions;
+        [NonSerialized] public List<Production> ProductionsPhase2;
+        
+        
+        /* Phase 3 variables */
 
         public void Setup()
         {
+            InitializeLists();
+            ExecutePhase1();
+            ExecutePhase2();
+        }
+        
+        /* Phase 1 code */
+        private void ExecutePhase1()
+        {
             SetLambdaProducers();
+            // DebugPrintLambdaProducers();
             SetInsertablePhase1();
-            
+            // DebugPrintPhaseProductions(ProductionsPhase1);
+            SetRemovablePhase1();
+            RemoveLambdaProductionsFromPhase1();
+            // DebugPrintPhaseProductions(ProductionsPhase1);
+        }
+
+        private void InitializeLists()
+        {
+            LambdaProducers = new List<char>();
+            ProductionsPhase1 = new List<Production>();
+            RemovablePhase1 = new List<char>();
+            UnitProductions = new List<Tuple<char, List<char>>>();
         }
 
         private void SetLambdaProducers()
@@ -52,19 +82,10 @@ namespace Resources.Scripts
             }
 
             LambdaProducers.AddRange(newLambdaProducers);
-            
-            /* Debug print */
-            if (LambdaProducers.Count <= 0) return;
-            print("Lambda producers: ");
-            foreach (var producer in LambdaProducers)
-            {
-                print(producer);
-            }
         }
 
         private void SetInsertablePhase1()
-        {
-            ProductionsPhase1 = new List<Production>();
+        { 
             /* Add all productions to the new list */
             foreach (var production in Productions)
             {
@@ -91,39 +112,101 @@ namespace Resources.Scripts
                     }
                 }
             }
+        }
+        
+        private void SetRemovablePhase1()
+        {
+            foreach (var production in ProductionsPhase1.Where(production => production._out == "l"))
+            {
+                RemovablePhase1.Add(production._in);
+            }
+        }
 
-            print("Productions phase 1:");
-            foreach (var production in ProductionsPhase1)
+        private void RemoveLambdaProductionsFromPhase1()
+        {
+            if (RemovablePhase1.Count < 1) return;
+            var removeList = ProductionsPhase1.Where(production => production._out == "l").ToList();
+            foreach (var removable in removeList)
+            {
+                ProductionsPhase1.Remove(removable);
+            }
+        }
+
+        private void DebugPrintPhaseProductions(List<Production> phaseProductions)
+        {
+            print("Current productions:");
+            foreach (var production in phaseProductions)
             {
                 print(production._in + " => " + production._out);
             }
-            
-        }
-        
-        public Production[] GetRemovablePhase1()
-        {
-            
-            return null; 
-        }
-        
-        public Production[] GetInsertablePhase1()
-        {
-            
-            return null; 
         }
 
-        public Production[] GetRemovablePhase2()
+        private void DebugPrintLambdaProducers()
         {
-            
-            return null; 
+            if (LambdaProducers.Count <= 0) return;
+            print("Lambda producers: ");
+            foreach (var producer in LambdaProducers)
+            {
+                print(producer);
+            }   
         }
         
-        public Production[] GetInsertablePhase2()
+        /* Phase 2 code */
+        private void ExecutePhase2()
         {
-            
-            return null; 
+            SetUnitProductions();
+            SetInsertablePhase2();
+            // DebugPrintUnitProductions();
         }
         
+        private void SetUnitProductions()
+        {
+            foreach (var variable in Variables)
+                UnitProductions.Add(new Tuple<char, List<char>>(variable, new List<char>()));
+
+            foreach (var tuple in UnitProductions)
+            {
+                foreach (var production in ProductionsPhase1)
+                {
+                    if (tuple.Item1 != production._in) continue;            // If not the same producer
+                    if (production._out.Length > 1) continue;               // If production is not a unit
+                    if (char.IsUpper(production._out.ToCharArray()[0]))     // If it's a variable
+                        tuple.Item2.Add(production._out.ToCharArray()[0]);  // Add to the tuple list
+                }
+            }
+        }
+
+        private void DebugPrintUnitProductions()
+        {
+            foreach (var tuple in UnitProductions)
+            {
+                print("Fecho de " + tuple.Item1 + ": ");
+                foreach (var variable in tuple.Item2)
+                {
+                    print(variable);
+                }
+            }
+        }
+        
+        private void SetInsertablePhase2()
+        {
+            ProductionsPhase2 = ProductionsPhase1.DeepClone();
+            foreach (var tuple in UnitProductions.Where(tuple => tuple.Item2.Count > 0))
+            {
+                foreach (var producer in tuple.Item2)
+                {
+                    foreach (var production in ProductionsPhase1.Where(production => production._in == producer))
+                    {
+                        ProductionsPhase2.Add(new Production(tuple.Item1, production._out));
+                    }
+                }
+            }
+            print("Phase 1: ");
+            DebugPrintPhaseProductions(ProductionsPhase1);
+            
+            print("Phase 2: ");
+            DebugPrintPhaseProductions(ProductionsPhase2);
+        }
         
         public Production[] GetRemovablePhase3()
         {
@@ -131,7 +214,5 @@ namespace Resources.Scripts
             return null; 
         }
 
-
-      
     }
 }

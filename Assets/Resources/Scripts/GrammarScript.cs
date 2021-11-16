@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Resources.Scripts
 {
@@ -31,6 +33,9 @@ namespace Resources.Scripts
         [NonSerialized] public List<Production> RemovablePhase1;
         [NonSerialized] public List<Production> ProductionsPhase1;
         
+        [NonSerialized] public List<Tuple<char, List<char>>> ReachableFrom;
+        [NonSerialized] public List<Production> ProductionsPhase1AfterRemoveUnreachable;
+        
         
         /* Phase 2 variables */
         [NonSerialized] public List<char> LambdaProducers;
@@ -40,6 +45,7 @@ namespace Resources.Scripts
         /* Phase 3 variables */
         [NonSerialized] public List<Tuple<char, List<char>>> UnitProductions;
         [NonSerialized] public List<Production> ProductionsPhase3;
+        [NonSerialized] public List<Production> ProductionsPhase3AfterRemovingUnitProductions;
         
         
 
@@ -47,8 +53,8 @@ namespace Resources.Scripts
         {
             InitializeLists();
             ExecutePhase1();
-            // ExecutePhase2();
-            // ExecutePhase3();
+            ExecutePhase2();
+            ExecutePhase3();
         }
 
         private void InitializeLists()
@@ -56,12 +62,16 @@ namespace Resources.Scripts
             UsefulVariables = new List<char>();
             RemovablePhase1 = new List<Production>();
             ProductionsPhase1 = new List<Production>();
-            
+            ReachableFrom = new List<Tuple<char, List<char>>>();
+            ProductionsPhase1AfterRemoveUnreachable = new List<Production>();
+        
             LambdaProducers = new List<char>();
             ProductionsPhase2 = new List<Production>();
             RemovablePhase2 = new List<char>();
             
             UnitProductions = new List<Tuple<char, List<char>>>();
+            ProductionsPhase3 = new List<Production>();
+            ProductionsPhase3AfterRemovingUnitProductions = new List<Production>();
         }
 
         
@@ -71,8 +81,8 @@ namespace Resources.Scripts
             SetUsefulVariables();
             SetRemovablePhase1();
             SetProductionsPhase1();
-            
-            // TO DO: Remove unreachable variables
+            DebugPrintListProduction(ProductionsPhase1, "Productions phase 1: ");
+            SetUnreachableStates();
         }
 
         private void SetUsefulVariables()
@@ -153,41 +163,181 @@ namespace Resources.Scripts
                 var foundProduction = ProductionsPhase1.Find(production => production._in == removable._in);
                 ProductionsPhase1.Remove(foundProduction);
             }
-            
         }
 
-        private void DebugPrintUsefulVariables()
+        private void SetUnreachableStates()
         {
-            if (UsefulVariables.Count < 1) return;
-            print("Useful variables: ");
-            foreach (var usefulVariable in UsefulVariables)
+            foreach (var usefulVariable in UsefulVariables)     // Add direct reachable list
             {
-                print(usefulVariable);
+                var reachableVariables = new List<char>();
+                foreach (var production in ProductionsPhase1.Where(production => production._in == usefulVariable))
+                {
+                    var productionOutCharArray = production._out.ToCharArray();
+                    for (var i = 0; i < productionOutCharArray.Length; i++)
+                        if (char.IsUpper(productionOutCharArray[i]))
+                            if(!reachableVariables.Contains(productionOutCharArray[i])) 
+                                reachableVariables.Add(productionOutCharArray[i]);
+                }
+                ReachableFrom.Add(new Tuple<char, List<char>>(usefulVariable, reachableVariables));
+            }
+            
+            foreach (var reachable in ReachableFrom)
+            {
+                DebugPrintListChar(reachable.Item2, "1st iteration: Reachable from " + reachable.Item1 + ": ");
+            }
+
+            var reachedEnd = false;
+            while (!reachedEnd)
+            {
+                var newReachableAdded = false;
+                foreach (var usefulVariable in UsefulVariables)     // For each variable on UsefulVariables
+                {
+                    // print("TRABALHANDO COM A VARIAVEL " + usefulVariable + "!!");
+                    var currentTuple = ReachableFrom.Find(reachable => reachable.Item1 == usefulVariable); // Been working useful variable
+                    foreach (var reachable in currentTuple.Item2)         // For each variable reachable from the current useful variable
+                    {
+                        // print("Olhando a variavel alcançável por " + usefulVariable + ": " + reachable);
+                        var reachableListPreviousSize = currentTuple.Item2.Count;
+                        // print("Numero de alcancáveis por " + usefulVariable + " antes de adicionar algo: " + reachableListPreviousSize);
+
+                        var currentInsideTuple = ReachableFrom.Find(x => x.Item1 == reachable);
+                        if (currentInsideTuple == null)
+                        {
+                            print("A variável " + reachable + " nao sai de lugar nenhum!! Ignorando... ");
+                            continue;
+                        }
+                        var currentInsideReachableList = currentInsideTuple.Item2;   // current reachable item from the useful variable 
+                        if (currentInsideReachableList.Count < 1)
+                        {
+                            // print("Não foram encontradas variaveis alcancáveis a partir de " + reachable + "!");
+                            continue;
+                        }
+                        // print("Foram encontradas " + currentInsideReachableList.Count + " variaveis alcancáveis a partir de " + reachable + "! Seguem: ");
+                        foreach (var item in currentInsideReachableList)
+                        {
+                            // print(item);
+                        }
+                        
+                        foreach (var insideReachableListItem in currentInsideReachableList)    // Add all not already present reachable items 
+                        {
+                            // print("Tentando adicionar a variavel " + insideReachableListItem + " a lista de variaveis chegaveis a partir de " + usefulVariable + "!");
+                            if (!currentTuple.Item2.Contains(insideReachableListItem))
+                            {
+                                // print("Foi possível adicionar o item " + insideReachableListItem + " na lista de chegaveis por " + usefulVariable + "!");
+                                currentTuple.Item2.Add(insideReachableListItem);
+                            }
+                            else
+                            {
+                                // print("Não foi possível adicionar pois já continha o item " + insideReachableListItem + " na lista de chegaveis por " + usefulVariable + "!");
+                            }
+                        }
+
+                        var reachableListSizeAfterInsertion = currentTuple.Item2.Count;
+                        
+                        // print("Numero de alcancáveis por " + usefulVariable + " depois de tentar adicionar algo: " + reachableListSizeAfterInsertion);
+                        
+                        if (reachableListSizeAfterInsertion - reachableListPreviousSize > 0)
+                        {
+                            // print("Houveram adições " + usefulVariable + " na lista de chegados a partir de " + usefulVariable +"!");
+                            newReachableAdded = true;
+                            break;
+                        }
+                    }
+
+                    if (newReachableAdded)
+                    {
+                        reachedEnd = false;
+                        break;
+                    }
+                }
+
+                if (!newReachableAdded)
+                {
+                    reachedEnd = true; 
+                }
+            }
+
+            foreach (var reachable in ReachableFrom)
+            {
+                DebugPrintListChar(reachable.Item2, "2nd iteration: Reachable from " + reachable.Item1 + ": ");
+            }
+            
+            
+            ProductionsPhase1AfterRemoveUnreachable = ProductionsPhase1.ToList().DeepClone();
+
+            foreach (var production in ProductionsPhase1)
+            {
+                if (!ReachableFrom.Find(x => x.Item1 == StartVariable).Item2.Contains(production._in))
+                {
+                    var foundVariable =
+                        ProductionsPhase1AfterRemoveUnreachable.Find(x =>
+                            x._in == production._in && x._out == production._out);
+                    ProductionsPhase1AfterRemoveUnreachable.Remove(foundVariable);
+                }
+            } 
+            
+            DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable, "After remove unreachable items: ");
+
+            var auxProductionsPhase1 = ProductionsPhase1AfterRemoveUnreachable.DeepClone();
+            foreach (var production in auxProductionsPhase1)
+            {
+                for (var i = 0; i < production._out.Length; i++)
+                {
+                    if (char.IsUpper((production._out[i])))
+                    {
+                        if (!UsefulVariables.Contains(production._out[i]))
+                        {
+                            ProductionsPhase1AfterRemoveUnreachable.Remove(ProductionsPhase1AfterRemoveUnreachable.Find(productionX =>
+                                productionX._in == production._in && productionX._out == production._out));
+                            break;
+                        }
+                    }
+                }
+            }
+            DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable, "After remove unreachable variables: ");
+        }
+
+        private void DebugPrintListChar(List<char> list, string text)
+        {
+            if (list.Count < 1) return;
+            print(text);
+            foreach (var item in list)
+            {
+                print(item);
             }
         }
         
+        private void DebugPrintListProduction(List<Production> list, string text)
+        {
+            if (list.Count < 1) return;
+            print(text);
+            foreach (var item in list)
+            {
+                print(item._in + " => " + item._out);
+            }
+        }
         
         /* Phase 2 (Empty productions) code */
         private void ExecutePhase2()
         {
             SetLambdaProducers(); 
-            DebugPrintLambdaProducers();
+            DebugPrintListChar(LambdaProducers, "Lambda producers: ");
             SetInsertablePhase2();
-            DebugPrintPhaseProductions(ProductionsPhase2, 1);
+            DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after inserting new productions: ");
             SetRemovablePhase2();
             RemoveLambdaProductionsFromPhase2();
-            DebugPrintPhaseProductions(ProductionsPhase2, 1);
+            DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after removing");
         }
 
     
         private void SetLambdaProducers()
         {
-            LambdaProducers = (from production in Productions where production._out[0] == 'l' select production._in).ToList();
+            LambdaProducers = (from production in ProductionsPhase1AfterRemoveUnreachable where production._out[0] == 'l' select production._in).ToList();
             var newLambdaProducers = new List<char>();
             // Discover Variables that produces lambda productions
             foreach (var lambdaProducer in LambdaProducers)
             {
-                foreach (var production in Productions)
+                foreach (var production in ProductionsPhase1AfterRemoveUnreachable)
                 {
                     if (production._out.Length > 1) continue;
                     if (production._out[0] == lambdaProducer)
@@ -201,12 +351,8 @@ namespace Resources.Scripts
         }
 
         private void SetInsertablePhase2()
-        { 
-            /* Add all productions to the new list */
-            foreach (var production in Productions)
-            {
-                ProductionsPhase2.Add(production);
-            }
+        {
+            ProductionsPhase2 = ProductionsPhase1AfterRemoveUnreachable.DeepClone();
             
             foreach (var lambdaProducer in LambdaProducers)
             {
@@ -265,35 +411,7 @@ namespace Resources.Scripts
                 ProductionsPhase2.Remove(removable);
             }
         }
-
-        private void DebugPrintPhaseProductions(List<Production> phaseProductions, int phaseNumber)
-        {
-            print("Productions phase " + phaseNumber + ":");
-            foreach (var production in phaseProductions)
-            {
-                print(production._in + " => " + production._out);
-            }
-        }
-
-        private void DebugPrintLambdaProducers()
-        {
-            if (LambdaProducers.Count <= 0) return;
-            print("Lambda producers: ");
-            foreach (var producer in LambdaProducers)
-            {
-                print(producer);
-            }   
-        }
-
-        private void DebugPrintPhaseRemovables()
-        {
-            if (LambdaProducers.Count <= 0) return;
-            print("Phase removables: ");
-            foreach (var removable in RemovablePhase2)
-            {
-                print(removable);
-            }
-        }
+        
         
         /* Phase 3 (Unit productions) code */
         private void ExecutePhase3()
@@ -303,13 +421,16 @@ namespace Resources.Scripts
             SetInsertablePhase3();
             
             print("PHASE 3 FINAL TEST: ");
-            print("Phase 2: ");
-            DebugPrintPhaseProductions(ProductionsPhase2, 1);
             
-            print("Phase 3: ");
-            DebugPrintPhaseProductions(ProductionsPhase3, 2);
+            DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions: ");
+            
+            DebugPrintListProduction(ProductionsPhase3, "Phase 3 productions: ");
+
+            RemoveUnitProductions();
+            
+            DebugPrintListProduction(ProductionsPhase3AfterRemovingUnitProductions.OrderBy(x => x._in).ToList(), "Final results: ");
         }
-        
+
         private void SetUnitProductions()
         {
             foreach (var variable in Variables)
@@ -320,7 +441,7 @@ namespace Resources.Scripts
                 foreach (var production in ProductionsPhase2)
                 {
                     if (tuple.Item1 != production._in) continue;            // If not the same producer
-                    if (production._out.Length > 1) continue;               // If production is not a unit
+                    if (production._out.Length > 1) continue;               // If production is not a unit, jump
                     if (char.IsUpper(production._out.ToCharArray()[0]))     // If it's a variable
                         tuple.Item2.Add(production._out.ToCharArray()[0]);  // Add to the tuple list
                 }
@@ -355,10 +476,17 @@ namespace Resources.Scripts
 
         }
         
-        public Production[] GetRemovablePhase3()
+        private void RemoveUnitProductions()
         {
-            
-            return null; 
+            ProductionsPhase3AfterRemovingUnitProductions = ProductionsPhase3.DeepClone();
+            foreach (var unitProduction in UnitProductions)
+            {
+                foreach (var innerProduction in unitProduction.Item2)
+                {
+                    ProductionsPhase3AfterRemovingUnitProductions.RemoveAll(production => production._out.Length == 1 &&
+                        production._in == unitProduction.Item1 && production._out.ToCharArray()[0] == innerProduction);
+                }
+            }
         }
 
     }

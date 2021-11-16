@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -272,6 +273,7 @@ namespace Resources.Scripts
                     var foundVariable =
                         ProductionsPhase1AfterRemoveUnreachable.Find(x =>
                             x._in == production._in && x._out == production._out);
+                    if (foundVariable._in == StartVariable) continue; // Make sure that the starting variable won't be excluded
                     ProductionsPhase1AfterRemoveUnreachable.Remove(foundVariable);
                 }
             } 
@@ -370,16 +372,27 @@ namespace Resources.Scripts
                         for (var j = 0; j < characterChain.Length; j++)         // Count how many variations will be produced
                         {
                             if (characterChain[j] == t)
+                            {
                                 variableCount += 1;
-                            
-                            
+                            }
                         }
 
-                        for (var k = 0; k < variableCount; k++)                 // Produce each variation
+                        var factorial = variableCount;
+
+                        for (var i = variableCount; i > 1; i--)
                         {
-                            var variationCount = variableCount;
+                            factorial = factorial * (i - 1);
+                        }
+                        
+                        print("Initial: " + variableCount + " FACTORIAL: " + factorial);
+
+                        for (var k = 0; k < factorial; k++)                 // Produce each variation
+                        {
+                            var variationCount = 0;
                             for (var j = 0; j < characterChain.Length; j++)
                             {
+                                
+                                // TODO: TREAT VARIATIONS 
                                 if (characterChain[j] == t)
                                 {
                                     variableCount -= 1;
@@ -469,6 +482,8 @@ namespace Resources.Scripts
                 {
                     foreach (var production in ProductionsPhase2.Where(production => production._in == producer))
                     {
+                        if (production._out.Length != 1) continue;
+                        if (tuple.Item1 == production._out.ToCharArray()[0]) continue; 
                         ProductionsPhase3.Add(new Production(tuple.Item1, production._out));
                     }
                 }

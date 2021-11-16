@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5515adcc88870243a7a59e77119a8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grammarObject: {fileID: 1228953401}
+  grammarObject: {fileID: 858532652}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +423,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &858532652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5805856958746334197, guid: 8345dbe5f9f08614b9b29a601a031fca, type: 3}
+  m_PrefabInstance: {fileID: 247672990}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1205332738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,11 +485,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
---- !u!1 &1228953401 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5805856958746334197, guid: 5a26e3f993f18e64a868ea064e8c41b0, type: 3}
-  m_PrefabInstance: {fileID: 2030533574}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2030533574
 PrefabInstance:
   m_ObjectHideFlags: 0

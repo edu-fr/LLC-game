@@ -392,13 +392,10 @@ namespace Resources.Scripts
                             }
 
                             if (ProductionsPhase2.Find(x =>
-                                x._in == production._in && x._out == newStringBuilder.ToString()) == null)
+                                    x._in == production._in && x._out == newStringBuilder.ToString()) == null &&
+                                newStringBuilder.ToString().Length > 0)
                             { 
                                 ProductionsPhase2.Add(new Production(production._in, newStringBuilder.ToString()));
-                            }
-                            else
-                            {
-                                print("Tentou colocar repetido!");
                             }
                         }
 
@@ -445,7 +442,7 @@ namespace Resources.Scripts
                 }
             }
             
-            for (var i = positions.Length - 1; i > 0; i--)
+            for (var i = positions.Length - 1; i >= 0; i--)
             { 
                 if (positions[i] == 0)
                 {

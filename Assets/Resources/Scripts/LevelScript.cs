@@ -26,7 +26,9 @@ namespace Resources.Scripts
             // Discover productions that could be removed on phase 2
             // Discover productions that need to me inserted on phase 2
         }
-
+    
+        // S -> ABaAA
+        
         // Update is called once per frame
         void Update()
         {

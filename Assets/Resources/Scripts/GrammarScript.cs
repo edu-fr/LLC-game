@@ -366,7 +366,6 @@ namespace Resources.Scripts
                     foreach (var t in characterChain)
                     {
                         if (t != lambdaProducer) continue;
-                        var newString = new StringBuilder();
                         var variableCount = 0;
                         
                         for (var j = 0; j < characterChain.Length; j++)         // Count how many variations will be produced
@@ -376,35 +375,84 @@ namespace Resources.Scripts
                                 variableCount += 1;
                             }
                         }
-
-                        var factorial = variableCount;
-
-                        for (var i = variableCount; i > 1; i--)
-                        {
-                            factorial = factorial * (i - 1);
-                        }
                         
-                        print("Initial: " + variableCount + " FACTORIAL: " + factorial);
-
-                        for (var k = 0; k < factorial; k++)                 // Produce each variation
+                        var variationsTable = BinTableGenerator(variableCount);
+                        for (var i = 0; i < math.pow(2, variableCount); i++)
                         {
-                            var variationCount = 0;
-                            for (var j = 0; j < characterChain.Length; j++)
+                            var variationRow = new List<int>();
+                            for (var j = 0; j < variableCount; j++)
                             {
-                                
-                                // TODO: TREAT VARIATIONS 
-                                if (characterChain[j] == t)
-                                {
-                                    variableCount -= 1;
-                                    continue;
-                                }
-                                newString.Append(characterChain[j]);
-                            }    
+                                variationRow.Add(variationsTable[i, j]);
+                            }
+                            var variation = GenerateVariation(characterChain.ToList(), variationRow.ToArray(), t);
+                            var newStringBuilder = new StringBuilder();
+                            foreach (var character in variation)
+                            {
+                                newStringBuilder.Append(character);
+                            }
+
+                            if (ProductionsPhase2.Find(x =>
+                                x._in == production._in && x._out == newStringBuilder.ToString()) == null)
+                            { 
+                                ProductionsPhase2.Add(new Production(production._in, newStringBuilder.ToString()));
+                            }
+                            else
+                            {
+                                print("Tentou colocar repetido!");
+                            }
                         }
-                        ProductionsPhase2.Add(new Production(production._in, newString.ToString()));
+
                     }
                 }
             }
+        }
+        
+        private int[,] BinTableGenerator(int columns)
+        {
+            var rows = (int) math.pow(2, columns);
+            var table = new int[rows, columns];
+
+            var changeNum = rows;
+            for (var j = 0; j < columns; j++)
+            {
+                changeNum /= 2;
+                var changeNumCounter = 0;
+                var current = true;
+                for (var i = 0; i < rows; i++)
+                {
+                    table[i, j] = current ? 1 : 0;
+                    changeNumCounter++;
+                    if (changeNumCounter >= changeNum)
+                    {
+                        current = !current;
+                        changeNumCounter = 0;
+                    } 
+                }
+            }
+            return table;
+        }
+
+        private List<char> GenerateVariation(List<char> charList, int[] positions, char variable)
+        {
+            var resultingList = charList.DeepClone();
+            var onStringPositions = new List<int>();
+
+            for (var i = 0; i < charList.Count; i++)
+            {
+                if (charList[i] == variable)
+                {
+                    onStringPositions.Add(i);
+                }
+            }
+            
+            for (var i = positions.Length - 1; i > 0; i--)
+            { 
+                if (positions[i] == 0)
+                {
+                    resultingList.RemoveAt(onStringPositions[i]);
+                }
+            }
+            return resultingList;
         }
         
         private void SetRemovablePhase2()

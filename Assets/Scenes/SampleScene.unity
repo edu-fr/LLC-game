@@ -244,6 +244,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5805856958746334196, guid: 8345dbe5f9f08614b9b29a601a031fca, type: 3}
+      propertyPath: Productions.Array.data[6]._out
+      value: SSaaSaSa
+      objectReference: {fileID: 0}
     - target: {fileID: 5805856958746334197, guid: 8345dbe5f9f08614b9b29a601a031fca, type: 3}
       propertyPath: m_Name
       value: Grammar 2

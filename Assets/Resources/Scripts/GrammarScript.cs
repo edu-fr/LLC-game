@@ -45,8 +45,9 @@ namespace Resources.Scripts
 
         /* Phase 3 variables */
         [NonSerialized] public List<Tuple<char, List<char>>> UnitProductions;
+        [NonSerialized] public List<Production> NonUnitProductions;
         [NonSerialized] public List<Production> ProductionsPhase3;
-        [NonSerialized] public List<Production> ProductionsPhase3AfterRemovingUnitProductions;
+        [NonSerialized] public List<Production> ResultingProductions;
         
         
 
@@ -54,8 +55,17 @@ namespace Resources.Scripts
         {
             InitializeLists();
             ExecutePhase1();
+            DebugPrintListProduction(ProductionsPhase1.OrderBy(x => x._in).ToList(), "Productions phase 1: ");
+            DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable.OrderBy(x => x._in).ToList(), "Productions phase 1 after removing unreachable: ");
+            
+            Debug.Log(" ================================================================= ");
             ExecutePhase2();
+            DebugPrintListProduction(ProductionsPhase2.OrderBy(x => x._in).ToList(), "Productions phase 2: ");
+            
+            Debug.Log(" ================================================================= ");
             ExecutePhase3();
+            DebugPrintListProduction(ResultingProductions.OrderBy(x => x._in).ToList(), "Productions phase 3 after removing unit: ");
+
         }
 
         private void InitializeLists()
@@ -71,8 +81,9 @@ namespace Resources.Scripts
             RemovablePhase2 = new List<char>();
             
             UnitProductions = new List<Tuple<char, List<char>>>();
+            NonUnitProductions = new List<Production>();
             ProductionsPhase3 = new List<Production>();
-            ProductionsPhase3AfterRemovingUnitProductions = new List<Production>();
+            ResultingProductions = new List<Production>();
         }
 
         
@@ -80,9 +91,9 @@ namespace Resources.Scripts
         private void ExecutePhase1()
         {
             SetUsefulVariables();
+            DebugPrintListChar(UsefulVariables, "Variáveis ÚTEIS: ");
             SetRemovablePhase1();
             SetProductionsPhase1();
-            DebugPrintListProduction(ProductionsPhase1, "Productions phase 1: ");
             SetUnreachableStates();
         }
 
@@ -182,10 +193,10 @@ namespace Resources.Scripts
                 ReachableFrom.Add(new Tuple<char, List<char>>(usefulVariable, reachableVariables));
             }
             
-            foreach (var reachable in ReachableFrom)
-            {
-                DebugPrintListChar(reachable.Item2, "1st iteration: Reachable from " + reachable.Item1 + ": ");
-            }
+            // foreach (var reachable in ReachableFrom)
+            // {
+            //     DebugPrintListChar(reachable.Item2, "1st iteration: Reachable from " + reachable.Item1 + ": ");
+            // }
 
             var reachedEnd = false;
             while (!reachedEnd)
@@ -204,7 +215,7 @@ namespace Resources.Scripts
                         var currentInsideTuple = ReachableFrom.Find(x => x.Item1 == reachable);
                         if (currentInsideTuple == null)
                         {
-                            print("A variável " + reachable + " nao sai de lugar nenhum!! Ignorando... ");
+                            // print("A variável " + reachable + " nao sai de lugar nenhum!! Ignorando... ");
                             continue;
                         }
                         var currentInsideReachableList = currentInsideTuple.Item2;   // current reachable item from the useful variable 
@@ -258,10 +269,10 @@ namespace Resources.Scripts
                 }
             }
 
-            foreach (var reachable in ReachableFrom)
-            {
-                DebugPrintListChar(reachable.Item2, "2nd iteration: Reachable from " + reachable.Item1 + ": ");
-            }
+            // foreach (var reachable in ReachableFrom)
+            // {
+            //     DebugPrintListChar(reachable.Item2, "2nd iteration: Reachable from " + reachable.Item1 + ": ");
+            // }
             
             
             ProductionsPhase1AfterRemoveUnreachable = ProductionsPhase1.ToList().DeepClone();
@@ -278,7 +289,7 @@ namespace Resources.Scripts
                 }
             } 
             
-            DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable, "After remove unreachable items: ");
+            // DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable, "After remove unreachable items: ");
 
             var auxProductionsPhase1 = ProductionsPhase1AfterRemoveUnreachable.DeepClone();
             foreach (var production in auxProductionsPhase1)
@@ -296,7 +307,7 @@ namespace Resources.Scripts
                     }
                 }
             }
-            DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable, "After remove unreachable variables: ");
+            // DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable, "After remove unreachable variables: ");
         }
 
         private void DebugPrintListChar(List<char> list, string text)
@@ -325,10 +336,10 @@ namespace Resources.Scripts
             SetLambdaProducers(); 
             DebugPrintListChar(LambdaProducers, "Lambda producers: ");
             SetInsertablePhase2();
-            DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after inserting new productions: ");
+            // DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after inserting new productions: ");
             SetRemovablePhase2();
             RemoveLambdaProductionsFromPhase2();
-            DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after removing");
+            // DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after removing");
         }
 
     
@@ -474,36 +485,65 @@ namespace Resources.Scripts
         /* Phase 3 (Unit productions) code */
         private void ExecutePhase3()
         {
+            RemoveUselessUnitProductions();
             SetUnitProductions();
+            Debug.Log("UNIT PRODUCTIONS: ");
             DebugPrintUnitProductions();
-            SetInsertablePhase3();
-            
-            print("PHASE 3 FINAL TEST: ");
-            
-            DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions: ");
-            
-            DebugPrintListProduction(ProductionsPhase3, "Phase 3 productions: ");
-
-            RemoveUnitProductions();
-            
-            DebugPrintListProduction(ProductionsPhase3AfterRemovingUnitProductions.OrderBy(x => x._in).ToList(), "Final results: ");
+            SetNonUnitProductions();
+            DebugPrintListProduction(NonUnitProductions, "Non unit productions: ");
+            SetResultingProductions();
         }
 
+        private void RemoveUselessUnitProductions()
+        {
+            ProductionsPhase3 = ProductionsPhase2.DeepClone();
+            ProductionsPhase3.RemoveAll(production => production._out.Length == 1 &&
+                        production._out.ToCharArray()[0] == production._in);
+        }
+        
         private void SetUnitProductions()
         {
             foreach (var variable in Variables)
                 UnitProductions.Add(new Tuple<char, List<char>>(variable, new List<char>()));
 
-            foreach (var tuple in UnitProductions)
+            var unitProductionWasAdd = true;
+            while (unitProductionWasAdd)
             {
-                foreach (var production in ProductionsPhase2)
+                unitProductionWasAdd = false;
+                foreach (var tuple in UnitProductions)
                 {
-                    if (tuple.Item1 != production._in) continue;            // If not the same producer
-                    if (production._out.Length > 1) continue;               // If production is not a unit, jump
-                    if (char.IsUpper(production._out.ToCharArray()[0]))     // If it's a variable
-                        tuple.Item2.Add(production._out.ToCharArray()[0]);  // Add to the tuple list
-                }
+                    foreach (var production in ProductionsPhase3)
+                    {
+                        if (tuple.Item1 != production._in) continue;            // If not the same producer
+                        if (production._out.Length > 1) continue;               // If production is not a unit, jump
+                        if (char.IsUpper(production._out.ToCharArray()[0]))     // If it's a variable
+                        {
+                            foreach (var variable in tuple.Item2.DeepClone())
+                            {
+                                foreach (var innerProduction in UnitProductions.Where(innerProduction => innerProduction.Item1 == variable))
+                                {
+                                    foreach (var innerInnerProduction in innerProduction.Item2)
+                                    {
+                                        if (!tuple.Item2.Contains(innerInnerProduction) && tuple.Item1 != innerInnerProduction)
+                                        {
+                                            tuple.Item2.Add(innerInnerProduction);  // Add to the tuple list
+                                            unitProductionWasAdd = true;
+                                        }
+                                        
+                                    }
+                                }
+                                
+                            }
+                            if (!tuple.Item2.Contains(production._out.ToCharArray()[0]))
+                            {
+                                tuple.Item2.Add(production._out.ToCharArray()[0]);  // Add to the tuple list
+                                unitProductionWasAdd = true;
+                            }
+                        }
+                    }
+                }    
             }
+            
         }
 
         private void DebugPrintUnitProductions()
@@ -517,37 +557,33 @@ namespace Resources.Scripts
                 }
             }
         }
-        
-        private void SetInsertablePhase3()
+
+        private void SetNonUnitProductions()
         {
-            ProductionsPhase3 = ProductionsPhase2.DeepClone();
-            foreach (var tuple in UnitProductions.Where(tuple => tuple.Item2.Count > 0))
+            foreach (var production in ProductionsPhase3)
             {
-                foreach (var producer in tuple.Item2)
+                if(production._out.Length > 1 || !char.IsUpper(production._out.ToCharArray()[0]))
+                    NonUnitProductions.Add(production);
+            }
+        }
+        
+        private void SetResultingProductions()
+        {
+            ResultingProductions = NonUnitProductions.DeepClone();
+            
+            foreach (var unitProductionTuple in UnitProductions.Where(unitProductionTuple => unitProductionTuple.Item2.Count > 0))
+            {
+                foreach (var unitProducer in unitProductionTuple.Item2)
                 {
-                    foreach (var production in ProductionsPhase2.Where(production => production._in == producer))
+                    foreach (var production in NonUnitProductions.Where(production => production._in == unitProducer))              // Para cada elemento do fecho, eu vejo as produções dele
                     {
-                        if (production._out.Length != 1) continue;
-                        if (tuple.Item1 == production._out.ToCharArray()[0]) continue; 
-                        ProductionsPhase3.Add(new Production(tuple.Item1, production._out));
+                         ResultingProductions.Add(new Production(unitProductionTuple.Item1, production._out));
                     }
                 }
             }
 
         }
         
-        private void RemoveUnitProductions()
-        {
-            ProductionsPhase3AfterRemovingUnitProductions = ProductionsPhase3.DeepClone();
-            foreach (var unitProduction in UnitProductions)
-            {
-                foreach (var innerProduction in unitProduction.Item2)
-                {
-                    ProductionsPhase3AfterRemovingUnitProductions.RemoveAll(production => production._out.Length == 1 &&
-                        production._in == unitProduction.Item1 && production._out.ToCharArray()[0] == innerProduction);
-                }
-            }
-        }
 
     }
 }

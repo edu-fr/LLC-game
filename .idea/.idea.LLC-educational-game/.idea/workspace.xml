@@ -9,6 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Slot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_UiFrameRateCounter.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="20jCIFI5KQ6n5yt70IH1g2D5Euy" />
   <component name="ProjectViewState">
@@ -69,7 +70,7 @@
       <workItem from="1637273171774" duration="1451000" />
       <workItem from="1642094788683" duration="11240000" />
       <workItem from="1642179211201" duration="6694000" />
-      <workItem from="1642257368251" duration="2723000" />
+      <workItem from="1642257368251" duration="4059000" />
     </task>
     <servers />
   </component>

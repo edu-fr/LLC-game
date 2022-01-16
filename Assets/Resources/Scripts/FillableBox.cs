@@ -1,16 +1,21 @@
 using System.Collections.Generic;
+using Coffee.UIEffects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Resources.Scripts
 {
     public class FillableBox : MonoBehaviour
     {
         private RectTransform _fillableBoxTransform;
-        [SerializeField] private GameObject scrollRectObject;
+        [SerializeField] private GameObject titleBox;
         [SerializeField] private GameObject productionBoxes;
+        [SerializeField] private GameObject scrollBar;
+        private ColorBlock _scrollBarDefaultColorBlock;
         public List<GrammarScript.Production> productionList;
-        public Transform productionBoxPrefab;
+        public List<Transform> productionBoxList;
+        public Transform productionBoxPrefab;   
 
         // fillable box attributes
         [SerializeField] private float titleBoxOffset;
@@ -26,6 +31,7 @@ namespace Resources.Scripts
         {
             productionList = new List<GrammarScript.Production>();
             _productionBoxHeight = productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y;
+            _scrollBarDefaultColorBlock = scrollBar.GetComponent<Scrollbar>().colors;
         }
         
         public void FillWithProductions(List<GrammarScript.Production> productions)
@@ -42,12 +48,34 @@ namespace Resources.Scripts
                 var productionsBoxTransform = productionBoxes.transform;
                 var productionsBoxPosition = productionsBoxTransform.position;
                 var newProductionBox = Instantiate(productionBoxPrefab, new Vector3(productionsBoxPosition.x, productionsBoxPosition.y, productionsBoxPosition.z), Quaternion.identity, productionBoxes.transform);
-                newProductionBox.transform.position -= new Vector3(0, _productionBoxHeight * productionCounter, 0);
+                productionBoxList.Add(newProductionBox);
+                var newProductionTransform = newProductionBox.transform;
+                var newProductionPosition = newProductionTransform.position;
+                newProductionPosition -= new Vector3(0, _productionBoxHeight * productionCounter, 0);
+                newProductionTransform.position = newProductionPosition;
+                // Set new original position
+                newProductionBox.GetComponent<Draggable>().OriginalPosition = newProductionTransform.localPosition;
                 // Change it's text
                 newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
                 productionCounter++;
-                
             }
+            SetGrayScale(false);
+        }
+
+        private void SetGrayScale(bool option)
+        {
+            var currentEffectMode = option ? EffectMode.Grayscale : EffectMode.None;
+            var currentColorBlock = option ? ColorBlock.defaultColorBlock : _scrollBarDefaultColorBlock;
+
+            gameObject.GetComponent<UIEffect>().effectMode = currentEffectMode;
+            titleBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
+            foreach (var productionBox in productionBoxList)
+            {
+                productionBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
+            }
+
+            scrollBar.GetComponent<Scrollbar>().colors = currentColorBlock;
+
         }
     }
 }

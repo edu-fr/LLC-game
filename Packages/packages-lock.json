@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.coffee.ui-effect": {
+      "version": "file:D:/Documents/Facul/TCC/Implementação/Assets/UI Effects/com.coffee.ui-effect-4.0.0-preview.9/package",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "7.0.1",
       "depth": 0,

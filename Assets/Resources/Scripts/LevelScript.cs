@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Resources.Scripts
@@ -10,15 +11,22 @@ namespace Resources.Scripts
         private GrammarScript _grammar;
         private List<char> _lambdaProducers = new List<char>();
 
-        // Start is called before the first frame update
-        void Start()
+        // ReSharper disable once InconsistentNaming
+        [SerializeField] private GameObject _CFL_Box;
+
+        private void Awake()
+        {
+            
+        }
+        
+        private void Start()
         {
             // Get Current grammar
             _grammar = grammarObject.GetComponent<GrammarScript>();
             // Analyse productions
             _grammar.Setup();
-
-
+            _CFL_Box.GetComponent<FillableBox>().FillWithProductions(_grammar.Productions.ToList());
+            
             // Discover productions that could be removed on phase 1
 
             // Discover productions that need to me inserted on phase 1
@@ -30,7 +38,7 @@ namespace Resources.Scripts
         // S -> ABaAA
         
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             /*
              * switch(phase) {

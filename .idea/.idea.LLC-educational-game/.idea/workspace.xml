@@ -10,6 +10,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Slot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/ColorBlock.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/ProductionsBox.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Scrollbar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -73,7 +74,9 @@
       <workItem from="1642094788683" duration="11240000" />
       <workItem from="1642179211201" duration="6694000" />
       <workItem from="1642257368251" duration="4651000" />
-      <workItem from="1642351600414" duration="13548000" />
+      <workItem from="1642351600414" duration="13602000" />
+      <workItem from="1642439534890" duration="2465000" />
+      <workItem from="1642536964733" duration="2924000" />
     </task>
     <servers />
   </component>

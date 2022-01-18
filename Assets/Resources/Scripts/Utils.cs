@@ -1,11 +1,12 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace Resources.Scripts
 {
     public static class Utils
     {
-      
+        public static readonly float ScreenDif = Display.main.systemWidth / 1280;
     }
     
     public static class ExtensionMethods

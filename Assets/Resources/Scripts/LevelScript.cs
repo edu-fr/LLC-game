@@ -13,7 +13,7 @@ namespace Resources.Scripts
 
         // ReSharper disable once InconsistentNaming
         [SerializeField] private GameObject _CFL_Box;
-
+        [SerializeField] private GameObject variablesBox;
         private void Awake()
         {
             
@@ -25,19 +25,12 @@ namespace Resources.Scripts
             _grammar = grammarObject.GetComponent<GrammarScript>();
             // Analyse productions
             _grammar.Setup();
-            _CFL_Box.GetComponent<FillableBox>().FillWithProductions(_grammar.Productions.ToList());
+            _CFL_Box.GetComponent<ProductionsBox>().Fill(_grammar.Productions.ToList());
+            variablesBox.GetComponent<VariablesBox>().Fill(_grammar.Variables);
             
-            // Discover productions that could be removed on phase 1
-
-            // Discover productions that need to me inserted on phase 1
-
-            // Discover productions that could be removed on phase 2
-            // Discover productions that need to me inserted on phase 2
+           
         }
     
-        // S -> ABaAA
-        
-        // Update is called once per frame
         private void Update()
         {
             /*

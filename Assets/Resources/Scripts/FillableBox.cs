@@ -1,20 +1,23 @@
 using System.Collections.Generic;
+using System.Linq;
 using Coffee.UIEffects;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace Resources.Scripts
 {
-    public abstract class FillableBox : MonoBehaviour
+    public abstract class FillableBox : MonoBehaviour, IDropHandler
     {
         protected RectTransform FillableBoxTransform;
         [SerializeField] protected GameObject titleBox;
         [SerializeField] protected float titleBoxOffset;
         [SerializeField] protected GameObject scrollBar;
         protected ColorBlock ScrollBarDefaultColorBlock;
-        
+
         protected virtual void Awake()
         {
             FillableBoxTransform = GetComponent<RectTransform>();
@@ -34,5 +37,9 @@ namespace Resources.Scripts
             titleBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
             scrollBar.GetComponent<Scrollbar>().colors = currentColorBlock;
         }
+
+        public abstract void RemoveFromLists(GameObject box);
+        public abstract void AddToLists(GameObject box);
+        public abstract void OnDrop(PointerEventData eventData);
     }
 }

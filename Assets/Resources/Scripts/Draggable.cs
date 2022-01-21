@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,6 +11,8 @@ namespace Resources.Scripts
         private CanvasGroup _canvasGroup;
         public Vector3 OriginalPosition { get; set; }
         public bool CanBeDragged;
+        public GameObject AttachedTo;
+        public bool IsOnValidPositionToDrop;
         private void Awake()
         {
             _canvas = FindObjectOfType<Canvas>();
@@ -19,20 +22,23 @@ namespace Resources.Scripts
 
         private void Start()
         {
-            CanBeDragged = false;
+            IsOnValidPositionToDrop = false;
         }
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            print("test");
+            // print("Pointer down");
         }
      
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (!CanBeDragged) return;
-            print("Begin dragging");
+            IsOnValidPositionToDrop = false;
             _canvasGroup.alpha = .6f;
             _canvasGroup.blocksRaycasts = false;
+            // Remove from current box and set the Canvas as new parent
+            AttachedTo.GetComponentInParent<FillableBox>().RemoveFromLists(gameObject);
+            gameObject.transform.SetParent(_canvas.transform);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -44,10 +50,17 @@ namespace Resources.Scripts
         public void OnEndDrag(PointerEventData eventData)
         {
             if (!CanBeDragged) return;
-            print("end dragging");
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.alpha = 1f;
-            transform.localPosition = OriginalPosition;
+
+            if (!IsOnValidPositionToDrop)
+            {
+                print("Not on valid position!");
+                transform.SetParent(AttachedTo.transform);
+                transform.localPosition = OriginalPosition;
+                AttachedTo.GetComponentInParent<FillableBox>().AddToLists(gameObject);
+            }
+
         }
 
     }

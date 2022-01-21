@@ -25,8 +25,8 @@ namespace Resources.Scripts
             _grammar = grammarObject.GetComponent<GrammarScript>();
             // Analyse productions
             _grammar.Setup();
-            _CFL_Box.GetComponent<ProductionsBox>().Fill(_grammar.Productions.ToList());
-            variablesBox.GetComponent<VariablesBox>().Fill(_grammar.Variables);
+            _CFL_Box.GetComponent<ProductionsBox>().FillWithProductions(_grammar.Productions.ToList());
+            variablesBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.Variables);
             
            
         }

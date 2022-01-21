@@ -8,7 +8,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Slot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/ColorBlock.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/ProductionsBox.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Scrollbar.cs" root0="SKIP_HIGHLIGHTING" />
@@ -76,7 +75,10 @@
       <workItem from="1642257368251" duration="4651000" />
       <workItem from="1642351600414" duration="13602000" />
       <workItem from="1642439534890" duration="2465000" />
-      <workItem from="1642536964733" duration="2924000" />
+      <workItem from="1642536964733" duration="6028000" />
+      <workItem from="1642608175687" duration="3700000" />
+      <workItem from="1642699143545" duration="7587000" />
+      <workItem from="1642783820359" duration="3764000" />
     </task>
     <servers />
   </component>

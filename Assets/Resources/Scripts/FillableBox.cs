@@ -28,7 +28,7 @@ namespace Resources.Scripts
             ScrollBarDefaultColorBlock = scrollBar.GetComponent<Scrollbar>().colors;
         }
         
-        protected virtual void SetGrayScale(bool option)
+        public virtual void SetGrayScale(bool option)
         {
             var currentEffectMode = option ? EffectMode.Grayscale : EffectMode.None;
             var currentColorBlock = option ? ColorBlock.defaultColorBlock : ScrollBarDefaultColorBlock;

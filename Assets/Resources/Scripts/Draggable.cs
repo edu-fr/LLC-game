@@ -9,9 +9,11 @@ namespace Resources.Scripts
         private Canvas _canvas;
         private RectTransform _rectTransform;
         private CanvasGroup _canvasGroup;
+        public Vector3 LastValidPosition { get; set; }
         public Vector3 OriginalPosition { get; set; }
         public bool CanBeDragged;
         public GameObject AttachedTo;
+        public GameObject OriginalAttachedObject;
         public bool IsOnValidPositionToDrop;
         private void Awake()
         {
@@ -57,7 +59,7 @@ namespace Resources.Scripts
             {
                 print("Not on valid position!");
                 transform.SetParent(AttachedTo.transform);
-                transform.localPosition = OriginalPosition;
+                transform.localPosition = LastValidPosition;
                 AttachedTo.GetComponentInParent<FillableBox>().AddToLists(gameObject);
             }
 

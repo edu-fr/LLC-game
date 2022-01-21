@@ -25,11 +25,15 @@ namespace Resources.Scripts
             _productionBoxHeight = (productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y)* Utils.ScreenDif;
         }
 
-        protected override void SetGrayScale(bool option)
+        public override void SetGrayScale(bool option)
         {
             base.SetGrayScale(option);
-            
+            var currentEffectMode = option ? EffectMode.Grayscale : EffectMode.None;
 
+            foreach (var productionBox in productionBoxList)
+            {
+                productionBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
+            }
         }
         
         public void FillWithProductions(List<GrammarScript.Production> productions)
@@ -56,6 +60,8 @@ namespace Resources.Scripts
                 newProductionTransform.position = newProductionPosition;
                 // Set new original position
                 newProductionBox.GetComponent<Draggable>().OriginalPosition = newProductionTransform.localPosition;
+                newProductionBox.GetComponent<Draggable>().LastValidPosition =
+                    newProductionBox.GetComponent<Draggable>().OriginalPosition;
                 // Change it's text
                 newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
                 AddToLists(newProductionBox.gameObject);

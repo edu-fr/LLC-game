@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Resources.Scripts
 {
@@ -14,6 +16,10 @@ namespace Resources.Scripts
         // ReSharper disable once InconsistentNaming
         [SerializeField] private GameObject _CFL_Box;
         [SerializeField] private GameObject variablesBox;
+        [SerializeField] private GameObject usefulVariablesBox;
+        [SerializeField] private GameObject uselessVariablesBox;
+        private int currentPhase;
+        private int currentPart;
         private void Awake()
         {
             
@@ -26,40 +32,71 @@ namespace Resources.Scripts
             // Analyse productions
             _grammar.Setup();
             _CFL_Box.GetComponent<ProductionsBox>().FillWithProductions(_grammar.Productions.ToList());
+            _CFL_Box.GetComponent<ProductionsBox>().SetGrayScale(true);
             variablesBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.Variables);
-            
-           
+
+            currentPhase = 1;
+            currentPart = 1;
+
         }
-    
+
+        public void TryNextPhase()
+        {
+            switch (currentPhase)
+            {
+                case 1:
+
+                    switch (currentPart)
+                    {
+                        case 1:
+                            Phase1Part1();
+                            break;
+                        
+                        case 2:
+
+                            break;
+                    }
+                    
+                    break;
+                
+                case 2:
+
+                    break;
+                
+            }
+        }
+
+        private void Phase1Part1()
+        {
+            var currentVariablesOnVariablesBox = variablesBox.GetComponent<VariablesBox>().variableList;
+            if (currentVariablesOnVariablesBox.Count > 0)
+            {
+                print("Ainda há variáveis que devem ser movidas!");
+                return;
+            }
+            
+            var currentVariablesOnUsefulBox = usefulVariablesBox.GetComponent<VariablesBox>().variableList;
+            var currentVariablesOnUselessBox = uselessVariablesBox.GetComponent<VariablesBox>().variableList;
+            var correctVariables = _grammar.UsefulVariables;
+
+            if (correctVariables.Count != currentVariablesOnUsefulBox.Count) print("ERRADO PELO NUM DE ELEMENTOS!");
+            else
+            {
+                foreach (var variable in currentVariablesOnUsefulBox)
+                {
+                    if (!correctVariables.Contains(variable))
+                    {
+                        print("A variavel " + variable + " não faz parte da lista de variáveis corretas!");
+                        return;
+                    } 
+                }
+                print("Correto! Pode prosseguir para a próxima fase!");
+            }
+        }
         private void Update()
         {
-            /*
-             * switch(phase) {
-             *
-             *  phase1.1: // Definicao do conjunto vazio
-             *      permitir que o player mova as variáveis que produzem vazio para os espaços corretos
-             *      espera o player 
-             *  
-             *  phase1.2: // Produções vazias
-             *      permitir que o player crie novas produções (produções adicionais para remover as vazias)
-             *      permitir que o player exclua produções (produçÕes que produzem lambda)
-             *      espera que o player clique em concluir etapa (ou o tempo acabe)
-             * 
-             *  phase2.1: // Definicao dos fechos
-             *      permitir que o player mova as variaveis solitarias que sao produzidas por cada variavel
-             *      espera que o player clique em concluir etapa
-             *
-             *  phase2.2: // Substituir produções unitárias
-             *      permitir que o player exclua producoes unitarias
-             *      permitir que o player introduza outras producoes no lugar dessas unitarias
-             *      espera que o player clique em concluir etapa
-             * 
-             *  phase3: // Excluir produções inuteis
-             *      permite que o player jogue fora produções inúteis
-             *      espera o player clicar em concluir etapa
-             * 
-             * }
-             */
+           
+
         }
     }
 }

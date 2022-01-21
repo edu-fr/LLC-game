@@ -95,6 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanBeDragged: 0
   AttachedTo: {fileID: 0}
+  OriginalAttachedObject: {fileID: 0}
+  IsOnValidPositionToDrop: 0
 --- !u!225 &-6171547179020981741
 CanvasGroup:
   m_ObjectHideFlags: 0

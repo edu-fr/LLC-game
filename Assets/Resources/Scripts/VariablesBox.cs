@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Coffee.UIEffects;
 using TMPro;
@@ -27,10 +28,15 @@ namespace Resources.Scripts
             _variableBoxHeight = variableBoxPrefab.GetComponent<RectTransform>().sizeDelta.y * Utils.ScreenDif;
         }
 
-        protected override void SetGrayScale(bool option)
+        public override void SetGrayScale(bool option)
         {
             base.SetGrayScale(option);
-            
+            var currentEffectMode = option ? EffectMode.Grayscale : EffectMode.None;
+
+            foreach (var variableBox in variableBoxList)
+            {
+                variableBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
+            }
 
         }
         
@@ -50,7 +56,8 @@ namespace Resources.Scripts
                     Quaternion.identity, variableBoxes.transform);
                 var newVariableBoxDraggable = newVariableBox.GetComponent<Draggable>();
                 newVariableBoxDraggable.CanBeDragged = true;
-                newVariableBoxDraggable.AttachedTo = variableBoxes; // create a reference to this object
+                newVariableBoxDraggable.AttachedTo = variableBoxes; // create a reference to his original creator most internal box 
+                newVariableBoxDraggable.OriginalAttachedObject = variableBoxes;
                 newVariableBox.GetComponent<BoxContent>().SetVariable(variable);
                 var newVariableTransform = newVariableBox.transform;
                 var newVariablePosition = newVariableTransform.position;
@@ -58,6 +65,8 @@ namespace Resources.Scripts
                 newVariableTransform.position = newVariablePosition;
                 // Set new original position
                 newVariableBox.GetComponent<Draggable>().OriginalPosition = newVariableTransform.localPosition;
+                newVariableBox.GetComponent<Draggable>().LastValidPosition = 
+                    newVariableBox.GetComponent<Draggable>().OriginalPosition;
                 // Change it's text
                 newVariableBox.GetComponentInChildren<TextMeshProUGUI>().SetText(variable.ToString());
                 AddToLists(newVariableBox.gameObject);
@@ -83,15 +92,27 @@ namespace Resources.Scripts
             if (eventData.pointerDrag == null) return;
             if (eventData.pointerDrag.CompareTag("Variable"))
             {
+                
                 print("On valid position!");
                 AddToLists(eventData.pointerDrag);
                 eventData.pointerDrag.transform.SetParent(variableBoxes.transform);
-                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition =
-                    GetComponent<RectTransform>().anchoredPosition;
+                eventData.pointerDrag.GetComponent<Draggable>().AttachedTo = variableBoxes;
+                if (eventData.pointerDrag.GetComponent<Draggable>().OriginalAttachedObject == variableBoxes)
+                {
+                    print("Está no original!");
+                    eventData.pointerDrag.GetComponent<RectTransform>().localPosition =
+                        eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
+                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
+                }
+                else
+                { 
+                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<RectTransform>().localPosition;
+                }
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
             }
           
             
         }
+
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Variable
   - Production
+  - Anchor
   layers:
   - Default
   - TransparentFX

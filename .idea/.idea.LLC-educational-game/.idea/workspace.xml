@@ -12,7 +12,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/ProductionsBox.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Scrollbar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BoxPositionsManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="20jCIFI5KQ6n5yt70IH1g2D5Euy" />
   <component name="ProjectViewState">
@@ -81,6 +80,8 @@
       <workItem from="1642699143545" duration="7587000" />
       <workItem from="1642783820359" duration="11658000" />
       <workItem from="1643056134687" duration="2597000" />
+      <workItem from="1643112096860" duration="613000" />
+      <workItem from="1643149258951" duration="550000" />
     </task>
     <servers />
   </component>

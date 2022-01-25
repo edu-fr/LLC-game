@@ -19,6 +19,7 @@ namespace Resources.Scripts
         [SerializeField] private GameObject variablesBox;
         [SerializeField] private GameObject usefulVariablesBox;
         [SerializeField] private GameObject uselessVariablesBox;
+        [SerializeField] private GameObject trashBin;
         private int _currentPhase;
         private int _currentPart;
         
@@ -135,14 +136,23 @@ namespace Resources.Scripts
             variablesBox.SetActive(false);
             usefulVariablesBox.SetActive(false);
             
+            // Activating necessary objects
+            trashBin.SetActive(true);
+
             // Setting positions
             CFL_Box.transform.position = _boxPositionsManager.Anchor_Phase1Part2_CLF_Box.position;
             uselessVariablesBox.transform.position =
                 _boxPositionsManager.Anchor_Phase1Part2_uselessVariablesBox_gray.position;
 
-                // Changing box colors
+            // Changing box colors
             CFL_Box.GetComponent<ProductionsBox>().SetGrayScale(false);
             uselessVariablesBox.GetComponent<VariablesBox>().SetGrayScale(true);
+            
+            // Making CFL_Box objects draggable again
+            foreach (var productionBox in CFL_Box.GetComponent<ProductionsBox>().productionBoxList)
+            {
+                productionBox.GetComponent<Draggable>().CanBeDragged = true;
+            }
             
         }
 

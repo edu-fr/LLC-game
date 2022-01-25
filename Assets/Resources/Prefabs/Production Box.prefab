@@ -95,6 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanBeDragged: 0
   AttachedTo: {fileID: 0}
+  OriginalAttachedObject: {fileID: 0}
+  IsOnValidPositionToDrop: 0
 --- !u!225 &-6171547179020981741
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -138,7 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a0c0b35fda5264e9de2b693763fbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: 
 --- !u!1 &8517226815843427635
 GameObject:
   m_ObjectHideFlags: 0

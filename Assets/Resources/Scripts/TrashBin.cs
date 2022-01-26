@@ -1,3 +1,4 @@
+using Coffee.UIEffects;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -8,17 +9,23 @@ namespace Resources.Scripts
     {
         public void OnDrop(PointerEventData eventData)
         {
-            eventData.pointerDrag.gameObject.SetActive(false);
+            if (eventData.pointerDrag.gameObject.CompareTag("Production"))
+            {
+                eventData.pointerDrag.gameObject.SetActive(false);
+                print("Deletado com sucesso!");
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            eventData.pointerDrag.GetComponent<Image>().tintColor = Color.red;
+            if (!eventData.pointerDrag) return; 
+            eventData.pointerDrag.gameObject.GetComponent<UIEffect>().effectMode = EffectMode.Sepia;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            eventData.pointerDrag.GetComponent<Image>().tintColor = Color.clear;
+            if (!eventData.pointerDrag) return;
+            eventData.pointerDrag.gameObject.GetComponent<UIEffect>().effectMode = EffectMode.None;
         }
     }
 }

@@ -15,5 +15,5 @@ public class BoxPositionsManager : MonoBehaviour
     public Transform Anchor_Phase1Part2_CLF_Box;
     public Transform Anchor_Phase1Part2_usefulVariablesBox_gray;
     public Transform Anchor_Phase1Part2_uselessVariablesBox_gray;
-    
+    public Transform Anchor_TrashBin;
 }

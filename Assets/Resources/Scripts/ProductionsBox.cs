@@ -84,7 +84,9 @@ namespace Resources.Scripts
 
         public override void OnDrop(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            if (!eventData.pointerDrag) return;
+            
+
         }
     }
 }

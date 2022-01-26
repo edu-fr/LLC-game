@@ -44,6 +44,11 @@ namespace Resources.Scripts
             _currentPart = 1;
             
             SetupPhase1Part1();
+            
+            // DEBUG
+            
+            SetupPhase1Part2();
+            _currentPart = 2; 
         }
 
         public void TryNextPhase()
@@ -91,7 +96,7 @@ namespace Resources.Scripts
             
             var currentVariablesOnUsefulBox = usefulVariablesBox.GetComponent<VariablesBox>().variableList;
             var currentVariablesOnUselessBox = uselessVariablesBox.GetComponent<VariablesBox>().variableList;
-            var correctVariables = _grammar.UsefulVariables;
+            var correctVariables = _grammar.UsefulVariablesPhase1;
 
             if (correctVariables.Count != currentVariablesOnUsefulBox.Count) print("ERRADO PELO NUM DE ELEMENTOS!");
             else
@@ -143,7 +148,8 @@ namespace Resources.Scripts
             CFL_Box.transform.position = _boxPositionsManager.Anchor_Phase1Part2_CLF_Box.position;
             uselessVariablesBox.transform.position =
                 _boxPositionsManager.Anchor_Phase1Part2_uselessVariablesBox_gray.position;
-
+            trashBin.transform.position = _boxPositionsManager.Anchor_TrashBin.position;
+            
             // Changing box colors
             CFL_Box.GetComponent<ProductionsBox>().SetGrayScale(false);
             uselessVariablesBox.GetComponent<VariablesBox>().SetGrayScale(true);
@@ -158,6 +164,29 @@ namespace Resources.Scripts
 
         private bool Phase1Part2()
         {
+            // var currentProductionsOnProductionsBox = CFL_Box.GetComponent<ProductionsBox>().productionList;
+            // if (currentProductionsOnProductionsBox.Count < 1)
+            // {
+            //     print("É necessário que alguma produção exista na linguagem");
+            //     return false;
+            // }
+            //
+            // var correctProductions = _grammar.usefulAndReachableProductionsPhase1;
+            //
+            // if (correctProductions.Count != currentProductionsOnProductionsBox.Count) print("Número errado de produções úteis!");
+            // else
+            // {
+            //     foreach (var variable in currentVariablesOnUsefulBox)
+            //     {
+            //         if (!correctProductions.Contains(variable))
+            //         {
+            //             print("A variavel " + variable + " não faz parte da lista de variáveis corretas!");
+            //             return false;
+            //         } 
+            //     }
+            //     print("Correto! Pode prosseguir para a próxima fase!");
+            //     return true;
+            // }
             return false;
         }
         private void Update()

@@ -66,6 +66,7 @@ namespace Resources.Scripts
                 newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
                 AddToLists(newProductionBox.gameObject);
                 productionCounter++;
+                print(" POSICAO: " + newProductionBox.GetComponent<Draggable>().OriginalPosition);
             }
             SetGrayScale(false);
         }

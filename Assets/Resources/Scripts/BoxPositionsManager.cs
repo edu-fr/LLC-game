@@ -1,19 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-public class BoxPositionsManager : MonoBehaviour
+namespace Resources.Scripts
 {
-    // ANCHORS
-    // Phase 1 Part 1
-    public Transform Anchor_Phase1Part1_CLF_Box_gray;
-    public Transform Anchor_Phase1Part1_variablesBox;
-    public Transform Anchor_Phase1Part1_usefulVariablesBox;
-    public Transform Anchor_Phase1Part1_uselessVariablesBox;
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public class BoxPositionsManager : MonoBehaviour
+    {
+        // ANCHORS
+        // Phase 1 Part 1
+        public Transform Anchor_Phase1Part1_ProductionsBox_gray;
+        public Transform Anchor_Phase1Part1_variablesBox;
+        public Transform Anchor_Phase1Part1_usefulVariablesBox;
+        public Transform Anchor_Phase1Part1_uselessVariablesBox;
     
-    // Phase 2 Part 2
-    public Transform Anchor_Phase1Part2_CLF_Box;
-    public Transform Anchor_Phase1Part2_usefulVariablesBox_gray;
-    public Transform Anchor_Phase1Part2_uselessVariablesBox_gray;
-    public Transform Anchor_TrashBin;
+        // Phase 1 Part 2
+        public Transform Anchor_Phase1Part2_ProductionsBox;
+        public Transform Anchor_Phase1Part2_uselessVariablesBox_gray;
+        public Transform Anchor_Phase1Part2_trashBin;
+    
+        // Phase 1 Part 3
+        public Transform Anchor_Phase1Part3_Productions_Box;
+        public Transform Anchor_Phase1Part3_uselessVariablesBox_gray;
+        public Transform Anchor_Phase1Part3_trashBin;
+    
+        // Phase 2 Part 1
+        public Transform Anchor_Phase2Part1_productionsBox; 
+        public Transform Anchor_Phase2Part1_variablesBox;
+        public Transform Anchor_Phase2Part1_lambdaProducersBox; 
+    }
 }

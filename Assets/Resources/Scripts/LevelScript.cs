@@ -50,9 +50,12 @@ namespace Resources.Scripts
             SetupPhase1Part1();
             
             // DEBUG
-            //
-            // SetupPhase1Part2();
-            // _currentPart = 2; 
+            
+            SetupPhase1Part2();
+            SetupPhase1Part3();
+            SetupPhase2Part1();
+            _currentPart = 1;
+            _currentPhase = 2;
         }
 
         public void TryNextPhase()
@@ -92,7 +95,21 @@ namespace Resources.Scripts
                     break;
                 
                 case 2:
-
+                    
+                    switch (_currentPart)
+                    {
+                        case 1:
+                            if (Phase2Part1())
+                            {
+                                _currentPart = 2;
+                                SetupPhase2Part2();
+                            };
+                            break;
+                        
+                        case 2:
+                          
+                            break;
+                    }
                     break;
                 
             }
@@ -101,15 +118,6 @@ namespace Resources.Scripts
         private void SetupPhase1Part1()
         {
             print("Setting up phase 1 part 1");
-            
-            // Deactivating all objects
-            DeactivateAllObjects();
-            
-            // Activating necessary objects
-            p1_productionsBox.SetActive(true);
-            p1_variablesBox.SetActive(true);
-            p1_usefulVariablesBox.SetActive(true);
-            p1_uselessVariablesBox.SetActive(true);
 
             // Filling boxes
             p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.Productions.ToList());
@@ -158,16 +166,11 @@ namespace Resources.Scripts
         private void SetupPhase1Part2()
         {
             print("Setting up phase 1 part 2");
-            
-            // Deactivating all objects
-            DeactivateAllObjects();
-            
-            // Activating necessary objects
-            p1_productionsBox.SetActive(true);
-            p1_uselessVariablesBox.SetActive(true);
-            p1_usefulVariablesBox.SetActive(true);
-            trashBin.SetActive(true);
 
+            // Removing from camera unused boxes
+            var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
+            p1_variablesBox.transform.position = outOfBoundsPosition;
+            p1_usefulVariablesBox.transform.position = outOfBoundsPosition;
             // Setting positions
             p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part2_ProductionsBox.position;
             p1_uselessVariablesBox.transform.position =
@@ -263,13 +266,11 @@ namespace Resources.Scripts
         {
             print("Setting up Phase 2 Part 1");
             
-            // Deactivating all objects
-            DeactivateAllObjects();
-            
-            // Activating useful objects
-            p2_productionsBox.SetActive(true);
-            p2_variablesBox.SetActive(true);
-            p2_lambdaProducersBox.SetActive(true);
+            // Removing from camera vision unused boxes
+            var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
+            p1_uselessVariablesBox.transform.position = outOfBoundsPosition; 
+            p1_productionsBox.transform.position = outOfBoundsPosition;
+            trashBin.transform.position = outOfBoundsPosition;
             
             // Setting positions
             p2_variablesBox.transform.position = _boxPositionsManager.Anchor_Phase2Part1_variablesBox.position;
@@ -280,23 +281,47 @@ namespace Resources.Scripts
             // Filling boxes
             p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.usefulAndReachableProductionsPhase1);
             var variableList = new List<char>();
-            foreach (var production in _grammar.UsefulProductionsPhase1.Where(production => !variableList.Contains(production._in)))
+            foreach (var production in _grammar.usefulAndReachableProductionsPhase1.Where(production => !variableList.Contains(production._in)))
             {
                 variableList.Add(production._in);
             }
             p2_variablesBox.GetComponent<VariablesBox>().FillWithVariables(variableList);
+            
+            // Setting box gray
+            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
         }
 
-        private void DeactivateAllObjects()
+        private bool Phase2Part1()
         {
-            p1_productionsBox.SetActive(false);
-            p1_variablesBox.SetActive(false);
-            p1_usefulVariablesBox.SetActive(false);
-            p1_uselessVariablesBox.SetActive(false);
-            p2_variablesBox.SetActive(false);
-            p2_lambdaProducersBox.SetActive(false);
-            p2_productionsBox.SetActive(false);
-            trashBin.SetActive(false);
+            var correctLambdaProducers = _grammar.LambdaProducers;
+            var currentVariablesOnLambdaProducersBox = p2_lambdaProducersBox.GetComponent<VariablesBox>().variableList;
+            
+            if (correctLambdaProducers.Count != currentVariablesOnLambdaProducersBox.Count) print("Número errado de variaveis que produzem vazio!");
+            else
+            {
+                foreach (var variable in currentVariablesOnLambdaProducersBox)
+                {
+                    if (!correctLambdaProducers.Contains(variable))
+                    {
+                        print("A variavel " + variable + " não faz parte da lista de variáveis produtoras de lambda!");
+                        return false;
+                    } 
+                }
+                print("Correto! Pode prosseguir para a próxima fase!");
+                return true;
+            }
+            return false;
+        }
+
+        private void SetupPhase2Part2()
+        {
+            // Removing from camera vision unused boxes
+            var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
+            // p1_uselessVariablesBox.transform.position = outOfBoundsPosition; 
+            // p1_productionsBox.transform.position = outOfBoundsPosition;
+            // trashBin.transform.position = outOfBoundsPosition;
+
+            // CRIAR A JANELA DE CRIAR NOVA PRODUCAO!
         }
         private void Update()
         {

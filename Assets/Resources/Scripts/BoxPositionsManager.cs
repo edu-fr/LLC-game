@@ -7,6 +7,8 @@ namespace Resources.Scripts
     public class BoxPositionsManager : MonoBehaviour
     {
         // ANCHORS
+        public Transform Anchor_OutOfBounds;
+
         // Phase 1 Part 1
         public Transform Anchor_Phase1Part1_ProductionsBox_gray;
         public Transform Anchor_Phase1Part1_variablesBox;

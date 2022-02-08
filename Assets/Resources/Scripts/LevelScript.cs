@@ -51,11 +51,11 @@ namespace Resources.Scripts
             
             // DEBUG
             
-            SetupPhase1Part2();
-            SetupPhase1Part3();
-            SetupPhase2Part1();
-            _currentPart = 1;
-            _currentPhase = 2;
+            // SetupPhase1Part2();
+            // SetupPhase1Part3();
+            // SetupPhase2Part1();
+            // _currentPart = 1;
+            // _currentPhase = 2;
         }
 
         public void TryNextPhase()

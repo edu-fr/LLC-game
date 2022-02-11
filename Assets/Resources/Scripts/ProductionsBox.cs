@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Coffee.UIEffects;
 using TMPro;
@@ -14,6 +16,7 @@ namespace Resources.Scripts
         public List<Transform> productionBoxList;
         public Transform productionBoxPrefab;
         private float _productionBoxHeight;
+        private GrammarScript.Production _lastProductionInserted;
         private Vector3 _emptyPosition = Vector3.zero;
         protected override void Awake()
         {
@@ -67,14 +70,15 @@ namespace Resources.Scripts
                 // Change it's text
                 newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
                 AddToLists(newProductionBox.gameObject);
+                _lastProductionInserted = production;
                 productionCounter++;
             }
             SetGrayScale(false);
         }
-
+        
         public void AppendProduction(GrammarScript.Production production)
         {
-            var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
+             var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
             productionBoxesRectTransform.sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
 
             // Instantiate a new production box
@@ -97,7 +101,13 @@ namespace Resources.Scripts
             AddToLists(newProductionBox.gameObject);
             _emptyPosition = newProductionTransform.position - new Vector3(0, _productionBoxHeight, 0);
         }
+        
+        public void ScrollbarTop()
+        {
+            var bar = GetComponentInChildren<Scrollbar>();
+        }
 
+        
         public override void RemoveFromLists(GameObject box)
         {
             productionBoxList.Remove(box.transform);
@@ -108,6 +118,15 @@ namespace Resources.Scripts
         {
             productionBoxList.Add(box.transform);
             productionList.Add(box.GetComponent<BoxContent>().Production);
+            printProductionList();
+        }
+
+        public void printProductionList()
+        {
+            foreach (var production in productionList)
+            {
+                print(production._in + "->" + production._out);
+            }
         }
 
         public override void OnDrop(PointerEventData eventData)

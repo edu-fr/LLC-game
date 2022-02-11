@@ -538,11 +538,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3050634694007333567, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 778.3737
+      value: 770.3388
       objectReference: {fileID: 0}
     - target: {fileID: 3050634694007333567, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 313.6931
+      value: 285.5706
       objectReference: {fileID: 0}
     - target: {fileID: 3050634694007333567, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
       propertyPath: m_LocalPosition.x
@@ -574,11 +574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3050634694007333567, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -132.14374
+      value: -254.83
       objectReference: {fileID: 0}
     - target: {fileID: 3050634694007333567, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -84.10745
+      value: 217.21
       objectReference: {fileID: 0}
     - target: {fileID: 3050634694007333567, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -596,6 +596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Production Maker
       objectReference: {fileID: 0}
+    - target: {fileID: 6920158249302167911, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
+      propertyPath: levelController
+      value: 
+      objectReference: {fileID: 499284019}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57263315ae49ae4ca626e533a7b0818, type: 3}
 --- !u!224 &155043463 stripped

@@ -21,7 +21,7 @@ namespace Resources.Scripts
         [SerializeField] private GameObject p1_uselessVariablesBox;
         [SerializeField] private GameObject p2_variablesBox;
         [SerializeField] private GameObject p2_lambdaProducersBox;
-        [SerializeField] private GameObject p2_productionsBox;
+        public GameObject p2_productionsBox;
         [SerializeField] private GameObject trashBin;
         
         private int _currentPhase;
@@ -51,11 +51,12 @@ namespace Resources.Scripts
             
             // DEBUG
             
-            // SetupPhase1Part2();
-            // SetupPhase1Part3();
-            // SetupPhase2Part1();
-            // _currentPart = 1;
-            // _currentPhase = 2;
+            SetupPhase1Part2();
+            SetupPhase1Part3();
+            SetupPhase2Part1();
+            SetupPhase2Part2();
+            _currentPart = 2;
+            _currentPhase = 2;
         }
 
         public void TryNextPhase()
@@ -317,9 +318,8 @@ namespace Resources.Scripts
         {
             // Removing from camera vision unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
-            // p1_uselessVariablesBox.transform.position = outOfBoundsPosition; 
-            // p1_productionsBox.transform.position = outOfBoundsPosition;
-            // trashBin.transform.position = outOfBoundsPosition;
+            p2_lambdaProducersBox.transform.position = outOfBoundsPosition;
+            p2_variablesBox.transform.position = outOfBoundsPosition;
 
             // CRIAR A JANELA DE CRIAR NOVA PRODUCAO!
         }

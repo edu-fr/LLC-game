@@ -74,7 +74,7 @@ namespace Resources.Scripts
             }
             SetGrayScale(false);
         }
-        
+
         public override void RemoveFromLists(GameObject box)
         {
             variableBoxList.Remove(box.transform);

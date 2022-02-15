@@ -108,7 +108,10 @@ namespace Resources.Scripts
                             break;
                         
                         case 2:
-                          
+                            if (Phase2Part2())
+                            {
+                                print("Correto, pode prosseguir!");
+                            }
                             break;
                     }
                     break;
@@ -322,6 +325,41 @@ namespace Resources.Scripts
             p2_variablesBox.transform.position = outOfBoundsPosition;
 
             // CRIAR A JANELA DE CRIAR NOVA PRODUCAO!
+            
+        }
+
+        private bool Phase2Part2()
+        {
+            
+            var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
+            if (productionList.Count != _grammar.ProductionsPhase2.Count)
+            {
+                print("Numero incorreto de produções!");
+                return false;
+            }
+            foreach (var production in productionList)
+            {
+                var productionExists = false;
+                foreach (var correctProduction in _grammar.ProductionsPhase2)
+                {
+                    if (production._in == correctProduction._in)
+                    {
+                        if (production._out == correctProduction._out)
+                        {
+                            productionExists = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!productionExists)
+                {
+                    print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
+                    return false;
+                }
+            }
+
+            return true;
         }
         private void Update()
         {

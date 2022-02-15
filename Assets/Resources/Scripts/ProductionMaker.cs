@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -26,8 +27,18 @@ namespace Resources.Scripts
         
         public void CreateProduction()
         {
-            print(_variableText.text);
-            print(_productionText.text);
+            if (_variableText.text.Length < 2)
+            {
+                print("Nâo é possível criar uma produção sem uma variável na esquerda.");
+                return;
+            }
+
+            if (_productionText.text.Length < 2)
+            {
+                print("Não é possível criar uma produção sem nada na direita.");
+                return;
+            }
+            
             if (!_currentGrammar.Variables.Contains(_variableText.text[0]))
             {
                 print("ERRO! Variável inválida!");
@@ -55,7 +66,13 @@ namespace Resources.Scripts
                 }
             }
 
-            var newProduction = new GrammarScript.Production(_variableText.text.ToCharArray()[0], _productionText.text);
+            var correctString = new StringBuilder();
+            for (int i = 0; i < _productionText.text.Length - 1; i++)
+            {
+                correctString.Append(_productionText.text[i]);
+            }
+
+            var newProduction = new GrammarScript.Production(_variableText.text.ToCharArray()[0], correctString.ToString());
 
             var productionsBox = levelController.GetComponent<LevelScript>().p2_productionsBox
                 .GetComponent<ProductionsBox>();

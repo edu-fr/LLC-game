@@ -12,6 +12,7 @@ namespace Resources.Scripts
         public Vector3 LastValidPosition { get; set; }
         public Vector3 OriginalPosition { get; set; }
         public bool CanBeDragged;
+        public bool CanBeDeleted;
         public GameObject AttachedTo;
         public GameObject OriginalAttachedObject;
         public bool IsOnValidPositionToDrop;
@@ -22,16 +23,26 @@ namespace Resources.Scripts
             _canvasGroup = GetComponent<CanvasGroup>();
         }
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (CanBeDeleted)
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    print("Cliquei com o direito!");
+                }
+            }
+            else
+            {
+                print("Cannot be deleted! POIS: " + CanBeDeleted);
+            }
+        }
+
         private void Start()
         {
             IsOnValidPositionToDrop = false;
         }
-        
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            // print("Pointer down");
-        }
-     
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (!CanBeDragged) return;
@@ -64,6 +75,6 @@ namespace Resources.Scripts
             }
 
         }
-
+        
     }
 }

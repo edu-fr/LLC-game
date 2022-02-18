@@ -18,6 +18,7 @@ namespace Resources.Scripts
         private float _productionBoxHeight;
         private GrammarScript.Production _lastProductionInserted;
         private Vector3 _emptyPosition = Vector3.zero;
+        private Vector2 ProductionBoxesOriginalSize;
         protected override void Awake()
         {
             base.Awake();
@@ -27,6 +28,7 @@ namespace Resources.Scripts
         {
             base.Start();
             _productionBoxHeight = (productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y)* Utils.ScreenDif;
+            ProductionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
         public override void SetGrayScale(bool option)
@@ -101,13 +103,7 @@ namespace Resources.Scripts
             AddToLists(newProductionBox.gameObject);
             _emptyPosition = newProductionTransform.position - new Vector3(0, _productionBoxHeight, 0);
         }
-        
-        public void ScrollbarTop()
-        {
-            var bar = GetComponentInChildren<Scrollbar>();
-        }
 
-        
         public override void RemoveFromLists(GameObject box)
         {
             productionBoxList.Remove(box.transform);
@@ -134,6 +130,32 @@ namespace Resources.Scripts
             if (!eventData.pointerDrag) return;
             
 
+        }
+
+        public void RemoveProductionAndReconstructList(GameObject productionBoxToBeRemoved,
+            List<GrammarScript.Production> productionsList)
+        {
+            RemoveFromLists(productionBoxToBeRemoved);
+            productionsList.Remove(productionBoxToBeRemoved.GetComponent<BoxContent>().Production);
+            ClearProductionsBox();
+
+        }
+
+        public void ClearProductionsBox()
+        {
+            foreach (var productionBox in productionBoxList)
+            {
+                RemoveFromLists(productionBox.gameObject);
+            }
+            productionBoxes.GetComponent<RectTransform>().sizeDelta = ProductionBoxesOriginalSize;
+        }
+
+        public void SetAllProductionsDeletability(bool boolean)
+        {
+            foreach (var productionBox in productionBoxList)
+            {
+                productionBox.GetComponent<Draggable>().CanBeDeleted = boolean;
+            }
         }
     }
 }

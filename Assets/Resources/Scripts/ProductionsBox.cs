@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Coffee.UIEffects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -44,6 +45,12 @@ namespace Resources.Scripts
         
         public void FillWithProductions(List<GrammarScript.Production> productions)
         {
+            if (productionBoxList.Count > 0 || productionList.Count > 0)
+            {
+                print("box list: " + productionBoxList.Count + "list: " + productionList.Count);
+                return;
+            }
+            print("Numero de producoes que foram chamadas aqui: " + productions.Count);
             var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
             var productionCounter = 0;
             foreach (var production in productions)
@@ -78,43 +85,54 @@ namespace Resources.Scripts
             SetGrayScale(false);
         }
         
-        public void AppendProduction(GrammarScript.Production production)
-        {
-             var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
-            productionBoxesRectTransform.sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
-
-            // Instantiate a new production box
-            var productionsBoxTransform = productionBoxes.transform;
-            var productionsBoxPosition = productionsBoxTransform.position;
-            var newProductionBox = Instantiate(productionBoxPrefab,
-                new Vector3(productionsBoxPosition.x, productionsBoxPosition.y, productionsBoxPosition.z),
-                Quaternion.identity, productionBoxes.transform);
-            newProductionBox.GetComponent<Draggable>().CanBeDragged = false;
-            newProductionBox.GetComponent<Draggable>().AttachedTo = productionBoxes;
-            newProductionBox.GetComponent<BoxContent>().SetProduction(production);
-            var newProductionTransform = newProductionBox.transform;
-            newProductionTransform.position = _emptyPosition;
-            // Set new original position
-            newProductionBox.GetComponent<Draggable>().OriginalPosition = newProductionTransform.localPosition;
-            newProductionBox.GetComponent<Draggable>().LastValidPosition =
-                newProductionBox.GetComponent<Draggable>().OriginalPosition;
-            // Change it's text
-            newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
-            AddToLists(newProductionBox.gameObject);
-            _emptyPosition = newProductionTransform.position - new Vector3(0, _productionBoxHeight, 0);
-        }
+        // public void AppendProduction(GrammarScript.Production production)
+        // {
+        //      var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
+        //     productionBoxesRectTransform.sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
+        //
+        //     // Instantiate a new production box
+        //     var productionsBoxTransform = productionBoxes.transform;
+        //     var productionsBoxPosition = productionsBoxTransform.position;
+        //     var newProductionBox = Instantiate(productionBoxPrefab,
+        //         new Vector3(productionsBoxPosition.x, productionsBoxPosition.y, productionsBoxPosition.z),
+        //         Quaternion.identity, productionBoxes.transform);
+        //     newProductionBox.GetComponent<Draggable>().CanBeDragged = false;
+        //     newProductionBox.GetComponent<Draggable>().AttachedTo = productionBoxes;
+        //     newProductionBox.GetComponent<BoxContent>().SetProduction(production);
+        //     var newProductionTransform = newProductionBox.transform;
+        //     newProductionTransform.position = _emptyPosition;
+        //     // Set new original position
+        //     newProductionBox.GetComponent<Draggable>().OriginalPosition = newProductionTransform.localPosition;
+        //     newProductionBox.GetComponent<Draggable>().LastValidPosition =
+        //         newProductionBox.GetComponent<Draggable>().OriginalPosition;
+        //     // Change it's text
+        //     newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
+        //     AddToLists(newProductionBox.gameObject);
+        //     _emptyPosition = newProductionTransform.position - new Vector3(0, _productionBoxHeight, 0);
+        // }
 
         public override void RemoveFromLists(GameObject box)
         {
-            productionBoxList.Remove(box.transform);
-            productionList.Remove(box.GetComponent<BoxContent>().Production);
+            if (!productionBoxList.Remove(box.transform))
+            {
+                print("Nâo conseguiu remover a caixa da producao: " 
+                      + box.GetComponent<BoxContent>().Production._in + "->" 
+                      + box.GetComponent<BoxContent>().Production._out);
+            }
+            
+            if (!productionList.Remove(box.GetComponent<BoxContent>().Production))
+            {
+                print("Nâo conseguiu remover da lista a produção " 
+                      + box.GetComponent<BoxContent>().Production._in + "->" 
+                      + box.GetComponent<BoxContent>().Production._out);
+            }
         }
 
         public override void AddToLists(GameObject box)
         {
             productionBoxList.Add(box.transform);
             productionList.Add(box.GetComponent<BoxContent>().Production);
-            printProductionList();
+            // printProductionList();
         }
 
         public void printProductionList()
@@ -132,20 +150,34 @@ namespace Resources.Scripts
 
         }
 
-        public void RemoveProductionAndReconstructList(GameObject productionBoxToBeRemoved,
-            List<GrammarScript.Production> productionsList)
+        public void RemoveProductionAndReconstructList(GameObject productionBoxToBeRemoved)
         {
             RemoveFromLists(productionBoxToBeRemoved);
-            productionsList.Remove(productionBoxToBeRemoved.GetComponent<BoxContent>().Production);
-            ClearProductionsBox();
-
+            Destroy(productionBoxToBeRemoved.gameObject);
+            var productionsListCopy = productionList.DeepClone();
+           
+            ClearList();
+            FillWithProductions(productionsListCopy);
+            SetAllProductionsDeletability(true);
+        }
+        
+        
+        public void InsertProductionAndReconstructList(GrammarScript.Production productionToBeInserted)
+        {
+            var productionsListCopy = productionList.DeepClone();
+            productionsListCopy.Add(productionToBeInserted);
+            ClearList();
+            FillWithProductions(productionsListCopy);
+            SetAllProductionsDeletability(true);
         }
 
-        public void ClearProductionsBox()
+        public override void ClearList()
         {
-            foreach (var productionBox in productionBoxList)
+            while (productionBoxList.Count > 0)
             {
-                RemoveFromLists(productionBox.gameObject);
+                var currentProductionBox = productionBoxList[0];
+                RemoveFromLists(currentProductionBox.gameObject);
+                Destroy(currentProductionBox.gameObject);
             }
             productionBoxes.GetComponent<RectTransform>().sizeDelta = ProductionBoxesOriginalSize;
         }

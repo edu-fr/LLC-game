@@ -27,9 +27,10 @@ namespace Resources.Scripts
         {
             if (CanBeDeleted)
             {
-                if (Input.GetMouseButtonDown(1))
-                {
-                    print("Cliquei com o direito!");
+                if (Input.GetMouseButtonDown(1))         // Botão direito
+                { 
+                    var productionsBoxRef = AttachedTo.GetComponent<InternalBox>().FillableBoxImAttachedTo;
+                    productionsBoxRef.GetComponent<ProductionsBox>().RemoveProductionAndReconstructList(gameObject);
                 }
             }
             else

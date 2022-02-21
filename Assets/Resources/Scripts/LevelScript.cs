@@ -324,9 +324,7 @@ namespace Resources.Scripts
             p2_lambdaProducersBox.transform.position = outOfBoundsPosition;
             p2_variablesBox.transform.position = outOfBoundsPosition;
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
-            p2_productionsBox.GetComponent<ProductionsBox>().AppendProduction(new GrammarScript.Production('B', "BbBb"));
-            // CRIAR A JANELA DE CRIAR NOVA PRODUCAO!
-            
+
         }
 
         private bool Phase2Part2()

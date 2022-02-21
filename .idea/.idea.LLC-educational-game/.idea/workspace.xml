@@ -13,6 +13,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/ProductionMaker.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Scrollbar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/InternalBox.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/31/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="20jCIFI5KQ6n5yt70IH1g2D5Euy" />
   <component name="ProjectViewState">
@@ -94,6 +96,9 @@
       <workItem from="1644874949887" duration="607000" />
       <workItem from="1644925797134" duration="1387000" />
       <workItem from="1645209381353" duration="3192000" />
+      <workItem from="1645396783158" duration="904000" />
+      <workItem from="1645443232271" duration="1590000" />
+      <workItem from="1645478417570" duration="4336000" />
     </task>
     <servers />
   </component>

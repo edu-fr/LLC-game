@@ -38,6 +38,7 @@ namespace Resources.Scripts
             scrollBar.GetComponent<Scrollbar>().colors = currentColorBlock;
         }
 
+        public abstract void ClearList();
         public abstract void RemoveFromLists(GameObject box);
         public abstract void AddToLists(GameObject box);
         public abstract void OnDrop(PointerEventData eventData);

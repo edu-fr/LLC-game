@@ -39,7 +39,12 @@ namespace Resources.Scripts
             }
 
         }
-        
+
+        public override void ClearList()
+        {
+            throw new NotImplementedException();
+        }
+
         public void FillWithVariables(IEnumerable<char> variables)
         {
             var variableBoxesRectTransform = variableBoxes.GetComponent<RectTransform>();

@@ -21,6 +21,8 @@ namespace Resources.Scripts
         [SerializeField] private GameObject p1_uselessVariablesBox;
         [SerializeField] private GameObject p2_variablesBox;
         [SerializeField] private GameObject p2_lambdaProducersBox;
+        [SerializeField] private GameObject p2_productionMaker;
+        
         public GameObject p2_productionsBox;
         [SerializeField] private GameObject trashBin;
         
@@ -328,6 +330,49 @@ namespace Resources.Scripts
         }
 
         private bool Phase2Part2()
+        {
+            
+            var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
+            if (productionList.Count != _grammar.ProductionsPhase2.Count)
+            {
+                print("Numero incorreto de produções!");
+                return false;
+            }
+            foreach (var production in productionList)
+            {
+                var productionExists = false;
+                foreach (var correctProduction in _grammar.ProductionsPhase2)
+                {
+                    if (production._in == correctProduction._in)
+                    {
+                        if (production._out == correctProduction._out)
+                        {
+                            productionExists = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!productionExists)
+                {
+                    print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
+        private void SetupPhase2Part3()
+        {
+            // Removing from camera vision unused boxes
+            var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
+            p2_productionMaker.transform.position = outOfBoundsPosition;
+            // Turning off deletability
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+        }
+        
+        private bool Phase2Part3()
         {
             
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;

@@ -28,6 +28,7 @@ namespace Resources.Scripts
         // Phase 2 Part 1
         public Transform Anchor_Phase2Part1_productionsBox; 
         public Transform Anchor_Phase2Part1_variablesBox;
-        public Transform Anchor_Phase2Part1_lambdaProducersBox; 
+        public Transform Anchor_Phase2Part1_lambdaProducersBox;
+        public Transform Anchor_Phase2Part2_productionMaker;
     }
 }

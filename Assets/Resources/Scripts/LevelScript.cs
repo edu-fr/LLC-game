@@ -22,6 +22,7 @@ namespace Resources.Scripts
         [SerializeField] private GameObject p2_variablesBox;
         [SerializeField] private GameObject p2_lambdaProducersBox;
         [SerializeField] private GameObject p2_productionMaker;
+        [SerializeField] private GameObject p2_acceptLambdaQuestionBox;
         
         public GameObject p2_productionsBox;
         [SerializeField] private GameObject trashBin;
@@ -35,7 +36,6 @@ namespace Resources.Scripts
         private void Awake()
         {
             _boxPositionsManager = GetComponent<BoxPositionsManager>();
-           
         }
         
         private void Start()
@@ -112,7 +112,16 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase2Part2())
                             {
-                                print("Correto, pode prosseguir!");
+                                _currentPart = 3;
+                                SetupPhase2Part3();
+                            }
+                            break;
+                        case 3:
+                            if (Phase2Part3())
+                            {
+                                _currentPhase = 3;
+                                _currentPart = 1;
+                                SetupPhase3Part1();
                             }
                             break;
                     }
@@ -325,13 +334,14 @@ namespace Resources.Scripts
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p2_lambdaProducersBox.transform.position = outOfBoundsPosition;
             p2_variablesBox.transform.position = outOfBoundsPosition;
+            p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionsBox.position;
+            p2_productionMaker.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionMaker.position;
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
-
+            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
         }
 
         private bool Phase2Part2()
         {
-            
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (productionList.Count != _grammar.ProductionsPhase2.Count)
             {
@@ -368,41 +378,28 @@ namespace Resources.Scripts
             // Removing from camera vision unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p2_productionMaker.transform.position = outOfBoundsPosition;
+            p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part3_productionsBox_gray.position;
+            p2_acceptLambdaQuestionBox.transform.position = _boxPositionsManager.Anchor_Phase2Part3_acceptLambdaQuestionBox.position;
             // Turning off deletability
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            // Turning productions box gray
+            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
+            // Setting accept lambda question box starting variable
+            p2_acceptLambdaQuestionBox.GetComponent<AcceptLambdaQuestionBox>().SetStartVariable(_grammar.StartVariable);
         }
         
         private bool Phase2Part3()
         {
-            
-            var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            if (productionList.Count != _grammar.ProductionsPhase2.Count)
-            {
-                print("Numero incorreto de produções!");
-                return false;
-            }
-            foreach (var production in productionList)
-            {
-                var productionExists = false;
-                foreach (var correctProduction in _grammar.ProductionsPhase2)
-                {
-                    if (production._in == correctProduction._in)
-                    {
-                        if (production._out == correctProduction._out)
-                        {
-                            productionExists = true;
-                            break;
-                        }
-                    }
-                }
+            var lambdaProduction = new GrammarScript.Production(_grammar.StartVariable, "λ");
+            var currentProductionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
+            return (currentProductionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) !=
+                null && _grammar.StartVariableCanProduceLambda) || (currentProductionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) ==
+                null && !_grammar.StartVariableCanProduceLambda) ;
+        }
 
-                if (!productionExists)
-                {
-                    print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
-                    return false;
-                }
-            }
-
+        private bool SetupPhase3Part1()
+        {
+            print("Comecei a fase 3 parte 1!");
             return true;
         }
         private void Update()

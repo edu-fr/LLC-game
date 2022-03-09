@@ -47,7 +47,6 @@ namespace Resources.Scripts
 
             for (var i = 0; i < _productionText.text.Length - 1; i++)
             {
-                print("Tentando char: " + _productionText.text[i]);
                 if (char.IsNumber(_productionText.text[i]))
                 {
                     print("Numeros nao sao permitidos!");

@@ -19,7 +19,7 @@ namespace Resources.Scripts
         private float _productionBoxHeight;
         private GrammarScript.Production _lastProductionInserted;
         private Vector3 _emptyPosition = Vector3.zero;
-        private Vector2 ProductionBoxesOriginalSize;
+        private Vector2 _productionBoxesOriginalSize;
         protected override void Awake()
         {
             base.Awake();
@@ -29,7 +29,7 @@ namespace Resources.Scripts
         {
             base.Start();
             _productionBoxHeight = (productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y)* Utils.ScreenDif;
-            ProductionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
+            _productionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
         public override void SetGrayScale(bool option)
@@ -198,7 +198,7 @@ namespace Resources.Scripts
                 RemoveFromLists(currentProductionBox.gameObject);
                 Destroy(currentProductionBox.gameObject);
             }
-            productionBoxes.GetComponent<RectTransform>().sizeDelta = ProductionBoxesOriginalSize;
+            productionBoxes.GetComponent<RectTransform>().sizeDelta = _productionBoxesOriginalSize;
         }
 
         public void SetAllProductionsDeletability(bool boolean)

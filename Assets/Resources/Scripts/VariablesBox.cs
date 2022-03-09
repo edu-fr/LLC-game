@@ -16,6 +16,7 @@ namespace Resources.Scripts
         public List<Transform> variableBoxList;
         public Transform variableBoxPrefab;
         private float _variableBoxHeight;
+        private Vector2 _variableBoxesOriginalSize;
         
         protected override void Awake()
         {
@@ -26,6 +27,7 @@ namespace Resources.Scripts
         {
             base.Start();
             _variableBoxHeight = variableBoxPrefab.GetComponent<RectTransform>().sizeDelta.y * Utils.ScreenDif;
+            _variableBoxesOriginalSize = variableBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
         public override void SetGrayScale(bool option)
@@ -38,11 +40,6 @@ namespace Resources.Scripts
                 variableBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
             }
 
-        }
-
-        public override void ClearList()
-        {
-            throw new NotImplementedException();
         }
 
         public void FillWithVariables(IEnumerable<char> variables)
@@ -118,6 +115,16 @@ namespace Resources.Scripts
           
             
         }
-
+        
+        public override void ClearList()
+        {
+            while (variableBoxList.Count > 0)
+            {
+                var currentProductionBox = variableBoxList[0];
+                RemoveFromLists(currentProductionBox.gameObject);
+                Destroy(currentProductionBox.gameObject);
+            }
+            variableBoxes.GetComponent<RectTransform>().sizeDelta = _variableBoxesOriginalSize;
+        }
     }
 }

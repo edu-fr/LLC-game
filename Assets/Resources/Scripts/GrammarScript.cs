@@ -51,6 +51,7 @@ namespace Resources.Scripts
         [NonSerialized] public List<Production> ResultingProductions;
         
         /* Phase 4 variables (bonus) */
+        [NonSerialized] public List<char> VariablesPhase4;
         [NonSerialized] public List<char> UsefulVariablesPhase4;
         [NonSerialized] public List<Production> UselessProductionsPhase4;
         [NonSerialized] public List<Production> UsefulProductionsPhase4;
@@ -67,14 +68,16 @@ namespace Resources.Scripts
             DebugPrintListProduction(UsefulProductionsPhase1.OrderBy(x => x._in).ToList(), "Useful productions phase 1: ");
             DebugPrintListProduction(usefulAndReachableProductionsPhase1.OrderBy(x => x._in).ToList(), "Productions phase 1 after removing unreachable: ");
             
-            Debug.Log(" ================================================================= ");
+            Debug.Log(" ============================= PHASE 2 ==================================== ");
             ExecutePhase2();
             DebugPrintListProduction(ProductionsPhase2.OrderBy(x => x._in).ToList(), "Productions phase 2: ");
             
-            Debug.Log(" ================================================================= ");
+            Debug.Log(" ================================ PHASE 3 ================================= ");
             ExecutePhase3();
             DebugPrintListProduction(ResultingProductions.OrderBy(x => x._in).ToList(), "Productions phase 3 after removing unit: ");
-
+            
+            Debug.Log(" ================================= PHASE 4 ================================ ");
+            SetPhase4Variables();
             ExecutePhase1(ResultingProductions.ToArray(), ref UsefulVariablesPhase4, ref UselessProductionsPhase4, ref  UsefulProductionsPhase4, ref usefulAndReachableProductionsPhase4); // Yes, again
             DebugPrintListProduction(usefulAndReachableProductionsPhase4.OrderBy(x => x._in).ToList(), "Productions phase 4 after removing unreachable: ");
 
@@ -95,7 +98,6 @@ namespace Resources.Scripts
             
             InitializePhase1Lists(UsefulVariablesPhase4, UselessProductionsPhase4, UsefulProductionsPhase4, ReachableFromPhase4, usefulAndReachableProductionsPhase4);
         }
-
         
         private void InitializePhase1Lists(List<char> usefulVariables, List<Production> uselessProductions,
             List<Production> usefulProductions, List<Tuple<char, List<char>>> reachableFrom, List<Production> afterRemoveUselessAndUnreachable) {
@@ -650,7 +652,6 @@ namespace Resources.Scripts
             }
         }
 
-        
         private void SetResultingProductions()
         {
             ResultingProductions = NonUnitProductions.DeepClone();
@@ -676,7 +677,14 @@ namespace Resources.Scripts
             }
 
         }
-        
 
+        private void SetPhase4Variables()
+        {
+            VariablesPhase4 = new List<char>();
+            foreach (var production in ResultingProductions.Where(production => !VariablesPhase4.Contains(production._in)))
+            {
+                VariablesPhase4.Add(production._in);
+            }
+        }
     }
 }

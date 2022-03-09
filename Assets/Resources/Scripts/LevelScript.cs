@@ -148,13 +148,41 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase3Part3())
                             {
-                                print("Pode prosseguir para a parte bonus!");
                                 _currentPhase = 4;
                                 _currentPart = 1; 
+                                SetupPhase4Part1();
                             }
                             break;
                     }
                     break;
+                
+                case 4:
+                    switch (_currentPart)
+                    {
+                        case 1:
+                            if (Phase4Part1())
+                            {
+                                _currentPart = 2; 
+                                SetupPhase4Part2();
+                            };
+                            break;
+                        
+                        case 2:
+                            if (Phase4Part2())
+                            {
+                                _currentPart = 3;
+                                SetupPhase4Part3();
+                            }
+                            break;
+                        
+                        case 3:
+                            if (Phase4Part3())
+                            {
+                                print("VENCEU!!");
+                            }
+                            break;
+                    }
+                    break; 
             }
             
         }
@@ -441,11 +469,11 @@ namespace Resources.Scripts
         private bool Phase3Part1()
         {
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            print("NON USELESS UNIT PRODUCTIONS!");
-            foreach(var production in _grammar.NonUselessUnitProductions)
-            {
-                print(production._in + "->" + production._out);
-            }
+            // print("NON USELESS UNIT PRODUCTIONS!");
+            // foreach(var production in _grammar.NonUselessUnitProductions)
+            // {
+            //     print(production._in + "->" + production._out);
+            // }
             if (productionList.Count != _grammar.NonUselessUnitProductions.Count) // VER SE É ESSA LISTA MESMO
             {
                 print("Numero incorreto de produções!");
@@ -545,5 +573,161 @@ namespace Resources.Scripts
             
             return true; 
         }
+
+        private void SetupPhase4Part1()
+        {
+            print("Setting up phase 4 part 1");
+            
+            // Removing useless boxes
+            var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
+            p2_productionsBox.transform.position = outOfBoundsPosition;
+            p2_productionMaker.transform.position = outOfBoundsPosition;
+            p3_unitProductionsBox.transform.position = outOfBoundsPosition;
+            
+            // Filling boxes
+            p1_productionsBox.GetComponent<ProductionsBox>().ClearList();
+            p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.ResultingProductions);
+            p1_variablesBox.GetComponent<VariablesBox>().ClearList();
+            p1_variablesBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.VariablesPhase4);
+            // Cleaning some boxes
+            p1_usefulVariablesBox.GetComponent<VariablesBox>().ClearList();
+            p1_uselessVariablesBox.GetComponent<VariablesBox>().ClearList();
+
+            // Changing productions box color
+            p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
+
+            // Setting positions
+            p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_ProductionsBox_gray.position;
+            p1_variablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_variablesBox.position;
+            p1_uselessVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_uselessVariablesBox.position;
+            p1_usefulVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_usefulVariablesBox.position;
+        }
+        
+        
+        private bool Phase4Part1() 
+        {
+            var currentVariablesOnVariablesBox = p1_variablesBox.GetComponent<VariablesBox>().variableList;
+            if (currentVariablesOnVariablesBox.Count > 0)
+            {
+                print("Ainda há variáveis que devem ser movidas!");
+                return false;
+            }
+            
+            var currentVariablesOnUsefulBox = p1_usefulVariablesBox.GetComponent<VariablesBox>().variableList;
+            var correctVariables = _grammar.UsefulVariablesPhase4;
+
+            if (correctVariables.Count != currentVariablesOnUsefulBox.Count) print("ERRADO PELO NUM DE ELEMENTOS!");
+            else
+            {
+                foreach (var variable in currentVariablesOnUsefulBox)
+                {
+                    if (!correctVariables.Contains(variable))
+                    {
+                        print("A variavel " + variable + " não faz parte da lista de variáveis corretas!");
+                        return false;
+                    } 
+                }
+                print("Correto! Pode prosseguir para a próxima fase!");
+                return true;
+            }
+            return false;
+            
+        }
+
+        private void SetupPhase4Part2()
+        {
+            print("Setting up phase 4 part 2");
+
+            // Removing from camera unused boxes
+            var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
+            p1_variablesBox.transform.position = outOfBoundsPosition;
+            p1_usefulVariablesBox.transform.position = outOfBoundsPosition;
+            // Setting positions
+            p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part2_ProductionsBox.position;
+            p1_uselessVariablesBox.transform.position =
+                _boxPositionsManager.Anchor_Phase1Part2_uselessVariablesBox_gray.position;
+            trashBin.transform.position = _boxPositionsManager.Anchor_Phase1Part2_trashBin.position;
+            
+            // Changing box colors
+            p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
+            p1_uselessVariablesBox.GetComponent<VariablesBox>().SetGrayScale(true);
+            
+            // Making productions_Box objects draggable again
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
+        }
+
+        private bool Phase4Part2()
+        {
+            var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
+            if (currentProductionsOnProductionsBox.Count < 1)
+            {
+                print("É necessário que alguma produção exista na linguagem");
+                return false;
+            }
+            
+            var correctProductions = _grammar.UsefulProductionsPhase4;
+            
+            if (correctProductions.Count != currentProductionsOnProductionsBox.Count) print("Número errado de produções úteis!");
+            else
+            {
+                foreach (var production in currentProductionsOnProductionsBox)
+                {
+                    if (!correctProductions.Any(correctProduction =>
+                        correctProduction._in == production._in && correctProduction._out == production._out))
+                    {
+                        print("A producao " + production._in + " -> " + production._out +
+                              " não faz parte da lista de producoes corretas!");
+                        return false;
+                    }
+                }
+
+                print("Correto! Pode prosseguir para a próxima fase!");
+                return true;
+            }
+            return false;
+        }
+
+        private void SetupPhase4Part3()
+        {
+            print("Setting up phase 4 part 3");
+
+            // Setting positions
+            p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part3_Productions_Box.position;
+            p1_uselessVariablesBox.transform.position =
+                _boxPositionsManager.Anchor_Phase1Part3_uselessVariablesBox_gray.position;
+            trashBin.transform.position = _boxPositionsManager.Anchor_Phase1Part3_trashBin.position;
+        }
+
+        private bool Phase4Part3()
+        {
+            var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
+            if (currentProductionsOnProductionsBox.Count < 1)
+            {
+                print("É necessário que alguma produção exista na linguagem");
+                return false;
+            }
+            
+            var correctProductions = _grammar.usefulAndReachableProductionsPhase4;
+            
+            if (correctProductions.Count != currentProductionsOnProductionsBox.Count) print("Número errado de produções úteis e alcançáveis!");
+            else
+            {
+                foreach (var production in currentProductionsOnProductionsBox)
+                {
+                    if (!correctProductions.Any(correctProduction =>
+                        correctProduction._in == production._in && correctProduction._out == production._out))
+                    {
+                        print("A producao " + production._in + " -> " + production._out +
+                              " não faz parte da lista de producoes corretas!");
+                        return false;
+                    }
+                }
+
+                print("Correto! Pode prosseguir para a próxima fase!");
+                return true;
+            }
+            return false;
+        }
+        
     }
 }

@@ -44,6 +44,7 @@ namespace Resources.Scripts
         [NonSerialized] public bool StartVariableCanProduceLambda;
 
         /* Phase 3 variables */
+        [NonSerialized] public List<Production> NonUselessUnitProductions;
         [NonSerialized] public List<Tuple<char, List<char>>> UnitProductions;
         [NonSerialized] public List<Production> NonUnitProductions;
         [NonSerialized] public List<Production> ProductionsPhase3;
@@ -566,7 +567,9 @@ namespace Resources.Scripts
         /* Phase 3 (Unit productions) code */
         private void ExecutePhase3()
         {
-            RemoveUselessUnitProductions();
+            NonUselessUnitProductions = RemoveUselessUnitProductions();
+            
+            // deve retornar uma lista de producoes!
             SetUnitProductions();
             Debug.Log("UNIT PRODUCTIONS: ");
             DebugPrintUnitProductions();
@@ -575,11 +578,12 @@ namespace Resources.Scripts
             SetResultingProductions();
         }
 
-        private void RemoveUselessUnitProductions()
+        private List<Production> RemoveUselessUnitProductions()
         {
             ProductionsPhase3 = ProductionsPhase2.DeepClone();
             ProductionsPhase3.RemoveAll(production => production._out.Length == 1 &&
                         production._out.ToCharArray()[0] == production._in);
+            return ProductionsPhase3.DeepClone();
         }
         
         private void SetUnitProductions()

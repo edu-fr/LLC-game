@@ -23,8 +23,9 @@ namespace Resources.Scripts
         [SerializeField] private GameObject p2_lambdaProducersBox;
         [SerializeField] private GameObject p2_productionMaker;
         [SerializeField] private GameObject p2_acceptLambdaQuestionBox;
-        
         public GameObject p2_productionsBox;
+        [SerializeField] private GameObject p3_unitProductionsBox;
+            
         [SerializeField] private GameObject trashBin;
         
         private int _currentPhase;
@@ -66,7 +67,6 @@ namespace Resources.Scripts
             switch (_currentPhase)
             {
                 case 1:
-
                     switch (_currentPart)
                     {
                         case 1:
@@ -98,7 +98,6 @@ namespace Resources.Scripts
                     break;
                 
                 case 2:
-                    
                     switch (_currentPart)
                     {
                         case 1:
@@ -127,7 +126,31 @@ namespace Resources.Scripts
                     }
                     break;
                 
+                case 3:
+                    switch (_currentPart)
+                    {
+                        case 1:
+                            if (Phase3Part1())
+                            {
+                                _currentPart = 2;
+                                SetupPhase3Part2();
+                            }
+                            break;
+                        
+                        case 2:
+                            if (Phase3Part2())
+                            {
+                                print("Pode prosseguir para a parte 3!");
+                                
+                            }
+                            break;
+                        
+                        case 3:
+                            break;
+                    }
+                    break;
             }
+            
         }
 
         private void SetupPhase1Part1()
@@ -397,15 +420,72 @@ namespace Resources.Scripts
                 null && !_grammar.StartVariableCanProduceLambda) ;
         }
 
-        private bool SetupPhase3Part1()
+        private void SetupPhase3Part1()
         {
-            print("Comecei a fase 3 parte 1!");
+            // Removing from camera vision unused boxes
+            p2_acceptLambdaQuestionBox.transform.position = _boxPositionsManager.Anchor_OutOfBounds.position;
+            // Moving useful boxes
+            p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part1_productionsBox.position;
+            // Turning on deletability
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+            // Setting gray scale off
+            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
+        }
+
+        private bool Phase3Part1()
+        {
+            var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
+            print("NON USELESS UNIT PRODUCTIONS!");
+            foreach(var production in _grammar.NonUselessUnitProductions)
+            {
+                print(production._in + "->" + production._out);
+            }
+            if (productionList.Count != _grammar.NonUselessUnitProductions.Count) // VER SE É ESSA LISTA MESMO
+            {
+                print("Numero incorreto de produções!");
+                return false;
+            }
+            foreach (var production in productionList)
+            {
+                var productionExists = false;
+                foreach (var correctProduction in _grammar.NonUselessUnitProductions)
+                {
+                    if (production._in == correctProduction._in)
+                    {
+                        if (production._out == correctProduction._out)
+                        {
+                            productionExists = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!productionExists)
+                {
+                    print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
+                    return false;
+                }
+            }
+
             return true;
         }
-        private void Update()
-        {
-           
 
+        private void SetupPhase3Part2()
+        {
+            // Moving useful boxes
+            p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part2_productionsBox.position;
+            p3_unitProductionsBox.transform.position =
+                _boxPositionsManager.Anchor_Phase3Part2_unitProductionsBox.position;
+            // Turning off deletability
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            // Turning on draggability 
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
+        }
+
+        private bool Phase3Part2()
+        {
+            return true;
         }
     }
 }

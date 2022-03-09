@@ -74,8 +74,7 @@ namespace Resources.Scripts
 
             var newProduction = new GrammarScript.Production(_variableText.text.ToCharArray()[0], correctString.ToString());
 
-            var productionsBox = levelController.GetComponent<LevelScript>().p2_productionsBox
-                .GetComponent<ProductionsBox>();
+            var productionsBox = levelController.GetComponent<LevelScript>().p2_productionsBox.GetComponent<ProductionsBox>();
 
             var alreadyExists = false;
             foreach (var production in productionsBox.productionList)

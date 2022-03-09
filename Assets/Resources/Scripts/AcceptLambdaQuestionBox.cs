@@ -17,12 +17,10 @@ namespace Resources.Scripts
             var lambdaProduction = new GrammarScript.Production(StartVariableText.text.ToCharArray()[0], "λ");
             if (ProductionsBoxObject.GetComponent<ProductionsBox>().productionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) == null)
             {
-                print("Ainda nao contem! vou adicionar!");
-                ProductionsBoxObject.GetComponent<ProductionsBox>().InsertProductionAndReconstructList(new GrammarScript.Production(StartVariableText.text.ToCharArray()[0], "λ"));
-            }
-            else
-            {
-                print("Já contem, nao vou adicionar de novo!");
+                var productionsBoxComponent = ProductionsBoxObject.GetComponent<ProductionsBox>();
+                productionsBoxComponent.InsertProductionAndReconstructList(new GrammarScript.Production(StartVariableText.text.ToCharArray()[0], "λ"));
+                productionsBoxComponent.SetAllProductionsDeletability(false);
+                productionsBoxComponent.SetGrayScale(true);
             }
         }
 
@@ -31,17 +29,14 @@ namespace Resources.Scripts
             var lambdaProduction = new GrammarScript.Production(StartVariableText.text.ToCharArray()[0], "λ");
             if (ProductionsBoxObject.GetComponent<ProductionsBox>().productionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) != null)
             {
-                print("CONTEM, vou retirar!!!");
                 var lambdaProductionBox = ProductionsBoxObject.GetComponent<ProductionsBox>().productionBoxList
                     .Find(x => x.GetComponent<BoxContent>().Production._in == lambdaProduction._in &&
                                x.GetComponent<BoxContent>().Production._out == lambdaProduction._out);
-                ProductionsBoxObject.GetComponent<ProductionsBox>().RemoveProductionAndReconstructList(lambdaProductionBox.gameObject);
+                var productionsBoxComponent = ProductionsBoxObject.GetComponent<ProductionsBox>();
+                productionsBoxComponent.RemoveProductionAndReconstructList(lambdaProductionBox.gameObject);
+                productionsBoxComponent.SetAllProductionsDeletability(false);
+                productionsBoxComponent.SetGrayScale(true);
             }
-            else
-            {
-                print("NÃO CONTEM, entao nao da pra retirar!!!");
-            }
-            
         }
     }
 }

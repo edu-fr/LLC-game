@@ -189,5 +189,13 @@ namespace Resources.Scripts
                 productionBox.GetComponent<Draggable>().CanBeDeleted = boolean;
             }
         }
+        
+        public void SetAllProductionsDraggability(bool boolean)
+        {
+            foreach (var productionBox in productionBoxList)
+            {
+                productionBox.GetComponent<Draggable>().CanBeDragged = boolean;
+            }
+        }
     }
 }

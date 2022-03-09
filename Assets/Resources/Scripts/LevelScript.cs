@@ -140,12 +140,18 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase3Part2())
                             {
-                                print("Pode prosseguir para a parte 3!");
-                                
+                                _currentPart = 3;
+                                SetupPhase3Part3();
                             }
                             break;
                         
                         case 3:
+                            if (Phase3Part3())
+                            {
+                                print("Pode prosseguir para a parte bonus!");
+                                _currentPhase = 4;
+                                _currentPart = 1; 
+                            }
                             break;
                     }
                     break;
@@ -460,11 +466,9 @@ namespace Resources.Scripts
                     }
                 }
 
-                if (!productionExists)
-                {
-                    print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
-                    return false;
-                }
+                if (productionExists) continue;
+                print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
+                return false;
             }
 
             return true;
@@ -485,7 +489,61 @@ namespace Resources.Scripts
 
         private bool Phase3Part2()
         {
+            var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
+            if (_grammar.NonUnitProductions.Count != productionsBoxList.Count)
+            {
+                print("Número de produções unidade inesperado! Recebeu: " + productionsBoxList.Count + "; Esperava: " +
+                      _grammar.NonUnitProductions.Count);
+                return false;
+            }
+            foreach (var production in productionsBoxList.Where(production =>
+                !_grammar.NonUnitProductions.Exists(x => x._in == production._in && x._out == production._out)))
+            {
+                print("A produção " + production._in + "=>" + production._out +
+                      " não faz parte das produções unidade!");
+                return false;
+            }
             return true;
+        }
+
+        private void SetupPhase3Part3()
+        {
+            // Moving useful boxes
+            p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part3_productionsBox.position;
+            p3_unitProductionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part3_unitProductionsBox.position;
+            p2_productionMaker.transform.position = _boxPositionsManager.Anchor_Phase3Part3_productionMaker.position;
+            // Turning off deletability
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            // Turning off draggability 
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
+            // Setting the boxes with the correct content (debug only)
+            p2_productionsBox.GetComponent<ProductionsBox>().ClearList();
+            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.NonUnitProductions);
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
+            
+        }
+
+        private bool Phase3Part3()
+        {
+            var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
+            if (_grammar.ResultingProductions.Count != productionsBoxList.Count)
+            {
+                print("Número de produções finais inesperado! Recebeu: " + productionsBoxList.Count + "; Esperava: " +
+                      _grammar.ResultingProductions.Count);
+                return false;
+            }
+            
+            foreach (var production in productionsBoxList.Where(production =>
+                !_grammar.ResultingProductions.Exists(x => x._in == production._in && x._out == production._out)))
+            {
+                print("A produção " + production._in + "=>" + production._out +
+                      " não faz parte das produções resultantes da fase 3!");
+                return false;
+            }
+            
+            return true; 
         }
     }
 }

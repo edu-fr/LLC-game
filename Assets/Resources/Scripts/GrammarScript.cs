@@ -614,7 +614,6 @@ namespace Resources.Scripts
                                             tuple.Item2.Add(innerInnerProduction);  // Add to the tuple list
                                             unitProductionWasAdd = true;
                                         }
-                                        
                                     }
                                 }
                                 
@@ -628,7 +627,6 @@ namespace Resources.Scripts
                     }
                 }    
             }
-            
         }
 
         private void DebugPrintUnitProductions()
@@ -651,6 +649,7 @@ namespace Resources.Scripts
                     NonUnitProductions.Add(production);
             }
         }
+
         
         private void SetResultingProductions()
         {

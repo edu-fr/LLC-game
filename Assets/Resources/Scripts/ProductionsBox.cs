@@ -50,7 +50,6 @@ namespace Resources.Scripts
                 print("box list: " + productionBoxList.Count + "list: " + productionList.Count);
                 return;
             }
-            print("Numero de producoes que foram chamadas aqui: " + productions.Count);
             var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
             var productionCounter = 0;
             foreach (var production in productions)
@@ -145,9 +144,29 @@ namespace Resources.Scripts
 
         public override void OnDrop(PointerEventData eventData)
         {
-            if (!eventData.pointerDrag) return;
-            
+            if (eventData.pointerDrag == null) return;
+            if (eventData.pointerDrag.CompareTag("Production"))
+            {
+                
+                print("On valid position!");
+                AddToLists(eventData.pointerDrag);
+                eventData.pointerDrag.transform.SetParent(productionBoxes.transform);
+                eventData.pointerDrag.GetComponent<Draggable>().AttachedTo = productionBoxes;
+                if (eventData.pointerDrag.GetComponent<Draggable>().OriginalAttachedObject == productionBoxes)
+                {
+                    print("Está no original!");
+                    eventData.pointerDrag.GetComponent<RectTransform>().localPosition =
+                        eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
+                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
+                }
+                else
+                { 
+                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<RectTransform>().localPosition;
+                }
+                eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
+            }
 
+            
         }
 
         public void RemoveProductionAndReconstructList(GameObject productionBoxToBeRemoved)

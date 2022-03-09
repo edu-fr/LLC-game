@@ -44,5 +44,10 @@ namespace Resources.Scripts
         // Phase 3 Part 2  
         public Transform Anchor_Phase3Part2_productionsBox; 
         public Transform Anchor_Phase3Part2_unitProductionsBox; 
+        
+        // Phase 3 Part 3
+        public Transform Anchor_Phase3Part3_productionsBox;
+        public Transform Anchor_Phase3Part3_unitProductionsBox;
+        public Transform Anchor_Phase3Part3_productionMaker;
     }
 }

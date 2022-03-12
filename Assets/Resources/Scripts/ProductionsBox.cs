@@ -55,7 +55,6 @@ namespace Resources.Scripts
             {
                 // Expanding boxes container
                 productionBoxesRectTransform.sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
-                print("Size delta: " + productionBoxesRectTransform.sizeDelta);
                 // Instantiate a new production box
                 var productionsBoxTransform = productionBoxes.transform;
                 var productionsBoxPosition = productionsBoxTransform.position;

@@ -18,7 +18,6 @@ namespace Resources.Scripts
         public Transform productionBoxPrefab;
         private float _productionBoxHeight;
         private GrammarScript.Production _lastProductionInserted;
-        private Vector3 _emptyPosition = Vector3.zero;
         private Vector2 _productionBoxesOriginalSize;
         protected override void Awake()
         {
@@ -56,21 +55,19 @@ namespace Resources.Scripts
             {
                 // Expanding boxes container
                 productionBoxesRectTransform.sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
-
+                print("Size delta: " + productionBoxesRectTransform.sizeDelta);
                 // Instantiate a new production box
                 var productionsBoxTransform = productionBoxes.transform;
                 var productionsBoxPosition = productionsBoxTransform.position;
                 var newProductionBox = Instantiate(productionBoxPrefab,
-                    new Vector3(productionsBoxPosition.x, productionsBoxPosition.y, productionsBoxPosition.z),
-                    Quaternion.identity, productionBoxes.transform);
+                    productionsBoxPosition, Quaternion.identity, productionBoxes.transform);
                 newProductionBox.GetComponent<Draggable>().CanBeDragged = false;
                 newProductionBox.GetComponent<Draggable>().AttachedTo = productionBoxes;
                 newProductionBox.GetComponent<BoxContent>().SetProduction(production);
                 var newProductionTransform = newProductionBox.transform;
-                var newProductionPosition = newProductionTransform.position;
+                var newProductionPosition = productionsBoxPosition;
                 newProductionPosition -= new Vector3(0, _productionBoxHeight * productionCounter, 0);
                 newProductionTransform.position = newProductionPosition;
-                _emptyPosition = newProductionPosition - new Vector3(0, _productionBoxHeight, 0);
                 // Set new original position
                 newProductionBox.GetComponent<Draggable>().OriginalPosition = newProductionTransform.localPosition;
                 newProductionBox.GetComponent<Draggable>().LastValidPosition =
@@ -84,32 +81,6 @@ namespace Resources.Scripts
             SetGrayScale(false);
         }
         
-        // public void AppendProduction(GrammarScript.Production production)
-        // {
-        //      var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
-        //     productionBoxesRectTransform.sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
-        //
-        //     // Instantiate a new production box
-        //     var productionsBoxTransform = productionBoxes.transform;
-        //     var productionsBoxPosition = productionsBoxTransform.position;
-        //     var newProductionBox = Instantiate(productionBoxPrefab,
-        //         new Vector3(productionsBoxPosition.x, productionsBoxPosition.y, productionsBoxPosition.z),
-        //         Quaternion.identity, productionBoxes.transform);
-        //     newProductionBox.GetComponent<Draggable>().CanBeDragged = false;
-        //     newProductionBox.GetComponent<Draggable>().AttachedTo = productionBoxes;
-        //     newProductionBox.GetComponent<BoxContent>().SetProduction(production);
-        //     var newProductionTransform = newProductionBox.transform;
-        //     newProductionTransform.position = _emptyPosition;
-        //     // Set new original position
-        //     newProductionBox.GetComponent<Draggable>().OriginalPosition = newProductionTransform.localPosition;
-        //     newProductionBox.GetComponent<Draggable>().LastValidPosition =
-        //         newProductionBox.GetComponent<Draggable>().OriginalPosition;
-        //     // Change it's text
-        //     newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
-        //     AddToLists(newProductionBox.gameObject);
-        //     _emptyPosition = newProductionTransform.position - new Vector3(0, _productionBoxHeight, 0);
-        // }
-
         public override void RemoveFromLists(GameObject box)
         {
             if (!productionBoxList.Remove(box.transform))

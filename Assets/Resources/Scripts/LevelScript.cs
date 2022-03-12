@@ -51,15 +51,6 @@ namespace Resources.Scripts
             _currentPart = 1;
             
             SetupPhase1Part1();
-            
-            // DEBUG
-            
-            SetupPhase1Part2();
-            SetupPhase1Part3();
-            SetupPhase2Part1();
-            SetupPhase2Part2();
-            _currentPart = 2;
-            _currentPhase = 2;
         }
 
         public void TryNextPhase()
@@ -190,7 +181,13 @@ namespace Resources.Scripts
         private void SetupPhase1Part1()
         {
             print("Setting up phase 1 part 1");
-
+            
+            // Setting positions
+            p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_ProductionsBox_gray.position;
+            p1_variablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_variablesBox.position;
+            p1_uselessVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_uselessVariablesBox.position;
+            p1_usefulVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_usefulVariablesBox.position;
+            
             // Filling boxes
             p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.Productions.ToList());
             p1_variablesBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.Variables);
@@ -198,11 +195,6 @@ namespace Resources.Scripts
             // Changing productions box color
             p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
 
-            // Setting positions
-            p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_ProductionsBox_gray.position;
-            p1_variablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_variablesBox.position;
-            p1_uselessVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_uselessVariablesBox.position;
-            p1_usefulVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_usefulVariablesBox.position;
         }
 
         private bool Phase1Part1() 

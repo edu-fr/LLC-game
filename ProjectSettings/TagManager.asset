@@ -7,6 +7,7 @@ TagManager:
   - Variable
   - Production
   - Anchor
+  - GameManager
   layers:
   - Default
   - TransparentFX

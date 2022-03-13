@@ -14,6 +14,7 @@ namespace Resources.Scripts
     {
         public GameObject grammarObject;
         private GrammarScript _grammar;
+        [SerializeField] private TransitionHandler _transitionHandler;
 
         [SerializeField] private GameObject p1_productionsBox;
         [SerializeField] private GameObject p1_variablesBox;
@@ -49,7 +50,8 @@ namespace Resources.Scripts
             // Set initial phase and part
             _currentPhase = 1;
             _currentPart = 1;
-            
+
+            _transitionHandler.Transition(_currentPhase);
             SetupPhase1Part1();
         }
 
@@ -81,6 +83,7 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 1;
                                 _currentPhase = 2;
+                                _transitionHandler.Transition(_currentPhase);
                                 SetupPhase2Part1();
                             }
                             break;
@@ -111,6 +114,7 @@ namespace Resources.Scripts
                             {
                                 _currentPhase = 3;
                                 _currentPart = 1;
+                                _transitionHandler.Transition(_currentPhase);
                                 SetupPhase3Part1();
                             }
                             break;
@@ -141,6 +145,7 @@ namespace Resources.Scripts
                             {
                                 _currentPhase = 4;
                                 _currentPart = 1; 
+                                _transitionHandler.Transition(_currentPhase);
                                 SetupPhase4Part1();
                             }
                             break;

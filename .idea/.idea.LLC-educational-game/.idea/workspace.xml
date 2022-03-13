@@ -23,6 +23,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/ModalWindowPanel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Mask.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/TransitionHandler.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="20jCIFI5KQ6n5yt70IH1g2D5Euy" />
   <component name="ProjectViewState">
@@ -114,7 +115,8 @@
       <workItem from="1646827424580" duration="1485000" />
       <workItem from="1646843525056" duration="8518000" />
       <workItem from="1647091817919" duration="10435000" />
-      <workItem from="1647119884110" duration="8356000" />
+      <workItem from="1647119884110" duration="9018000" />
+      <workItem from="1647179804899" duration="4708000" />
     </task>
     <servers />
   </component>

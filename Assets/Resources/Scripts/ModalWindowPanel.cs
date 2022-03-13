@@ -13,62 +13,57 @@ namespace Resources.Scripts
       }
       
       [Header("Header")] 
-      [SerializeField] private Transform _headerArea;
-      [SerializeField] private TextMeshProUGUI _titleField;
+      [SerializeField] private Transform headerArea;
+      [SerializeField] private TextMeshProUGUI titleField;
 
       [Header("Content")] 
-      [SerializeField] private Transform _contentArea;
+      [SerializeField] private Transform contentArea;
       
-      [SerializeField] private Transform _verticalLayoutArea;
-      [SerializeField] private Image _verticalImage;
-      [SerializeField] private TextMeshProUGUI _verticalText;
+      [SerializeField] private Transform verticalLayoutArea;
+      [SerializeField] private Image verticalImage;
+      [SerializeField] private TextMeshProUGUI verticalText;
       
       [Space()] 
-      [SerializeField] private Transform _horizontalLayoutArea;
-      [SerializeField] private Image _horizontalImage;
-      [SerializeField] private TextMeshProUGUI _horizontalText;
+      [SerializeField] private Transform horizontalLayoutArea;
+      [SerializeField] private Image horizontalImage;
+      [SerializeField] private TextMeshProUGUI horizontalText;
 
       [Space()] 
-      [SerializeField] private Transform _horizontalLayoutIconArea;
-      [SerializeField] private Transform _iconArea;
-      [SerializeField] private Image _horizontalIcon;
-      [SerializeField] private TextMeshProUGUI _horizontalIconText;
+      [SerializeField] private Transform horizontalLayoutIconArea;
+      [SerializeField] private Transform iconArea;
+      [SerializeField] private Image horizontalIcon;
+      [SerializeField] private TextMeshProUGUI horizontalIconText;
 
       [Header("Footer")] 
-      [SerializeField] private Transform _footerArea;
-      [SerializeField] private Button _confirmButton;
-      [SerializeField] private Button _declineButton;
-      [SerializeField] private Button _alternateButton;
+      [SerializeField] private Transform footerArea;
+      [SerializeField] private Button confirmButton;
+      [SerializeField] private Button declineButton;
+      [SerializeField] private Button alternateButton;
 
-      private Action onConfirmAction;
-      private Action onDeclineAction;
-      private Action onAlternateAction;
+      private Action _onConfirmAction;
+      private Action _onDeclineAction;
+      private Action _onAlternateAction;
 
       public void Confirm()
       {
-         print("Tentando confirmar!");
-         onConfirmAction?.Invoke();
+         _onConfirmAction?.Invoke();
          // Close();
       }
 
       public void Decline()
       {
-         
-         print("Tentando declinar!");
-         onConfirmAction?.Invoke();
+         _onDeclineAction?.Invoke();
          // Close();
       }
 
       public void Alternate()
       {
-         
-         print("Tentando alternar!");
-         onAlternateAction?.Invoke();
+         _onAlternateAction?.Invoke();
          // Close();
       }
 
-      public void ShowMessage(WindowType windowType, string title, Sprite imageToShow, string message, string confirmText, string declineText, string alternateText, Action confirmAction,
-         Action declineAction = null, Action alternateAction = null)
+      public void ShowMessage(WindowType windowType, string title, Sprite imageToShow, string message, string confirmText, 
+         string declineText, string alternateText, Action confirmAction, Action declineAction = null, Action alternateAction = null)
       {
          gameObject.SetActive(true);
          
@@ -76,25 +71,24 @@ namespace Resources.Scripts
          
          // Hide the header if there's no title
          var hasTitle = string.IsNullOrEmpty(title);
-         _headerArea.gameObject.SetActive(hasTitle);
-         _titleField.text = title;
+         headerArea.gameObject.SetActive(hasTitle);
+         titleField.text = title;
          
          SetContent(windowType, imageToShow, message);
 
          // Setting buttons
-         _confirmButton.GetComponentInChildren<TextMeshProUGUI>().text = confirmText;
-         onConfirmAction = confirmAction;
+         confirmButton.GetComponentInChildren<TextMeshProUGUI>().text = confirmText;
+         _onConfirmAction = confirmAction;
 
          var hasDecline = (declineAction != null);
-         _declineButton.gameObject.SetActive(hasDecline);
-         _declineButton.GetComponentInChildren<TextMeshProUGUI>().text = declineText;
-         onDeclineAction = declineAction;
+         declineButton.gameObject.SetActive(hasDecline);
+         declineButton.GetComponentInChildren<TextMeshProUGUI>().text = declineText;
+         _onDeclineAction = declineAction;
 
          var hasAlternate = (alternateAction != null);
-         _alternateButton.gameObject.SetActive(hasAlternate);
-         _alternateButton.GetComponentInChildren<TextMeshProUGUI>().text = alternateText;
-         onAlternateAction = alternateAction;
-
+         alternateButton.gameObject.SetActive(hasAlternate);
+         alternateButton.GetComponentInChildren<TextMeshProUGUI>().text = alternateText;
+         _onAlternateAction = alternateAction;
       }
 
       private void SetWindowType(WindowType windowType)
@@ -102,21 +96,21 @@ namespace Resources.Scripts
          switch (windowType)
          {
             case WindowType.Vertical:
-               _horizontalLayoutArea.gameObject.SetActive(false);
-               _horizontalLayoutIconArea.gameObject.SetActive(false);
-               _verticalLayoutArea.gameObject.SetActive(true);
+               horizontalLayoutArea.gameObject.SetActive(false);
+               horizontalLayoutIconArea.gameObject.SetActive(false);
+               verticalLayoutArea.gameObject.SetActive(true);
                break;
             
             case WindowType.Horizontal:
-               _horizontalLayoutArea.gameObject.SetActive(true);
-               _horizontalLayoutIconArea.gameObject.SetActive(false);
-               _verticalLayoutArea.gameObject.SetActive(false);
+               horizontalLayoutArea.gameObject.SetActive(true);
+               horizontalLayoutIconArea.gameObject.SetActive(false);
+               verticalLayoutArea.gameObject.SetActive(false);
                break;
             
             case WindowType.HorizontalIcon:
-               _horizontalLayoutArea.gameObject.SetActive(false);
-               _horizontalLayoutIconArea.gameObject.SetActive(true);
-               _verticalLayoutArea.gameObject.SetActive(false);
+               horizontalLayoutArea.gameObject.SetActive(false);
+               horizontalLayoutIconArea.gameObject.SetActive(true);
+               verticalLayoutArea.gameObject.SetActive(false);
                break;
             
             default:
@@ -130,18 +124,18 @@ namespace Resources.Scripts
          switch (windowType)
          {
             case WindowType.Vertical:
-               _verticalImage.sprite = imageToShow;
-               _verticalText.text = message;
+               verticalImage.sprite = imageToShow;
+               verticalText.text = message;
                break;
             
             case WindowType.Horizontal:
-               _horizontalImage.sprite = imageToShow;
-               _horizontalText.text = message;
+               horizontalImage.sprite = imageToShow;
+               horizontalText.text = message;
                break;
             
             case WindowType.HorizontalIcon:
-               _horizontalIcon.sprite = imageToShow;
-               _horizontalIconText.text = message;
+               horizontalIcon.sprite = imageToShow;
+               horizontalIconText.text = message;
                break;
             
             default:

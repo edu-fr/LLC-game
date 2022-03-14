@@ -9,11 +9,12 @@ namespace Resources.Scripts
     {
         public string title;
         public Sprite sprite;
-        public string message;
+        [TextArea(10, 30)] public string message;
         public string confirmText;
         public string declineText;
         public string alternateText;
         public bool triggerOnEnable;
+        public ModalWindowPanel.WindowType windowType;
 
         public UnityEvent onContinueEvent;
         public UnityEvent onCancelEvent;
@@ -42,7 +43,7 @@ namespace Resources.Scripts
                 alternateCallback = onAlternateEvent.Invoke;
             }
             
-            UIController.Instance.ModalWindow.ShowMessage(ModalWindowPanel.WindowType.Vertical, title, sprite, message,
+            UIController.Instance.ModalWindow.ShowMessage(windowType, title, sprite, message,
                 confirmText, declineText, alternateText, continueCallback, cancelCallback, alternateCallback);
         }
         

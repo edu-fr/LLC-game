@@ -46,6 +46,5 @@ namespace Resources.Scripts
             UIController.Instance.ModalWindow.ShowMessage(windowType, title, sprite, message,
                 confirmText, declineText, alternateText, continueCallback, cancelCallback, alternateCallback);
         }
-        
     }
 }

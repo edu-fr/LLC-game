@@ -14,7 +14,7 @@ namespace Resources.Scripts
     {
         public GameObject grammarObject;
         private GrammarScript _grammar;
-        [SerializeField] private TransitionHandler _transitionHandler;
+        [SerializeField] private CanvasController canvasController;
 
         [SerializeField] private GameObject p1_productionsBox;
         [SerializeField] private GameObject p1_variablesBox;
@@ -51,8 +51,9 @@ namespace Resources.Scripts
             _currentPhase = 1;
             _currentPart = 1;
 
-            _transitionHandler.Transition(_currentPhase);
+            canvasController.Transition(_currentPhase);
             SetupPhase1Part1();
+            canvasController.ActivateTutorial(_currentPart, _currentPhase);
         }
 
         public void TryNextPhase()
@@ -65,9 +66,10 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase1Part1())
                             {
-                                _currentPart = 2; 
+                                _currentPart = 2;
                                 SetupPhase1Part2();
-                            };
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                            }
                             break;
                         
                         case 2:
@@ -75,6 +77,7 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 3;
                                 SetupPhase1Part3();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                         
@@ -83,8 +86,9 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 1;
                                 _currentPhase = 2;
-                                _transitionHandler.Transition(_currentPhase);
+                                canvasController.Transition(_currentPhase);
                                 SetupPhase2Part1();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                     }
@@ -99,7 +103,8 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 2;
                                 SetupPhase2Part2();
-                            };
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                            }
                             break;
                         
                         case 2:
@@ -107,6 +112,7 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 3;
                                 SetupPhase2Part3();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                         case 3:
@@ -114,8 +120,9 @@ namespace Resources.Scripts
                             {
                                 _currentPhase = 3;
                                 _currentPart = 1;
-                                _transitionHandler.Transition(_currentPhase);
+                                canvasController.Transition(_currentPhase);
                                 SetupPhase3Part1();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                     }
@@ -129,6 +136,7 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 2;
                                 SetupPhase3Part2();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                         
@@ -137,6 +145,7 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 3;
                                 SetupPhase3Part3();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                         
@@ -145,8 +154,9 @@ namespace Resources.Scripts
                             {
                                 _currentPhase = 4;
                                 _currentPart = 1; 
-                                _transitionHandler.Transition(_currentPhase);
+                                canvasController.Transition(_currentPhase);
                                 SetupPhase4Part1();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                     }
@@ -160,7 +170,8 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 2; 
                                 SetupPhase4Part2();
-                            };
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                            }
                             break;
                         
                         case 2:
@@ -168,6 +179,7 @@ namespace Resources.Scripts
                             {
                                 _currentPart = 3;
                                 SetupPhase4Part3();
+                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
                             }
                             break;
                         

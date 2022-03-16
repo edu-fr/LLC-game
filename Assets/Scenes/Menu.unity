@@ -407,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1571265319474648581, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
       propertyPath: m_text
-      value: OPTIONS
+      value: "OP\xC7\xD5ES"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LEVEL SELECT
+  m_text: "SELE\xC7\xC3O DE FASE"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1213,7 +1213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1571265319474648581, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
       propertyPath: m_text
-      value: QUIT
+      value: SAIR
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
@@ -2663,11 +2663,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1571265319288569743, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 213.9857
+      value: 292.9092
       objectReference: {fileID: 0}
     - target: {fileID: 1571265319288569743, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 77.9475
+      value: 88.8335
       objectReference: {fileID: 0}
     - target: {fileID: 1571265319288569743, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2716,6 +2716,14 @@ PrefabInstance:
     - target: {fileID: 1571265319288569743, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571265319474648581, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
+      propertyPath: m_text
+      value: JOGAR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571265319474648582, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 81.6451
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b21bac911c14f45a8b5932f21489ed, type: 3}

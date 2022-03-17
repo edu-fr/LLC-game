@@ -398,12 +398,13 @@ namespace Resources.Scripts
         {
             // Removing from camera vision unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
-            p2_lambdaProducersBox.transform.position = outOfBoundsPosition;
             p2_variablesBox.transform.position = outOfBoundsPosition;
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionsBox.position;
             p2_productionMaker.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionMaker.position;
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
+            p2_lambdaProducersBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_lambdaProducersBox.position;
         }
 
         private bool Phase2Part2()
@@ -529,7 +530,7 @@ namespace Resources.Scripts
             var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (_grammar.NonUnitProductions.Count != productionsBoxList.Count)
             {
-                print("Número de produções unidade inesperado! Recebeu: " + productionsBoxList.Count + "; Esperava: " +
+                print("Número de produções não unidade inesperado! Recebeu: " + productionsBoxList.Count + "; Esperava: " +
                       _grammar.NonUnitProductions.Count);
                 return false;
             }

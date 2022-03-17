@@ -28,10 +28,11 @@ namespace Resources.Scripts
             ScrollBarDefaultColorBlock = scrollBar.GetComponent<Scrollbar>().colors;
         }
         
-        public virtual void SetGrayScale(bool option)
+        public virtual void SetGrayScale(bool? option)
         {
-            var currentEffectMode = option ? EffectMode.Grayscale : EffectMode.None;
-            var currentColorBlock = option ? ColorBlock.defaultColorBlock : ScrollBarDefaultColorBlock;
+            if (option == null) return;
+            var currentEffectMode = (bool) option ? EffectMode.Grayscale : EffectMode.None;
+            var currentColorBlock = (bool) option ? ColorBlock.defaultColorBlock : ScrollBarDefaultColorBlock;
 
             gameObject.GetComponent<UIEffect>().effectMode = currentEffectMode;
             titleBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
@@ -42,5 +43,10 @@ namespace Resources.Scripts
         public abstract void RemoveFromLists(GameObject box);
         public abstract void AddToLists(GameObject box);
         public abstract void OnDrop(PointerEventData eventData);
+
+        public abstract void RemoveAndReconstructList(GameObject boxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale);
+
+        public abstract void InsertAndReconstructList(GrammarScript.Production productionToBeInserted, bool? draggable, bool? deletable, bool? grayscale);
+        public abstract void InsertAndReconstructList(char variableToBeInserted, bool? draggable, bool? deletable, bool? grayscale);
     }
 }

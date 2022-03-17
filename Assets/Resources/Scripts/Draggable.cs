@@ -25,17 +25,17 @@ namespace Resources.Scripts
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (CanBeDeleted)
-            {
-                if (Input.GetMouseButtonDown(1))         // Botão direito
-                { 
-                    var productionsBoxRef = AttachedTo.GetComponent<InternalBox>().FillableBoxImAttachedTo;
-                    productionsBoxRef.GetComponent<ProductionsBox>().RemoveProductionAndReconstructList(gameObject);
+            if (Input.GetMouseButtonDown(1))         // Botão direito
+            { 
+                if (CanBeDeleted)
+                {
+                    var boxRef = AttachedTo.GetComponent<InternalBox>().FillableBoxImAttachedTo;
+                    boxRef.GetComponent<FillableBox>().RemoveAndReconstructList(gameObject, draggable: true, deletable: true, grayscale: false);
                 }
-            }
-            else
-            {
-                print("Cannot be deleted! POIS: " + CanBeDeleted);
+                else 
+                {
+                    print("Cannot be deleted! pois deletable: " + CanBeDeleted);
+                }
             }
         }
 
@@ -47,11 +47,12 @@ namespace Resources.Scripts
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (!CanBeDragged) return;
+            print("BEING DRAGGED!!");
             IsOnValidPositionToDrop = false;
             _canvasGroup.alpha = .6f;
             _canvasGroup.blocksRaycasts = false;
             // Remove from current box and set the Canvas as new parent
-            AttachedTo.GetComponentInParent<FillableBox>().RemoveFromLists(gameObject);
+            AttachedTo.GetComponentInParent<FillableBox>().RemoveAndReconstructList(gameObject, draggable: true, deletable: false, grayscale: false);
             gameObject.transform.SetParent(_canvas.transform);
         }
 
@@ -71,11 +72,18 @@ namespace Resources.Scripts
             {
                 print("Not on valid position!");
                 transform.SetParent(AttachedTo.transform);
+                if (gameObject.GetComponent<BoxContent>().Production == null)
+                {
+                    print("Variável voltando porque o drop deu errado!");
+                    AttachedTo.GetComponent<FillableBox>().InsertAndReconstructList(GetComponent<BoxContent>().Variable, draggable: true, deletable: false, grayscale: false);
+                }
+                else
+                {
+                    print("Produção voltando porque o drop deu errado!");
+                    AttachedTo.GetComponent<FillableBox>().InsertAndReconstructList(GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
+                }
                 transform.localPosition = LastValidPosition;
-                AttachedTo.GetComponentInParent<FillableBox>().AddToLists(gameObject);
             }
-
         }
-        
     }
 }

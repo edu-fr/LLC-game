@@ -32,6 +32,7 @@ namespace Resources.Scripts
         
         // Phase 2 Part 2
         public Transform Anchor_Phase2Part2_productionsBox; 
+        public Transform Anchor_Phase2Part2_lambdaProducersBox; 
         public Transform Anchor_Phase2Part2_productionMaker;
         
         // Phase 2 Part 3

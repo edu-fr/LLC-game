@@ -86,7 +86,7 @@ namespace Resources.Scripts
 
             if (!alreadyExists)
             {
-                productionsBox.InsertProductionAndReconstructList(newProduction);
+                productionsBox.InsertAndReconstructList(newProduction, true, true, false);
                 productionTextFieldObject.GetComponent<TMP_InputField>().text = "";
                 variableTextFieldObject.GetComponent<TMP_InputField>().text = "";
             }

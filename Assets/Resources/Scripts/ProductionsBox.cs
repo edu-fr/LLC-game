@@ -31,10 +31,11 @@ namespace Resources.Scripts
             _productionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
-        public override void SetGrayScale(bool option)
+        public override void SetGrayScale(bool? option)
         {
+            if (option == null) return;
             base.SetGrayScale(option);
-            var currentEffectMode = option ? EffectMode.Grayscale : EffectMode.None;
+            var currentEffectMode = (bool) option ? EffectMode.Grayscale : EffectMode.None;
 
             foreach (var productionBox in productionBoxList)
             {
@@ -117,11 +118,11 @@ namespace Resources.Scripts
             if (eventData.pointerDrag == null) return;
             if (eventData.pointerDrag.CompareTag("Production"))
             {
-                
                 print("On valid position!");
                 AddToLists(eventData.pointerDrag);
                 eventData.pointerDrag.transform.SetParent(productionBoxes.transform);
                 eventData.pointerDrag.GetComponent<Draggable>().AttachedTo = productionBoxes;
+                InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
                 if (eventData.pointerDrag.GetComponent<Draggable>().OriginalAttachedObject == productionBoxes)
                 {
                     print("Está no original!");
@@ -138,26 +139,35 @@ namespace Resources.Scripts
 
             
         }
-
-        public void RemoveProductionAndReconstructList(GameObject productionBoxToBeRemoved)
+        
+        public override void RemoveAndReconstructList(GameObject productionBoxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale)
         {
             RemoveFromLists(productionBoxToBeRemoved);
             Destroy(productionBoxToBeRemoved.gameObject);
             var productionsListCopy = productionList.DeepClone();
-           
             ClearList();
             FillWithProductions(productionsListCopy);
-            SetAllProductionsDeletability(true);
+            if (deletable != null)
+            {
+                SetAllProductionsDeletability(deletable);
+                
+            }
         }
         
         
-        public void InsertProductionAndReconstructList(GrammarScript.Production productionToBeInserted)
+        public override void InsertAndReconstructList(GrammarScript.Production productionToBeInserted, bool? draggable, bool? deletable, bool? grayscale)
         {
             var productionsListCopy = productionList.DeepClone();
             productionsListCopy.Add(productionToBeInserted);
             ClearList();
             FillWithProductions(productionsListCopy);
-            SetAllProductionsDeletability(true);
+            SetAllProductionsDeletability(deletable);
+            SetGrayScale(grayscale);
+        }
+
+        public override void InsertAndReconstructList(char variableToBeInserted, bool? draggable, bool? deletable, bool? grayscale)
+        {
+            throw new NotImplementedException();
         }
 
         public override void ClearList()
@@ -171,19 +181,21 @@ namespace Resources.Scripts
             productionBoxes.GetComponent<RectTransform>().sizeDelta = _productionBoxesOriginalSize;
         }
 
-        public void SetAllProductionsDeletability(bool boolean)
+        public void SetAllProductionsDeletability(bool? boolean)
         {
+            if (boolean == null) return; 
             foreach (var productionBox in productionBoxList)
             {
-                productionBox.GetComponent<Draggable>().CanBeDeleted = boolean;
+                productionBox.GetComponent<Draggable>().CanBeDeleted = (bool) boolean;
             }
         }
         
-        public void SetAllProductionsDraggability(bool boolean)
+        public void SetAllProductionsDraggability(bool? boolean)
         {
+            if (boolean == null) return; 
             foreach (var productionBox in productionBoxList)
             {
-                productionBox.GetComponent<Draggable>().CanBeDragged = boolean;
+                productionBox.GetComponent<Draggable>().CanBeDragged = (bool) boolean;
             }
         }
     }

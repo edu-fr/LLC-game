@@ -23,7 +23,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/ModalWindowPanel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Mask.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/CanvasController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="20jCIFI5KQ6n5yt70IH1g2D5Euy" />
   <component name="ProjectViewState">
@@ -119,6 +118,8 @@
       <workItem from="1647179804899" duration="4708000" />
       <workItem from="1647278475526" duration="1910000" />
       <workItem from="1647294264708" duration="2982000" />
+      <workItem from="1647467846216" duration="635000" />
+      <workItem from="1647525341140" duration="5466000" />
     </task>
     <servers />
   </component>

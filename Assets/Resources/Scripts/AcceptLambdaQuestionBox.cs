@@ -18,7 +18,7 @@ namespace Resources.Scripts
             if (ProductionsBoxObject.GetComponent<ProductionsBox>().productionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) == null)
             {
                 var productionsBoxComponent = ProductionsBoxObject.GetComponent<ProductionsBox>();
-                productionsBoxComponent.InsertProductionAndReconstructList(new GrammarScript.Production(StartVariableText.text.ToCharArray()[0], "λ"));
+                productionsBoxComponent.InsertAndReconstructList(new GrammarScript.Production(StartVariableText.text.ToCharArray()[0], "λ"), draggable: false, deletable: false, grayscale: false);
                 productionsBoxComponent.SetAllProductionsDeletability(false);
                 productionsBoxComponent.SetGrayScale(true);
             }
@@ -33,7 +33,7 @@ namespace Resources.Scripts
                     .Find(x => x.GetComponent<BoxContent>().Production._in == lambdaProduction._in &&
                                x.GetComponent<BoxContent>().Production._out == lambdaProduction._out);
                 var productionsBoxComponent = ProductionsBoxObject.GetComponent<ProductionsBox>();
-                productionsBoxComponent.RemoveProductionAndReconstructList(lambdaProductionBox.gameObject);
+                ((FillableBox) productionsBoxComponent).RemoveAndReconstructList(lambdaProductionBox.gameObject, draggable: false, deletable: false, grayscale: false);
                 productionsBoxComponent.SetAllProductionsDeletability(false);
                 productionsBoxComponent.SetGrayScale(true);
             }

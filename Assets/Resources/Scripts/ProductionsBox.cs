@@ -14,6 +14,7 @@ namespace Resources.Scripts
     {
         [SerializeField] private GameObject productionBoxes;
         public List<GrammarScript.Production> productionList;
+        public List<GrammarScript.Production> originalProductionList;
         public List<Transform> productionBoxList;
         public Transform productionBoxPrefab;
         private float _productionBoxHeight;
@@ -112,7 +113,7 @@ namespace Resources.Scripts
         public override void OnDrop(PointerEventData eventData)
         {
             if (eventData.pointerDrag == null) return;
-            if (eventData.pointerDrag.CompareTag("Production"))
+            if (eventData.pointerDrag.CompareTag("Production") && eventData.pointerDrag.GetComponent<Draggable>().CanBeDragged)
             {
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
                 InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);

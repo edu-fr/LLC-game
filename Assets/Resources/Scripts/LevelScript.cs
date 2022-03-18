@@ -410,6 +410,8 @@ namespace Resources.Scripts
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(false);
             p2_lambdaProducersBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_lambdaProducersBox.position;
         }
 

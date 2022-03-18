@@ -97,7 +97,7 @@ namespace Resources.Scripts
         public override void OnDrop(PointerEventData eventData)
         {
             if (eventData.pointerDrag == null) return;
-            if (eventData.pointerDrag.CompareTag("Variable"))
+            if (eventData.pointerDrag.CompareTag("Variable") && eventData.pointerDrag.GetComponent<Draggable>().CanBeDragged)
             {
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
                 InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Variable, draggable: true, deletable: false, grayscale: false);

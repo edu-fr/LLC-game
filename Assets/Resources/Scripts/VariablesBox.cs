@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Coffee.UIEffects;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Resources.Scripts.Utils;
 
 namespace Resources.Scripts
 {
@@ -53,7 +55,9 @@ namespace Resources.Scripts
             }
             var variableBoxesRectTransform = variableBoxes.GetComponent<RectTransform>();
             var variableCounter = 0;
-            foreach (var variable in variables)
+            var variablesList = variables.ToList();
+            variablesList.Sort(ExtensionMethods.SortVariables);
+            foreach (var variable in variablesList)
             {
                 // Expanding boxes container
                 variableBoxesRectTransform.sizeDelta += new Vector2(0, _variableBoxHeight / Utils.ScreenDif);
@@ -96,7 +100,6 @@ namespace Resources.Scripts
             if (eventData.pointerDrag.CompareTag("Variable"))
             {
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
-                print("É VARIÁVEL E FOI DROPADA DENTRO DA CAIXA " + name);
                 InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Variable, draggable: true, deletable: false, grayscale: false);
                 Destroy(eventData.pointerDrag);
             }
@@ -120,10 +123,11 @@ namespace Resources.Scripts
 
         public override void InsertAndReconstructList(char variableToBeInserted, bool? draggable, bool? deletable, bool? grayscale)
         {
-            var variablesListCopy = variableList.DeepClone();
-            variablesListCopy.Add(variableToBeInserted);
+            var variableListCopy = variableList.DeepClone();
+            variableListCopy.Add(variableToBeInserted);
             ClearList();
-            FillWithVariables(variablesListCopy);
+            variableListCopy.Sort(ExtensionMethods.SortVariables);
+            FillWithVariables(variableListCopy);
             SetAllVariablesDeletability(deletable);
             SetAllVariablesDraggability(draggable);
             SetGrayScale(grayscale);
@@ -135,8 +139,8 @@ namespace Resources.Scripts
             if(destroy)
                 Destroy(variableBoxToBeRemoved.gameObject);
             var variableListCopy = variableList.DeepClone();
-           
             ClearList();
+            variableListCopy.Sort(ExtensionMethods.SortVariables);
             FillWithVariables(variableListCopy);
             SetAllVariablesDeletability(deletable);
             SetAllVariablesDraggability(draggable);

@@ -371,7 +371,9 @@ namespace Resources.Scripts
                 variableList.Add(production._in);
             }
             p2_variablesBox.GetComponent<VariablesBox>().FillWithVariables(variableList);
-            
+            p2_variablesBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(true);
+            p2_variablesBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
+
             // Setting box gray
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
         }

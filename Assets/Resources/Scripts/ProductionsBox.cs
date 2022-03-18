@@ -52,6 +52,7 @@ namespace Resources.Scripts
             }
             var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
             var productionCounter = 0;
+            productions.Sort(ExtensionMethods.SortProductions);
             foreach (var production in productions)
             {
                 // Expanding boxes container
@@ -98,7 +99,6 @@ namespace Resources.Scripts
         {
             productionBoxList.Add(box.transform);
             productionList.Add(box.GetComponent<BoxContent>().Production);
-            // printProductionList();
         }
 
         public void printProductionList()
@@ -114,48 +114,12 @@ namespace Resources.Scripts
             if (eventData.pointerDrag == null) return;
             if (eventData.pointerDrag.CompareTag("Production"))
             {
-                print("On valid position!");
-                AddToLists(eventData.pointerDrag);
-                eventData.pointerDrag.transform.SetParent(productionBoxes.transform);
-                eventData.pointerDrag.GetComponent<Draggable>().AttachedTo = productionBoxes;
-                InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
-            }
-
-            
-        }
-        
-        public override void RemoveAndReconstructList(GameObject productionBoxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale, bool destroy)
-        {
-            RemoveFromLists(productionBoxToBeRemoved);
-            if(destroy)
-                Destroy(productionBoxToBeRemoved.gameObject);
-            var productionsListCopy = productionList.DeepClone();
-            ClearList();
-            FillWithProductions(productionsListCopy);
-            if (deletable != null)
-            {
-                SetAllProductionsDeletability(deletable);
-                
+                InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
+                Destroy(eventData.pointerDrag);
             }
         }
         
-        
-        public override void InsertAndReconstructList(GrammarScript.Production productionToBeInserted, bool? draggable, bool? deletable, bool? grayscale)
-        {
-            var productionsListCopy = productionList.DeepClone();
-            productionsListCopy.Add(productionToBeInserted);
-            ClearList();
-            FillWithProductions(productionsListCopy);
-            SetAllProductionsDeletability(deletable);
-            SetGrayScale(grayscale);
-        }
-
-        public override void InsertAndReconstructList(char variableToBeInserted, bool? draggable, bool? deletable, bool? grayscale)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void ClearList()
         {
             while (productionBoxList.Count > 0)
@@ -165,6 +129,37 @@ namespace Resources.Scripts
                 Destroy(currentProductionBox.gameObject);
             }
             productionBoxes.GetComponent<RectTransform>().sizeDelta = _productionBoxesOriginalSize;
+        }
+       
+        public override void InsertAndReconstructList(GrammarScript.Production productionToBeInserted, bool? draggable, bool? deletable, bool? grayscale)
+        {
+            var productionsListCopy = productionList.DeepClone();
+            productionsListCopy.Add(productionToBeInserted);
+            ClearList();
+            productionsListCopy.Sort(ExtensionMethods.SortProductions);
+            FillWithProductions(productionsListCopy);
+            SetAllProductionsDraggability(draggable);
+            SetAllProductionsDeletability(deletable);
+            SetGrayScale(grayscale);
+        }
+        
+        public override void RemoveAndReconstructList(GameObject productionBoxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale, bool destroy)
+        {
+            RemoveFromLists(productionBoxToBeRemoved);
+            if(destroy)
+                Destroy(productionBoxToBeRemoved.gameObject);
+            var productionsListCopy = productionList.DeepClone();
+            ClearList();
+            productionsListCopy.Sort(ExtensionMethods.SortProductions);
+            FillWithProductions(productionsListCopy);
+            SetAllProductionsDeletability(deletable);
+            SetAllProductionsDraggability(draggable);
+        }
+        
+
+        public override void InsertAndReconstructList(char variableToBeInserted, bool? draggable, bool? deletable, bool? grayscale)
+        {
+            throw new NotImplementedException();
         }
 
         public void SetAllProductionsDeletability(bool? boolean)

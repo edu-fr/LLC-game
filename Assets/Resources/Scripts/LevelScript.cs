@@ -208,9 +208,13 @@ namespace Resources.Scripts
             // Filling boxes
             p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.Productions.ToList());
             p1_variablesBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.Variables);
-            
+            p1_variablesBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(true);
+            p1_variablesBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
+
             // Changing productions box color
             p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
 
         }
 

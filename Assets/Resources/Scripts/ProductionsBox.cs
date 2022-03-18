@@ -68,10 +68,6 @@ namespace Resources.Scripts
                 var newProductionPosition = productionsBoxPosition;
                 newProductionPosition -= new Vector3(0, _productionBoxHeight * productionCounter, 0);
                 newProductionTransform.position = newProductionPosition;
-                // Set new original position
-                newProductionBox.GetComponent<Draggable>().OriginalPosition = newProductionTransform.localPosition;
-                newProductionBox.GetComponent<Draggable>().LastValidPosition =
-                    newProductionBox.GetComponent<Draggable>().OriginalPosition;
                 // Change it's text
                 newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
                 AddToLists(newProductionBox.gameObject);
@@ -123,27 +119,17 @@ namespace Resources.Scripts
                 eventData.pointerDrag.transform.SetParent(productionBoxes.transform);
                 eventData.pointerDrag.GetComponent<Draggable>().AttachedTo = productionBoxes;
                 InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
-                if (eventData.pointerDrag.GetComponent<Draggable>().OriginalAttachedObject == productionBoxes)
-                {
-                    print("Está no original!");
-                    eventData.pointerDrag.GetComponent<RectTransform>().localPosition =
-                        eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
-                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
-                }
-                else
-                { 
-                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<RectTransform>().localPosition;
-                }
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
             }
 
             
         }
         
-        public override void RemoveAndReconstructList(GameObject productionBoxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale)
+        public override void RemoveAndReconstructList(GameObject productionBoxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale, bool destroy)
         {
             RemoveFromLists(productionBoxToBeRemoved);
-            Destroy(productionBoxToBeRemoved.gameObject);
+            if(destroy)
+                Destroy(productionBoxToBeRemoved.gameObject);
             var productionsListCopy = productionList.DeepClone();
             ClearList();
             FillWithProductions(productionsListCopy);

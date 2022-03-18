@@ -69,9 +69,6 @@ namespace Resources.Scripts
                 var newVariablePosition = variablesBoxPosition;
                 newVariablePosition -= new Vector3(0, _variableBoxHeight * variableCounter, 0);
                 newVariableTransform.position = newVariablePosition;
-                // Set new original position
-                newVariableBox.GetComponent<Draggable>().OriginalPosition = newVariableTransform.localPosition;
-                newVariableBox.GetComponent<Draggable>().LastValidPosition = newVariableBox.GetComponent<Draggable>().OriginalPosition;
                 // Change it's text
                 newVariableBox.GetComponentInChildren<TextMeshProUGUI>().SetText(variable.ToString());
                 AddToLists(newVariableBox.gameObject);
@@ -98,26 +95,11 @@ namespace Resources.Scripts
             if (eventData.pointerDrag == null) return;
             if (eventData.pointerDrag.CompareTag("Variable"))
             {
-                print("On valid position!");
-                AddToLists(eventData.pointerDrag);
-                eventData.pointerDrag.transform.SetParent(variableBoxes.transform);
-                eventData.pointerDrag.GetComponent<Draggable>().AttachedTo = variableBoxes;
-                InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
-                if (eventData.pointerDrag.GetComponent<Draggable>().OriginalAttachedObject == variableBoxes)
-                {
-                    print("Está no original!");
-                    eventData.pointerDrag.GetComponent<RectTransform>().localPosition =
-                        eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
-                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<Draggable>().OriginalPosition;
-                }
-                else
-                { 
-                    eventData.pointerDrag.GetComponent<Draggable>().LastValidPosition = eventData.pointerDrag.GetComponent<RectTransform>().localPosition;
-                }
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
+                print("É VARIÁVEL E FOI DROPADA DENTRO DA CAIXA " + name);
+                InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Variable, draggable: true, deletable: false, grayscale: false);
+                Destroy(eventData.pointerDrag);
             }
-          
-            
         }
         
         public override void ClearList()
@@ -147,10 +129,11 @@ namespace Resources.Scripts
             SetGrayScale(grayscale);
         }
         
-        public override void RemoveAndReconstructList(GameObject variableBoxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale)
+        public override void RemoveAndReconstructList(GameObject variableBoxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale, bool destroy)
         {
             RemoveFromLists(variableBoxToBeRemoved);
-            Destroy(variableBoxToBeRemoved.gameObject);
+            if(destroy)
+                Destroy(variableBoxToBeRemoved.gameObject);
             var variableListCopy = variableList.DeepClone();
            
             ClearList();

@@ -44,7 +44,7 @@ namespace Resources.Scripts
         public abstract void AddToLists(GameObject box);
         public abstract void OnDrop(PointerEventData eventData);
 
-        public abstract void RemoveAndReconstructList(GameObject boxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale);
+        public abstract void RemoveAndReconstructList(GameObject boxToBeRemoved, bool? draggable, bool? deletable, bool? grayscale, bool destroy);
 
         public abstract void InsertAndReconstructList(GrammarScript.Production productionToBeInserted, bool? draggable, bool? deletable, bool? grayscale);
         public abstract void InsertAndReconstructList(char variableToBeInserted, bool? draggable, bool? deletable, bool? grayscale);

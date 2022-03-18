@@ -33,7 +33,7 @@ namespace Resources.Scripts
                     .Find(x => x.GetComponent<BoxContent>().Production._in == lambdaProduction._in &&
                                x.GetComponent<BoxContent>().Production._out == lambdaProduction._out);
                 var productionsBoxComponent = ProductionsBoxObject.GetComponent<ProductionsBox>();
-                ((FillableBox) productionsBoxComponent).RemoveAndReconstructList(lambdaProductionBox.gameObject, draggable: false, deletable: false, grayscale: false);
+                ((FillableBox) productionsBoxComponent).RemoveAndReconstructList(lambdaProductionBox.gameObject, draggable: false, deletable: false, grayscale: false, destroy: true);
                 productionsBoxComponent.SetAllProductionsDeletability(false);
                 productionsBoxComponent.SetGrayScale(true);
             }

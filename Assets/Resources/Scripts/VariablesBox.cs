@@ -50,8 +50,7 @@ namespace Resources.Scripts
         {
             if (variableBoxList.Count > 0 || variableList.Count > 0)
             {
-                print("box list: " + variableBoxList.Count + "list: " + variableList.Count);
-                return;
+                ClearList();
             }
             var variableBoxesRectTransform = variableBoxes.GetComponent<RectTransform>();
             var variableCounter = 0;

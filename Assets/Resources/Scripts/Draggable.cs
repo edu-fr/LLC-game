@@ -24,7 +24,7 @@ namespace Resources.Scripts
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (Input.GetMouseButtonDown(2))         // Botão direito
+            if (Input.GetMouseButtonDown(1))         // Botão direito
             { 
                 if (CanBeDeleted)
                 {
@@ -50,7 +50,7 @@ namespace Resources.Scripts
             _canvasGroup.alpha = .6f;
             _canvasGroup.blocksRaycasts = false;
             // Remove from current box and set the Canvas as new parent
-            AttachedTo.GetComponentInParent<FillableBox>().RemoveAndReconstructList(gameObject, draggable: true, deletable: false, grayscale: false, destroy: false);
+            AttachedTo.GetComponentInParent<FillableBox>().RemoveAndReconstructList(gameObject, draggable: gameObject.GetComponent<Draggable>().CanBeDragged, deletable: gameObject.GetComponent<Draggable>().CanBeDeleted, grayscale: false, destroy: false);
             gameObject.transform.SetParent(_canvas.transform);
         }
 
@@ -72,17 +72,21 @@ namespace Resources.Scripts
                 if (gameObject.GetComponent<BoxContent>().Production == null)
                 {
                     print("VARIÁVEL voltando porque o drop deu errado!");
-                    AttachedTo.transform.parent.GetComponentInParent<FillableBox>().InsertAndReconstructList(GetComponent<BoxContent>().Variable, draggable: true, deletable: false, grayscale: false);
+                    AttachedTo.transform.parent.GetComponentInParent<FillableBox>().InsertAndReconstructList(GetComponent<BoxContent>().Variable, draggable: gameObject.GetComponent<Draggable>().CanBeDragged, deletable: gameObject.GetComponent<Draggable>().CanBeDeleted, grayscale: false);
                     print("Variavel: " + GetComponent<BoxContent>().Variable + " inserida novamente na lista");
                     Destroy(gameObject);
                 }
                 else
                 {
                     print("PRODUÇÃO voltando porque o drop deu errado!");
-                    AttachedTo.transform.parent.GetComponentInParent<FillableBox>().InsertAndReconstructList(GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
+                    AttachedTo.transform.parent.GetComponentInParent<FillableBox>().InsertAndReconstructList(GetComponent<BoxContent>().Production, draggable: gameObject.GetComponent<Draggable>().CanBeDragged, deletable: gameObject.GetComponent<Draggable>().CanBeDeleted, grayscale: false);
                     print("Produção: " + GetComponent<BoxContent>().Production + " inserida novamente na lista");
                     Destroy(gameObject);
                 }
+            }
+            else
+            {
+                print("Tava em valid position");
             }
         }
     }

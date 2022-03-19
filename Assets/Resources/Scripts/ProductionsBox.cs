@@ -48,8 +48,7 @@ namespace Resources.Scripts
         {
             if (productionBoxList.Count > 0 || productionList.Count > 0)
             {
-                print("box list: " + productionBoxList.Count + "list: " + productionList.Count);
-                return;
+                ClearList();
             }
             var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
             var productionCounter = 0;
@@ -116,7 +115,7 @@ namespace Resources.Scripts
             if (eventData.pointerDrag.CompareTag("Production") && eventData.pointerDrag.GetComponent<Draggable>().CanBeDragged)
             {
                 eventData.pointerDrag.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
-                InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: true, deletable: false, grayscale: false);
+                InsertAndReconstructList(eventData.pointerDrag.GetComponent<BoxContent>().Production, draggable: eventData.pointerDrag.GetComponent<Draggable>().CanBeDragged, deletable:  eventData.pointerDrag.GetComponent<Draggable>().CanBeDeleted, grayscale: false);
                 Destroy(eventData.pointerDrag);
             }
         }
@@ -165,11 +164,12 @@ namespace Resources.Scripts
 
         public void SetAllProductionsDeletability(bool? boolean)
         {
-            if (boolean == null) return; 
+            if (boolean == null) return;
             foreach (var productionBox in productionBoxList)
             {
                 productionBox.GetComponent<Draggable>().CanBeDeleted = (bool) boolean;
             }
+            print("DELETABILITY SETADA PARA " + (bool) boolean);
         }
         
         public void SetAllProductionsDraggability(bool? boolean)
@@ -179,6 +179,7 @@ namespace Resources.Scripts
             {
                 productionBox.GetComponent<Draggable>().CanBeDragged = (bool) boolean;
             }
+            print("DRAGGABILITY SETADA PARA " + (bool) boolean);
         }
     }
 }

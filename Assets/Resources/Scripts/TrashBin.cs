@@ -9,9 +9,11 @@ namespace Resources.Scripts
     {
         public void OnDrop(PointerEventData eventData)
         {
-            if (eventData.pointerDrag.gameObject.CompareTag("Production"))
+            if (eventData.pointerDrag.gameObject.CompareTag("Production") &&
+                eventData.pointerDrag.gameObject.GetComponent<Draggable>().CanBeDeleted)
             {
-                eventData.pointerDrag.gameObject.SetActive(false);
+                eventData.pointerDrag.gameObject.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
+                Destroy(eventData.pointerDrag.gameObject);
                 print("Deletado com sucesso!");
             }
         }

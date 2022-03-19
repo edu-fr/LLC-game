@@ -13,6 +13,7 @@ public class CanvasController : MonoBehaviour
     public TextMeshProUGUI transitionPanelContentText;
     public TextMeshProUGUI transitionPanelFooterText;
     private bool _waitingForKey = false;
+    public float timeToShowFooter;
     
     public string[] phaseTexts;
     public GameObject tutorial_1_1;
@@ -48,7 +49,7 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator WaitToShowFooter()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(timeToShowFooter);
         transitionPanelFooterText.gameObject.SetActive(true);
         _waitingForKey = true; 
     }

@@ -54,6 +54,15 @@ namespace Resources.Scripts
             canvasController.Transition(_currentPhase);
             SetupPhase1Part1();
             canvasController.ActivateTutorial(_currentPart, _currentPhase);
+            
+            // DEBUG
+            SetupPhase1Part2();
+            SetupPhase1Part3();
+            SetupPhase2Part1();
+            SetupPhase2Part2();
+            SetupPhase2Part3();
+            _currentPhase = 2;
+            _currentPart = 3;
         }
 
         public void TryNextPhase()
@@ -266,12 +275,9 @@ namespace Resources.Scripts
             p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
             p1_uselessVariablesBox.GetComponent<VariablesBox>().SetGrayScale(true);
             
-            // Making CFL_Box objects draggable again
-            foreach (var productionBox in p1_productionsBox.GetComponent<ProductionsBox>().productionBoxList)
-            {
-                productionBox.GetComponent<Draggable>().CanBeDragged = true;
-            }
-            
+            // Making productions box objects draggable and deletable again
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
         }
 
         private bool Phase1Part2()
@@ -407,6 +413,7 @@ namespace Resources.Scripts
             p2_variablesBox.transform.position = outOfBoundsPosition;
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionsBox.position;
             p2_productionMaker.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionMaker.position;
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
@@ -453,10 +460,18 @@ namespace Resources.Scripts
             // Removing from camera vision unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p2_productionMaker.transform.position = outOfBoundsPosition;
+            // Filling boxes independently of other phases
+            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.ProductionsPhase2);
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.LambdaProducers);
+            // Moving some useful boxes
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part3_productionsBox_gray.position;
             p2_acceptLambdaQuestionBox.transform.position = _boxPositionsManager.Anchor_Phase2Part3_acceptLambdaQuestionBox.position;
-            // Turning off deletability
+            p2_lambdaProducersBox.transform.position = _boxPositionsManager.Anchor_Phase2Part3_lambdaProducersBox.position;
+            // Turning off deletability and draggability for both boxes
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(false);
             // Turning productions box gray
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
             // Setting accept lambda question box starting variable
@@ -475,11 +490,15 @@ namespace Resources.Scripts
         private void SetupPhase3Part1()
         {
             // Removing from camera vision unused boxes
-            p2_acceptLambdaQuestionBox.transform.position = _boxPositionsManager.Anchor_OutOfBounds.position;
+            var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
+            p2_acceptLambdaQuestionBox.transform.position = outOfBoundsPosition;
+            p2_lambdaProducersBox.transform.position = outOfBoundsPosition;
             // Moving useful boxes
+            trashBin.transform.position = _boxPositionsManager.Anchor_Phase3Part1_trashBin.position; 
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part1_productionsBox.position;
-            // Turning on deletability
+            // Turning on deletability and Draggability
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             // Setting gray scale off
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
         }
@@ -522,6 +541,9 @@ namespace Resources.Scripts
 
         private void SetupPhase3Part2()
         {
+            // Moving useless boxes to out of bounds position
+            trashBin.transform.position = _boxPositionsManager.Anchor_OutOfBounds.position;
+            
             // Moving useful boxes
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part2_productionsBox.position;
             p3_unitProductionsBox.transform.position =

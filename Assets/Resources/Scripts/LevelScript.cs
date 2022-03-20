@@ -29,8 +29,8 @@ namespace Resources.Scripts
             
         [SerializeField] private GameObject trashBin;
         
-        private int _currentPhase;
-        private int _currentPart;
+        public int currentPhase { private set; get; }
+        public int currentPart { private set; get; }
         
         // Box positions
         private BoxPositionsManager _boxPositionsManager;
@@ -48,56 +48,56 @@ namespace Resources.Scripts
             _grammar.Setup();
             
             // Set initial phase and part
-            _currentPhase = 1;
-            _currentPart = 1;
+            currentPhase = 1;
+            currentPart = 1;
 
-            canvasController.Transition(_currentPhase);
+            canvasController.Transition(currentPhase);
             SetupPhase1Part1();
-            canvasController.ActivateTutorial(_currentPart, _currentPhase);
+            canvasController.ActivateTutorial(currentPart, currentPhase);
             
-            // DEBUG
-            SetupPhase1Part2();
-            SetupPhase1Part3();
-            SetupPhase2Part1();
-            SetupPhase2Part2();
-            SetupPhase2Part3();
-            _currentPhase = 2;
-            _currentPart = 3;
+            // // DEBUG
+            // SetupPhase1Part2();
+            // SetupPhase1Part3();
+            // SetupPhase2Part1();
+            // SetupPhase2Part2();
+            // SetupPhase2Part3();
+            // currentPhase = 2;
+            // currentPart = 3;
         }
 
         public void TryNextPhase()
         {
-            switch (_currentPhase)
+            switch (currentPhase)
             {
                 case 1:
-                    switch (_currentPart)
+                    switch (currentPart)
                     {
                         case 1:
                             if (Phase1Part1())
                             {
-                                _currentPart = 2;
+                                currentPart = 2;
                                 SetupPhase1Part2();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         
                         case 2:
                             if (Phase1Part2())
                             {
-                                _currentPart = 3;
+                                currentPart = 3;
                                 SetupPhase1Part3();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         
                         case 3:
                             if (Phase1Part3())
                             {
-                                _currentPart = 1;
-                                _currentPhase = 2;
-                                canvasController.Transition(_currentPhase);
+                                currentPart = 1;
+                                currentPhase = 2;
+                                canvasController.Transition(currentPhase);
                                 SetupPhase2Part1();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                     }
@@ -105,90 +105,90 @@ namespace Resources.Scripts
                     break;
                 
                 case 2:
-                    switch (_currentPart)
+                    switch (currentPart)
                     {
                         case 1:
                             if (Phase2Part1())
                             {
-                                _currentPart = 2;
+                                currentPart = 2;
                                 SetupPhase2Part2();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         
                         case 2:
                             if (Phase2Part2())
                             {
-                                _currentPart = 3;
+                                currentPart = 3;
                                 SetupPhase2Part3();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         case 3:
                             if (Phase2Part3())
                             {
-                                _currentPhase = 3;
-                                _currentPart = 1;
-                                canvasController.Transition(_currentPhase);
+                                currentPhase = 3;
+                                currentPart = 1;
+                                canvasController.Transition(currentPhase);
                                 SetupPhase3Part1();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                     }
                     break;
                 
                 case 3:
-                    switch (_currentPart)
+                    switch (currentPart)
                     {
                         case 1:
                             if (Phase3Part1())
                             {
-                                _currentPart = 2;
+                                currentPart = 2;
                                 SetupPhase3Part2();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         
                         case 2:
                             if (Phase3Part2())
                             {
-                                _currentPart = 3;
+                                currentPart = 3;
                                 SetupPhase3Part3();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         
                         case 3:
                             if (Phase3Part3())
                             {
-                                _currentPhase = 4;
-                                _currentPart = 1; 
-                                canvasController.Transition(_currentPhase);
+                                currentPhase = 4;
+                                currentPart = 1; 
+                                canvasController.Transition(currentPhase);
                                 SetupPhase4Part1();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                     }
                     break;
                 
                 case 4:
-                    switch (_currentPart)
+                    switch (currentPart)
                     {
                         case 1:
                             if (Phase4Part1())
                             {
-                                _currentPart = 2; 
+                                currentPart = 2; 
                                 SetupPhase4Part2();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         
                         case 2:
                             if (Phase4Part2())
                             {
-                                _currentPart = 3;
+                                currentPart = 3;
                                 SetupPhase4Part3();
-                                canvasController.ActivateTutorial(_currentPhase, _currentPart);
+                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                         
@@ -260,7 +260,11 @@ namespace Resources.Scripts
         private void SetupPhase1Part2()
         {
             print("Setting up phase 1 part 2");
-
+            // Saving the original production box content
+            p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.Productions.ToList());
+            // Saving the original production box content
+            p1_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.Productions.ToList();
+            
             // Removing from camera unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p1_variablesBox.transform.position = outOfBoundsPosition;
@@ -314,12 +318,20 @@ namespace Resources.Scripts
         private void SetupPhase1Part3()
         {
             print("Setting up phase 1 part 3");
+            // Filling box independently of other phases
+            p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.UsefulProductionsPhase1);
+            // Saving the original production box content
+            p1_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.UsefulProductionsPhase1;
 
             // Setting positions
             p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part3_Productions_Box.position;
             p1_uselessVariablesBox.transform.position =
                 _boxPositionsManager.Anchor_Phase1Part3_uselessVariablesBox_gray.position;
             trashBin.transform.position = _boxPositionsManager.Anchor_Phase1Part3_trashBin.position;
+            
+            // Setting draggability and deletability
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
         }
 
         private bool Phase1Part3()
@@ -411,15 +423,26 @@ namespace Resources.Scripts
             // Removing from camera vision unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p2_variablesBox.transform.position = outOfBoundsPosition;
+            
+            // Filling productions box independently of other phases
+            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.usefulAndReachableProductionsPhase1);
+            // Saving the original production box content
+            p2_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.usefulAndReachableProductionsPhase1;
+
+            // Moving useful boxes
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionsBox.position;
             p2_productionMaker.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionMaker.position;
+            p2_lambdaProducersBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_lambdaProducersBox.position;
+            // Setting on deletability and draggability
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
-            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
-            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
+            
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(false);
-            p2_lambdaProducersBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_lambdaProducersBox.position;
+            // Setting off production box gray scale
+            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
+            // Setting on lambda producers box gray scale
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
         }
 
         private bool Phase2Part2()
@@ -493,6 +516,12 @@ namespace Resources.Scripts
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p2_acceptLambdaQuestionBox.transform.position = outOfBoundsPosition;
             p2_lambdaProducersBox.transform.position = outOfBoundsPosition;
+           
+            // Filling productions box independently of other phases
+            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart);
+            // Saving the original production box content
+            p2_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart;
+
             // Moving useful boxes
             trashBin.transform.position = _boxPositionsManager.Anchor_Phase3Part1_trashBin.position; 
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part1_productionsBox.position;
@@ -576,6 +605,13 @@ namespace Resources.Scripts
 
         private void SetupPhase3Part3()
         {
+            // Filling productions box independently of other phases
+            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.NonUnitProductions);
+            // Saving the original production box content
+            p2_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.NonUnitProductions;
+            
+            // p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true); // verificar?
             // Moving useful boxes
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part3_productionsBox.position;
             p3_unitProductionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part3_unitProductionsBox.position;
@@ -583,13 +619,12 @@ namespace Resources.Scripts
             // Turning off deletability
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            // Turning off unit productions box drop acceptance
+            p3_unitProductionsBox.GetComponent<ProductionsBox>().acceptDrop = false;
             // Turning off draggability 
-            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
-            // Setting the boxes with the correct content (debug only)
-            p2_productionsBox.GetComponent<ProductionsBox>().ClearList();
-            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.NonUnitProductions);
-            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
-            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
+            p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
+            // Turning gray
+            p3_unitProductionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
             
         }
 
@@ -632,10 +667,15 @@ namespace Resources.Scripts
             // Cleaning some boxes
             p1_usefulVariablesBox.GetComponent<VariablesBox>().ClearList();
             p1_uselessVariablesBox.GetComponent<VariablesBox>().ClearList();
-
-            // Changing productions box color
+            // Changing box color
             p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
-
+            p1_uselessVariablesBox.GetComponent<VariablesBox>().SetGrayScale(false);
+            // Changing deletability and draggability
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
+            p1_variablesBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(true);
+            p1_variablesBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
+            
             // Setting positions
             p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_ProductionsBox_gray.position;
             p1_variablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_variablesBox.position;
@@ -677,11 +717,16 @@ namespace Resources.Scripts
         private void SetupPhase4Part2()
         {
             print("Setting up phase 4 part 2");
-
             // Removing from camera unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p1_variablesBox.transform.position = outOfBoundsPosition;
             p1_usefulVariablesBox.transform.position = outOfBoundsPosition;
+            
+            // Saving the original production box content
+            p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.ResultingProductions);
+            // Saving the original production box content
+            p1_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.ResultingProductions;
+            
             // Setting positions
             p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part2_ProductionsBox.position;
             p1_uselessVariablesBox.transform.position =
@@ -694,6 +739,7 @@ namespace Resources.Scripts
             
             // Making productions_Box objects draggable again
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
+
         }
 
         private bool Phase4Part2()
@@ -730,6 +776,10 @@ namespace Resources.Scripts
         private void SetupPhase4Part3()
         {
             print("Setting up phase 4 part 3");
+            // Saving the original production box content
+            p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.UsefulProductionsPhase4);
+            // Saving the original production box content
+            p1_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.UsefulProductionsPhase4;
 
             // Setting positions
             p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part3_Productions_Box.position;

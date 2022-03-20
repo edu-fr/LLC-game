@@ -29,6 +29,14 @@ public class CanvasController : MonoBehaviour
     public GameObject tutorial_4_2;
     public GameObject tutorial_4_3;
 
+    public GameObject resetProductionBox_f1p2;
+    public GameObject resetProductionBox_f1p3;
+    public GameObject resetProductionBox_f2p2;
+    public GameObject resetProductionBox_f3p1;
+    public GameObject resetProductionBox_f3p3;
+    public GameObject resetProductionBox_f4p2;
+    public GameObject resetProductionBox_f4p3;
+
     private void Update()
     {
         if (!_waitingForKey) return;

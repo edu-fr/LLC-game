@@ -20,6 +20,13 @@ namespace Resources.Scripts
         private float _productionBoxHeight;
         private GrammarScript.Production _lastProductionInserted;
         private Vector2 _productionBoxesOriginalSize;
+        public Button resetButton;
+        public CanvasController canvasController;
+        public LevelScript levelScript;
+        public bool acceptDrop = true;
+        public bool currentDraggability;
+        public bool currentDeletability;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -62,7 +69,7 @@ namespace Resources.Scripts
                 var productionsBoxPosition = productionsBoxTransform.position;
                 var newProductionBox = Instantiate(productionBoxPrefab,
                     productionsBoxPosition, Quaternion.identity, productionBoxes.transform);
-                newProductionBox.GetComponent<Draggable>().CanBeDragged = false;
+                // newProductionBox.GetComponent<Draggable>().CanBeDragged = false;
                 newProductionBox.GetComponent<Draggable>().AttachedTo = productionBoxes;
                 newProductionBox.GetComponent<BoxContent>().SetProduction(production);
                 var newProductionTransform = newProductionBox.transform;
@@ -111,6 +118,8 @@ namespace Resources.Scripts
 
         public override void OnDrop(PointerEventData eventData)
         {
+            if (!acceptDrop) return;
+            
             if (eventData.pointerDrag == null) return;
             if (eventData.pointerDrag.CompareTag("Production") && eventData.pointerDrag.GetComponent<Draggable>().CanBeDragged)
             {
@@ -165,6 +174,7 @@ namespace Resources.Scripts
         public void SetAllProductionsDeletability(bool? boolean)
         {
             if (boolean == null) return;
+            currentDeletability = (bool) boolean;
             foreach (var productionBox in productionBoxList)
             {
                 productionBox.GetComponent<Draggable>().CanBeDeleted = (bool) boolean;
@@ -174,12 +184,94 @@ namespace Resources.Scripts
         
         public void SetAllProductionsDraggability(bool? boolean)
         {
-            if (boolean == null) return; 
+            if (boolean == null) return;
+            currentDraggability = (bool) boolean;
             foreach (var productionBox in productionBoxList)
             {
                 productionBox.GetComponent<Draggable>().CanBeDragged = (bool) boolean;
             }
             print("DRAGGABILITY SETADA PARA " + (bool) boolean);
+        }
+
+        public void ResetButtonPress()
+        {
+            GETCurrentResetModal().SetActive(true);
+        }
+
+        private GameObject GETCurrentResetModal()
+        {
+            switch (levelScript.currentPhase)
+            {
+                case 1:
+                    switch (levelScript.currentPart)
+                    {
+                        case 2:
+                            return canvasController.resetProductionBox_f1p2;
+                        
+                        case 3:
+                            return canvasController.resetProductionBox_f1p3;
+                        
+                        default:
+                            print("Solicitação de reset modal incorreta! Parte errada!");
+                            break;
+                    }
+                    break;
+                
+                case 2:
+                    switch (levelScript.currentPart)
+                    {
+                        case 2:
+                            return canvasController.resetProductionBox_f2p2;
+                        
+                        default:
+                            print("Solicitação de reset modal incorreta! Parte errada!");
+                            break;
+                    }
+                    break;
+                
+                case 3:
+                    switch (levelScript.currentPart)
+                    {
+                        case 1:
+                            return canvasController.resetProductionBox_f3p1;
+                        
+                        case 3:
+                            return canvasController.resetProductionBox_f3p3;
+                        
+                        default:
+                            print("Solicitação de reset modal incorreta! Parte errada!");
+                            break;
+                    }
+                    break;
+                
+                case 4:
+                    switch (levelScript.currentPart)
+                    {
+                        case 2:
+                            return canvasController.resetProductionBox_f4p2;
+                        
+                        case 3:
+                            return canvasController.resetProductionBox_f4p3;
+                        
+                        default:
+                            print("Solicitação de reset modal incorreta! Parte errada!");
+                            break;
+                    }
+                    break;
+                
+                default:
+                    print("Solicitação de reset modal incorreta! Phase errada!");
+                    break;
+            }
+            return null;
+        }
+        
+        
+        public void ResetToOriginalList()
+        {
+            FillWithProductions(originalProductionList);
+            SetAllProductionsDeletability(currentDeletability);
+            SetAllProductionsDraggability(currentDraggability);
         }
     }
 }

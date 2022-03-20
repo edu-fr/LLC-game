@@ -42,6 +42,7 @@ namespace Resources.Scripts
         [NonSerialized] public List<Production> ProductionsPhase2;
         [NonSerialized] public List<char> RemovablePhase2;
         [NonSerialized] public bool StartVariableCanProduceLambda;
+        [NonSerialized] public List<Production> ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart;
 
         /* Phase 3 variables */
         [NonSerialized] public List<Production> NonUselessUnitProductions;
@@ -369,7 +370,7 @@ namespace Resources.Scripts
             SetInsertablePhase2();
             // DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after inserting new productions: ");
             SetRemovablePhase2();
-            RemoveLambdaProductionsFromPhase2();
+            ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart = RemoveLambdaProductionsFromPhase2AndAddLambdaFromStart();
             // DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after removing");
         }
 
@@ -552,9 +553,9 @@ namespace Resources.Scripts
             }
         }
 
-        private void RemoveLambdaProductionsFromPhase2()
+        private List<Production> RemoveLambdaProductionsFromPhase2AndAddLambdaFromStart()
         {
-            if (RemovablePhase2.Count < 1) return;
+            if (RemovablePhase2.Count < 1) return ProductionsPhase2;
             var removeList = ProductionsPhase2.Where(production => production._out == "l").ToList();
             foreach (var removable in removeList)
             {
@@ -563,6 +564,7 @@ namespace Resources.Scripts
             
             if (StartVariableCanProduceLambda)
                 ProductionsPhase2.Add(new Production(StartVariable, "l"));
+            return ProductionsPhase2.DeepClone();
         }
         
         

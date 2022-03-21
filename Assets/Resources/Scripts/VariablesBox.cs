@@ -24,13 +24,13 @@ namespace Resources.Scripts
         protected override void Awake()
         {
             base.Awake();
+            _variableBoxHeight = variableBoxPrefab.GetComponent<RectTransform>().sizeDelta.y * Utils.ScreenDif;
+            _variableBoxesOriginalSize = variableBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
         protected override void Start()
         {
             base.Start();
-            _variableBoxHeight = variableBoxPrefab.GetComponent<RectTransform>().sizeDelta.y * Utils.ScreenDif;
-            _variableBoxesOriginalSize = variableBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
         public override void SetGrayScale(bool? option)
@@ -38,10 +38,12 @@ namespace Resources.Scripts
             if (option == null) return;
             base.SetGrayScale(option);
             var currentEffectMode = (bool) option ? EffectMode.Grayscale : EffectMode.None;
+            var currentColorFactor = (bool) option ? 0 : 1;
 
             foreach (var variableBox in variableBoxList)
             {
                 variableBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
+                variableBox.GetComponent<UIEffect>().colorFactor = currentColorFactor;
             }
 
         }

@@ -30,13 +30,13 @@ namespace Resources.Scripts
         protected override void Awake()
         {
             base.Awake();
+            _productionBoxHeight = productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y * Utils.ScreenDif;
+            _productionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
         protected override void Start()
         {
             base.Start();
-            _productionBoxHeight = (productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y)* Utils.ScreenDif;
-            _productionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
         public override void SetGrayScale(bool? option)
@@ -44,10 +44,12 @@ namespace Resources.Scripts
             if (option == null) return;
             base.SetGrayScale(option);
             var currentEffectMode = (bool) option ? EffectMode.Grayscale : EffectMode.None;
-
+            var currentColorFactor = (bool) option ? 0 : 1;
+           
             foreach (var productionBox in productionBoxList)
             {
                 productionBox.GetComponent<UIEffect>().effectMode = currentEffectMode;
+                productionBox.GetComponent<UIEffect>().colorFactor = currentColorFactor;
             }
         }
         
@@ -58,12 +60,15 @@ namespace Resources.Scripts
                 ClearList();
             }
             var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
+            print("GAME OBJECT" + productionBoxesRectTransform.gameObject);
             var productionCounter = 0;
             productions.Sort(ExtensionMethods.SortProductions);
             foreach (var production in productions)
             {
                 // Expanding boxes container
-                productionBoxesRectTransform.sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
+                productionBoxes.GetComponent<RectTransform>().sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
+                print("TAMANHO: " + productionBoxesRectTransform.sizeDelta.x + "/" + productionBoxesRectTransform.sizeDelta.y);
+                print("PRODUCTION BOX HEIGHT! :" + _productionBoxHeight);
                 // Instantiate a new production box
                 var productionsBoxTransform = productionBoxes.transform;
                 var productionsBoxPosition = productionsBoxTransform.position;

@@ -433,6 +433,7 @@ namespace Resources.Scripts
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionsBox.position;
             p2_productionMaker.transform.position = _boxPositionsManager.Anchor_Phase2Part2_productionMaker.position;
             p2_lambdaProducersBox.transform.position = _boxPositionsManager.Anchor_Phase2Part2_lambdaProducersBox.position;
+            trashBin.transform.position = _boxPositionsManager.Anchor_Phase2Part2_trashBin.position;
             // Setting on deletability and draggability
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
@@ -483,6 +484,7 @@ namespace Resources.Scripts
             // Removing from camera vision unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p2_productionMaker.transform.position = outOfBoundsPosition;
+            trashBin.transform.position = outOfBoundsPosition;
             // Filling boxes independently of other phases
             p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.ProductionsPhase2);
             p2_lambdaProducersBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.LambdaProducers);

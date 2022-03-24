@@ -56,9 +56,9 @@ MonoBehaviour:
   - _in: 65
     _out: a
   - _in: 65
-    _out: l
+    _out: "\u03BB"
   - _in: 66
     _out: b
   - _in: 66
-    _out: l
+    _out: "\u03BB"
   StartVariable: 67

@@ -56,7 +56,7 @@ MonoBehaviour:
   - _in: 88
     _out: Z
   - _in: 88
-    _out: l
+    _out: "\u03BB"
   - _in: 89
     _out: AYB
   - _in: 89
@@ -64,11 +64,11 @@ MonoBehaviour:
   - _in: 89
     _out: Z
   - _in: 89
-    _out: l
+    _out: "\u03BB"
   - _in: 90
     _out: Zu
   - _in: 90
     _out: Zv
   - _in: 90
-    _out: l
+    _out: "\u03BB"
   StartVariable: 83

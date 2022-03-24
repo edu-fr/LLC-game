@@ -17,6 +17,7 @@ namespace Resources.Scripts
         [SerializeField] private CanvasController canvasController;
 
         [SerializeField] private GameObject p1_productionsBox;
+        [SerializeField] private GameObject p1_productionsBox_resetButton;
         [SerializeField] private GameObject p1_variablesBox;
         [SerializeField] private GameObject p1_usefulVariablesBox;
         [SerializeField] private GameObject p1_uselessVariablesBox;
@@ -25,7 +26,9 @@ namespace Resources.Scripts
         [SerializeField] private GameObject p2_productionMaker;
         [SerializeField] private GameObject p2_acceptLambdaQuestionBox;
         public GameObject p2_productionsBox;
+        public GameObject p2_productionsBox_resetButton;
         [SerializeField] private GameObject p3_unitProductionsBox;
+        [SerializeField] private GameObject p3_unitProductionsBox_resetButton;
             
         [SerializeField] private GameObject trashBin;
         
@@ -46,6 +49,8 @@ namespace Resources.Scripts
             _grammar = grammarObject.GetComponent<GrammarScript>();
             // Analyse productions
             _grammar.Setup();
+            // Accept lambda question box config
+            p2_acceptLambdaQuestionBox.GetComponent<AcceptLambdaQuestionBox>().SetStartVariable(_grammar.StartVariable);
             
             // Set initial phase and part
             currentPhase = 1;
@@ -224,7 +229,9 @@ namespace Resources.Scripts
             p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
-
+    
+            // Setting off reset button
+            p1_productionsBox_resetButton.SetActive(false);
         }
 
         private bool Phase1Part1() 
@@ -282,6 +289,9 @@ namespace Resources.Scripts
             // Making productions box objects draggable and deletable again
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+            
+            // Setting on reset button
+            p1_productionsBox_resetButton.SetActive(true);
         }
 
         private bool Phase1Part2()
@@ -394,6 +404,9 @@ namespace Resources.Scripts
 
             // Setting box gray
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
+            
+            // Setting off reset button
+            p2_productionsBox_resetButton.SetActive(false);
         }
 
         private bool Phase2Part1()
@@ -444,6 +457,10 @@ namespace Resources.Scripts
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
             // Setting on lambda producers box gray scale
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
+            
+            
+            // Setting on reset button
+            p2_productionsBox_resetButton.SetActive(true);
         }
 
         private bool Phase2Part2()
@@ -498,9 +515,12 @@ namespace Resources.Scripts
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(false);
             // Turning productions box gray
-            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
+            p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
+            p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
             // Setting accept lambda question box starting variable
-            p2_acceptLambdaQuestionBox.GetComponent<AcceptLambdaQuestionBox>().SetStartVariable(_grammar.StartVariable);
+            
+            // Setting off reset button
+            p2_productionsBox_resetButton.SetActive(false);
         }
         
         private bool Phase2Part3()
@@ -532,6 +552,9 @@ namespace Resources.Scripts
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             // Setting gray scale off
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
+            
+            // Setting on reset button
+            p2_productionsBox_resetButton.SetActive(true);
         }
 
         private bool Phase3Part1()
@@ -584,6 +607,9 @@ namespace Resources.Scripts
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
             // Turning on draggability 
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
+            // Setting off reset button
+            p3_unitProductionsBox_resetButton.SetActive(false);
+            p2_productionsBox_resetButton.SetActive(false);
         }
 
         private bool Phase3Part2()
@@ -627,7 +653,9 @@ namespace Resources.Scripts
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
             // Turning gray
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
-            
+            // Setting off reset button
+            p3_unitProductionsBox_resetButton.SetActive(false);
+            p2_productionsBox_resetButton.SetActive(true);
         }
 
         private bool Phase3Part3()
@@ -683,6 +711,9 @@ namespace Resources.Scripts
             p1_variablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_variablesBox.position;
             p1_uselessVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_uselessVariablesBox.position;
             p1_usefulVariablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_usefulVariablesBox.position;
+            
+            // Setting off reset button
+            p1_productionsBox_resetButton.SetActive(false);
         }
         
         
@@ -739,9 +770,12 @@ namespace Resources.Scripts
             p1_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
             p1_uselessVariablesBox.GetComponent<VariablesBox>().SetGrayScale(true);
             
-            // Making productions_Box objects draggable again
+            // Making productions_Box objects draggable and deletable again
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
-
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+    
+            // Setting on reset button
+            p1_productionsBox_resetButton.SetActive(true);
         }
 
         private bool Phase4Part2()
@@ -788,6 +822,13 @@ namespace Resources.Scripts
             p1_uselessVariablesBox.transform.position =
                 _boxPositionsManager.Anchor_Phase1Part3_uselessVariablesBox_gray.position;
             trashBin.transform.position = _boxPositionsManager.Anchor_Phase1Part3_trashBin.position;
+            
+            // Making productions_Box objects draggable and deletable again
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
+            p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+
+            // Setting on reset button
+            p1_productionsBox_resetButton.SetActive(true);
         }
 
         private bool Phase4Part3()

@@ -890,8 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ef3a5b4720e29469f0b075174f2578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartVariableText: {fileID: 5878819764306010093}
-  ProductionsBoxObject: {fileID: 0}
+  startVariableText: {fileID: 5878819764306010093}
+  productionsBoxObject: {fileID: 0}
 --- !u!114 &2323353974460355570
 MonoBehaviour:
   m_ObjectHideFlags: 0

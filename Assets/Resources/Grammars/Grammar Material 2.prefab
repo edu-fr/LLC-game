@@ -58,7 +58,7 @@ MonoBehaviour:
   - _in: 66
     _out: bbB
   - _in: 66
-    _out: l
+    _out: "\u03BB"
   - _in: 67
     _out: D
   - _in: 68

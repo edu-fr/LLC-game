@@ -52,7 +52,7 @@ MonoBehaviour:
   - _in: 83
     _out: A
   - _in: 83
-    _out: l
+    _out: "\u03BB"
   - _in: 65
     _out: Bc
   - _in: 65

@@ -378,7 +378,7 @@ namespace Resources.Scripts
         private void SetLambdaProducers()
         {
             LambdaProducers = (from production in usefulAndReachableProductionsPhase1
-                where production._out[0] == 'l' && !LambdaProducers.Contains(production._in)
+                where production._out[0] == 'λ' && !LambdaProducers.Contains(production._in)
                 select production._in).ToList();
             var newLambdaProducers = new List<char>();
             // Discover Variables that produces lambda productions
@@ -405,7 +405,7 @@ namespace Resources.Scripts
             var startVariableProductions = (from production in usefulAndReachableProductionsPhase1
                 where production._in == StartVariable
                 select production._out).ToList();
-            if (startVariableProductions.Contains("l"))
+            if (startVariableProductions.Contains("λ"))
             {
                 StartVariableCanProduceLambda = true;
                 return;
@@ -547,7 +547,7 @@ namespace Resources.Scripts
         
         private void SetRemovablePhase2()
         {
-            foreach (var production in ProductionsPhase2.Where(production => production._out == "l"))
+            foreach (var production in ProductionsPhase2.Where(production => production._out == "λ"))
             {
                 RemovablePhase2.Add(production._in);
             }
@@ -556,14 +556,14 @@ namespace Resources.Scripts
         private List<Production> RemoveLambdaProductionsFromPhase2AndAddLambdaFromStart()
         {
             if (RemovablePhase2.Count < 1) return ProductionsPhase2;
-            var removeList = ProductionsPhase2.Where(production => production._out == "l").ToList();
+            var removeList = ProductionsPhase2.Where(production => production._out == "λ").ToList();
             foreach (var removable in removeList)
             {
                 ProductionsPhase2.Remove(removable);
             }
             
             if (StartVariableCanProduceLambda)
-                ProductionsPhase2.Add(new Production(StartVariable, "l"));
+                ProductionsPhase2.Add(new Production(StartVariable, "λ"));
             return ProductionsPhase2.DeepClone();
         }
         

@@ -12,6 +12,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Save System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/ContentSizeFitter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/InternalBox.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PauseMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/WindowTrigger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/31/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/UIController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -128,7 +129,8 @@
       <workItem from="1647880983947" duration="593000" />
       <workItem from="1647901761608" duration="830000" />
       <workItem from="1648038330891" duration="1974000" />
-      <workItem from="1648125283209" duration="3999000" />
+      <workItem from="1648125283209" duration="4592000" />
+      <workItem from="1648208371808" duration="2729000" />
     </task>
     <servers />
   </component>

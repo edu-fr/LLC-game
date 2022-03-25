@@ -12,10 +12,21 @@ namespace Resources.Scripts
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class LevelScript : MonoBehaviour
     {
+        public enum GameState {
+            Running, Paused, PopUp
+        }
+
+        public GameState currentGameState;
+        public GameState previouslyGameState; 
+        
         public GameObject grammarObject;
         private GrammarScript _grammar;
         [SerializeField] private CanvasController canvasController;
-
+        [SerializeField] private float initialTime;
+        [SerializeField] private float remainingTime;
+        [SerializeField] private int initialLife;
+        [SerializeField] private int remainingLife;
+        
         [SerializeField] private GameObject p1_productionsBox;
         [SerializeField] private GameObject p1_productionsBox_resetButton;
         [SerializeField] private GameObject p1_variablesBox;
@@ -69,6 +80,69 @@ namespace Resources.Scripts
             // currentPhase = 2;
             // currentPart = 3;
         }
+
+        private void Update()
+        {
+            switch (currentGameState)
+            {
+                case GameState.Running:
+                    remainingTime -= Time.deltaTime;
+
+                    // Pause menu
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        previouslyGameState = GameState.Running;
+                        currentGameState = GameState.Paused;
+                        Pause();
+                    }
+                    
+                    break;
+                
+                case GameState.Paused:
+                    // Unpause
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        currentGameState = previouslyGameState;
+                        previouslyGameState = GameState.Paused;
+                        Unpause();
+                    }
+                    
+                    break;
+                
+                case GameState.PopUp:
+                    // Pause
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        previouslyGameState = GameState.PopUp;
+                        currentGameState = GameState.Paused;
+                    }
+                    
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            if (remainingTime <= 0)
+            {
+                // game-over screen
+                print("GAME OVER!");
+            }
+        }
+
+        public void Pause()
+        {
+            Time.timeScale = 0f;
+            canvasController.ShowPausePanel(true);
+        }
+
+        public void Unpause()
+        {
+            Time.timeScale = 1f;
+            canvasController.ShowPausePanel(false);
+        }
+
+       
 
         public void TryNextPhase()
         {

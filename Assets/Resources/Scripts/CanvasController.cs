@@ -37,6 +37,8 @@ public class CanvasController : MonoBehaviour
     public GameObject resetProductionBox_f4p2;
     public GameObject resetProductionBox_f4p3;
 
+    public CanvasRenderer PausePanel;
+    
     private void Update()
     {
         if (!_waitingForKey) return;
@@ -139,4 +141,10 @@ public class CanvasController : MonoBehaviour
                 break;
         }
     }
+
+    public void ShowPausePanel(bool boolean)
+    {
+        PausePanel.gameObject.SetActive(boolean);
+    }
+    
 }

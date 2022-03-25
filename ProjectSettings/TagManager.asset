@@ -8,6 +8,7 @@ TagManager:
   - Production
   - Anchor
   - GameManager
+  - GamePanel
   layers:
   - Default
   - TransparentFX

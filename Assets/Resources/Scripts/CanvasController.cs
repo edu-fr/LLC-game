@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Resources.Scripts;
 using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 // ReSharper disable InconsistentNaming
 
@@ -14,6 +16,14 @@ public class CanvasController : MonoBehaviour
     public TextMeshProUGUI transitionPanelFooterText;
     private bool _waitingForKey = false;
     public float timeToShowFooter;
+
+    public TextMeshProUGUI HUDTime; 
+    public TextMeshProUGUI HUDLife; 
+    
+    [SerializeField] internal float initialTime;
+    [SerializeField] internal float remainingTime;
+    [SerializeField] internal int initialLife;
+    [SerializeField] internal int remainingLife;
     
     public string[] phaseTexts;
     public GameObject tutorial_1_1;
@@ -38,19 +48,45 @@ public class CanvasController : MonoBehaviour
     public GameObject resetProductionBox_f4p3;
 
     public CanvasRenderer PausePanel;
-    
+
+    private void Start()
+    {
+        remainingLife = initialLife;
+        remainingTime = initialTime;
+    }
     private void Update()
     {
+        UpdateHUD();
+        
         if (!_waitingForKey) return;
         if (Input.anyKeyDown)
         {
             transitionPanel.gameObject.SetActive(false);
             _waitingForKey = false;
+            ActivateTutorial(levelScript.currentPart, levelScript.currentPhase);
         }
+    }
+
+    internal void UpdateTime()
+    {
+        remainingTime = remainingTime <= 0 ? 0 : remainingTime -= Time.deltaTime;
+    }
+
+    private void UpdateHUD()
+    {
+        HUDTime.SetText(((int) remainingTime).ToString(CultureInfo.CurrentCulture));
+        var currentLife = new List<char>();
+        for (var i = 0; i < remainingLife; i++)
+        {
+            currentLife.Add('*');
+        }
+        var currentLifeString = currentLife.ToArray().ArrayToString();
+        HUDLife.SetText(currentLifeString);
     }
     
     public void Transition(int phase)
     {
+        levelScript.ChangeGameState(LevelScript.GameState.PopUp);
         transitionPanelFooterText.gameObject.SetActive(false);
         transitionPanelContentText.SetText(phaseTexts[phase - 1]);
         transitionPanel.gameObject.SetActive(true);
@@ -66,6 +102,7 @@ public class CanvasController : MonoBehaviour
 
     public void ActivateTutorial(int phase, int part)
     {
+        levelScript.ChangeGameState(LevelScript.GameState.PopUp);
         switch (phase)
         {
             case 1:

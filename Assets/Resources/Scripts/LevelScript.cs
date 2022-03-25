@@ -22,11 +22,7 @@ namespace Resources.Scripts
         public GameObject grammarObject;
         private GrammarScript _grammar;
         [SerializeField] private CanvasController canvasController;
-        [SerializeField] private float initialTime;
-        [SerializeField] private float remainingTime;
-        [SerializeField] private int initialLife;
-        [SerializeField] private int remainingLife;
-        
+
         [SerializeField] private GameObject p1_productionsBox;
         [SerializeField] private GameObject p1_productionsBox_resetButton;
         [SerializeField] private GameObject p1_variablesBox;
@@ -69,16 +65,6 @@ namespace Resources.Scripts
 
             canvasController.Transition(currentPhase);
             SetupPhase1Part1();
-            canvasController.ActivateTutorial(currentPart, currentPhase);
-            
-            // // DEBUG
-            // SetupPhase1Part2();
-            // SetupPhase1Part3();
-            // SetupPhase2Part1();
-            // SetupPhase2Part2();
-            // SetupPhase2Part3();
-            // currentPhase = 2;
-            // currentPart = 3;
         }
 
         private void Update()
@@ -86,60 +72,73 @@ namespace Resources.Scripts
             switch (currentGameState)
             {
                 case GameState.Running:
-                    remainingTime -= Time.deltaTime;
-
-                    // Pause menu
+                    canvasController.UpdateTime();
+                    // Open pause menu
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
-                        previouslyGameState = GameState.Running;
-                        currentGameState = GameState.Paused;
-                        Pause();
+                        ChangeGameState(GameState.Paused);
                     }
-                    
                     break;
                 
                 case GameState.Paused:
                     // Unpause
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
-                        currentGameState = previouslyGameState;
-                        previouslyGameState = GameState.Paused;
-                        Unpause();
+                        ChangeGameState(previouslyGameState);
                     }
                     
                     break;
                 
                 case GameState.PopUp:
-                    // Pause
-                    if (Input.GetKeyDown(KeyCode.Escape))
-                    {
-                        previouslyGameState = GameState.PopUp;
-                        currentGameState = GameState.Paused;
-                    }
-                    
                     break;
                 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             
-            if (remainingTime <= 0)
+            if (canvasController.remainingTime <= 0)
             {
                 // game-over screen
                 print("GAME OVER!");
             }
         }
 
-        public void Pause()
-        {
-            Time.timeScale = 0f;
-            canvasController.ShowPausePanel(true);
-        }
-
         public void Unpause()
         {
-            Time.timeScale = 1f;
-            canvasController.ShowPausePanel(false);
+            ChangeGameState(GameState.Running);    
+        }
+
+        public void UnpopUp()
+        {   
+            ChangeGameState(GameState.Running);
+        }
+
+        public void ChangeGameState(GameState gameState)
+        {
+            switch(gameState)
+            {
+                case GameState.Running:
+                    previouslyGameState = currentGameState;
+                    currentGameState = GameState.Running;
+                    Time.timeScale = 1f;
+                    canvasController.ShowPausePanel(false);
+                    break;
+                
+                case GameState.Paused:
+                    previouslyGameState = currentGameState;
+                    currentGameState = GameState.Paused;
+                    Time.timeScale = 0f;
+                    canvasController.ShowPausePanel(true);
+                    break;
+                
+                case GameState.PopUp:
+                    previouslyGameState = currentGameState;
+                    currentGameState = GameState.PopUp;
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+            }
         }
 
        
@@ -176,7 +175,6 @@ namespace Resources.Scripts
                                 currentPhase = 2;
                                 canvasController.Transition(currentPhase);
                                 SetupPhase2Part1();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                     }
@@ -210,7 +208,6 @@ namespace Resources.Scripts
                                 currentPart = 1;
                                 canvasController.Transition(currentPhase);
                                 SetupPhase3Part1();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                     }
@@ -244,7 +241,6 @@ namespace Resources.Scripts
                                 currentPart = 1; 
                                 canvasController.Transition(currentPhase);
                                 SetupPhase4Part1();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             break;
                     }

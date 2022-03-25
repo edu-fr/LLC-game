@@ -8,6 +8,7 @@ namespace Resources.Scripts
     public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         private Canvas _canvas;
+        private RectTransform _gamePanel;
         private RectTransform _rectTransform;
         private CanvasGroup _canvasGroup; 
         public bool CanBeDragged;
@@ -20,6 +21,7 @@ namespace Resources.Scripts
             _canvas = FindObjectOfType<Canvas>();
             _rectTransform = GetComponent<RectTransform>();
             _canvasGroup = GetComponent<CanvasGroup>();
+            _gamePanel = GameObject.FindGameObjectWithTag("GamePanel").GetComponent<RectTransform>();
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -51,7 +53,7 @@ namespace Resources.Scripts
             _canvasGroup.blocksRaycasts = false;
             // Remove from current box and set the Canvas as new parent
             AttachedTo.GetComponentInParent<FillableBox>().RemoveAndReconstructList(gameObject, draggable: gameObject.GetComponent<Draggable>().CanBeDragged, deletable: gameObject.GetComponent<Draggable>().CanBeDeleted, grayscale: false, destroy: false);
-            gameObject.transform.SetParent(_canvas.transform);
+            gameObject.transform.SetParent(_gamePanel);
         }
 
         public void OnDrag(PointerEventData eventData)

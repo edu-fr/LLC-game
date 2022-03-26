@@ -39,6 +39,8 @@ public class CanvasController : MonoBehaviour
     public GameObject tutorial_4_2;
     public GameObject tutorial_4_3;
 
+    public GameObject mistakeHelpModal;
+    
     public GameObject resetProductionBox_f1p2;
     public GameObject resetProductionBox_f1p3;
     public GameObject resetProductionBox_f2p2;
@@ -63,7 +65,7 @@ public class CanvasController : MonoBehaviour
         {
             transitionPanel.gameObject.SetActive(false);
             _waitingForKey = false;
-            ActivateTutorial(levelScript.currentPart, levelScript.currentPhase);
+            ActivateTutorial(levelScript.currentPhase, levelScript.currentPart);
         }
     }
 
@@ -102,7 +104,6 @@ public class CanvasController : MonoBehaviour
 
     public void ActivateTutorial(int phase, int part)
     {
-        levelScript.ChangeGameState(LevelScript.GameState.PopUp);
         switch (phase)
         {
             case 1:
@@ -183,5 +184,13 @@ public class CanvasController : MonoBehaviour
     {
         PausePanel.gameObject.SetActive(boolean);
     }
-    
+
+    public void ConfigureAndCallHelpModal(string title, string message)
+    {
+        mistakeHelpModal.GetComponent<WindowTrigger>().title = title;
+        mistakeHelpModal.GetComponent<WindowTrigger>().message = message;
+        mistakeHelpModal.SetActive(true);
+        
+    }
+
 }

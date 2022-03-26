@@ -15,15 +15,23 @@ namespace Resources.Scripts
         public string alternateText;
         public bool triggerOnEnable;
         public ModalWindowPanel.WindowType windowType;
+        public LevelScript levelScript;
 
         public UnityEvent onContinueEvent;
         public UnityEvent onCancelEvent;
         public UnityEvent onAlternateEvent;
-        
+
+        public void Awake()
+        {
+            levelScript = GameObject.FindGameObjectWithTag("Level Controller").GetComponent<LevelScript>();
+        }
+
         public void OnEnable()
         {
             if (!triggerOnEnable) { return; }
-
+            
+            levelScript.ChangeGameState(LevelScript.GameState.PopUp);
+            
             Action continueCallback = null;
             Action cancelCallback = null;
             Action alternateCallback = null;

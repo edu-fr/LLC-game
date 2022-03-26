@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,18 +21,18 @@ namespace Resources.Scripts
       [SerializeField] private Transform contentArea;
       
       [SerializeField] private Transform verticalLayoutArea;
-      [SerializeField] private Image verticalImage;
+      [SerializeField] private RawImage verticalImage;
       [SerializeField] private TextMeshProUGUI verticalText;
       
       [Space()] 
       [SerializeField] private Transform horizontalLayoutArea;
-      [SerializeField] private Image horizontalImage;
+      [SerializeField] private RawImage horizontalImage;
       [SerializeField] private TextMeshProUGUI horizontalText;
 
       [Space()] 
       [SerializeField] private Transform horizontalLayoutIconArea;
       [SerializeField] private Transform iconArea;
-      [SerializeField] private Image horizontalIcon;
+      [SerializeField] private RawImage horizontalIcon;
       [SerializeField] private TextMeshProUGUI horizontalIconText;
 
       [Header("Footer")] 
@@ -70,7 +71,7 @@ namespace Resources.Scripts
          SetWindowType(windowType);
          
          // Hide the header if there's no title
-         var hasTitle = string.IsNullOrEmpty(title);
+         var hasTitle = !string.IsNullOrEmpty(title);
          headerArea.gameObject.SetActive(hasTitle);
          titleField.text = title;
          
@@ -124,17 +125,17 @@ namespace Resources.Scripts
          switch (windowType)
          {
             case WindowType.Vertical:
-               verticalImage.sprite = imageToShow;
+              // verticalImage.sprite = imageToShow;
                verticalText.text = message;
                break;
             
             case WindowType.Horizontal:
-               horizontalImage.sprite = imageToShow;
+//               horizontalImage.sprite = imageToShow;
                horizontalText.text = message;
                break;
             
             case WindowType.HorizontalIcon:
-               horizontalIcon.sprite = imageToShow;
+              // horizontalIcon.sprite = imageToShow;
                horizontalIconText.text = message;
                break;
             

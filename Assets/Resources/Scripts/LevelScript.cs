@@ -90,6 +90,7 @@ namespace Resources.Scripts
                     break;
                 
                 case GameState.PopUp:
+                   
                     break;
                 
                 default:
@@ -309,25 +310,30 @@ namespace Resources.Scripts
             var currentVariablesOnVariablesBox = p1_variablesBox.GetComponent<VariablesBox>().variableList;
             if (currentVariablesOnVariablesBox.Count > 0)
             {
-                print("Ainda há variáveis que devem ser movidas!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "Ainda há variáveis que devem ser movidas!");
                 return false;
             }
             
             var currentVariablesOnUsefulBox = p1_usefulVariablesBox.GetComponent<VariablesBox>().variableList;
             var correctVariables = _grammar.UsefulVariablesPhase1;
 
-            if (correctVariables.Count != currentVariablesOnUsefulBox.Count) print("ERRADO PELO NUM DE ELEMENTOS!");
+            if (correctVariables.Count > currentVariablesOnUsefulBox.Count) 
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis úteis do que o esperado!");
+            else if (correctVariables.Count < currentVariablesOnUsefulBox.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis úteis do que o esperado!");
+            }
             else
             {
                 foreach (var variable in currentVariablesOnUsefulBox)
                 {
                     if (!correctVariables.Contains(variable))
                     {
-                        print("A variavel " + variable + " não faz parte da lista de variáveis corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não faz parte da lista de variáveis corretas!");
                         return false;
                     } 
                 }
-                print("Correto! Pode prosseguir para a próxima fase!");
+                // Victory screen and fanfare
                 return true;
             }
             return false;
@@ -369,27 +375,31 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                print("É necessário que alguma produção exista na linguagem");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
                 return false;
             }
             
             var correctProductions = _grammar.UsefulProductionsPhase1;
             
-            if (correctProductions.Count != currentProductionsOnProductionsBox.Count) print("Número errado de produções úteis!");
-            else
+            if (correctProductions.Count > currentProductionsOnProductionsBox.Count) 
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções corretas do que o esperado!");
+            else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções corretas do que o esperado!");
+            } 
+            else 
             {
                 foreach (var production in currentProductionsOnProductionsBox)
                 {
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        print("A producao " + production._in + " -> " + production._out +
-                              " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
                         return false;
                     }
                 }
 
-                print("Correto! Pode prosseguir para a próxima fase!");
+                // Victory screen and fanfare
                 return true;
             }
             return false;
@@ -419,13 +429,16 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                print("É necessário que alguma produção exista na linguagem");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
                 return false;
             }
             
             var correctProductions = _grammar.usefulAndReachableProductionsPhase1;
             
-            if (correctProductions.Count != currentProductionsOnProductionsBox.Count) print("Número errado de produções úteis e alcançáveis!");
+            if (correctProductions.Count > currentProductionsOnProductionsBox.Count)
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções úteis e alcançáveis do que o esperado!");
+            else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções úteis e alcançáveis do que o esperado!");
             else
             {
                 foreach (var production in currentProductionsOnProductionsBox)
@@ -433,13 +446,12 @@ namespace Resources.Scripts
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        print("A producao " + production._in + " -> " + production._out +
-                              " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
                         return false;
                     }
                 }
 
-                print("Correto! Pode prosseguir para a próxima fase!");
+                // Victory screen and fanfare
                 return true;
             }
             return false;
@@ -484,18 +496,23 @@ namespace Resources.Scripts
             var correctLambdaProducers = _grammar.LambdaProducers;
             var currentVariablesOnLambdaProducersBox = p2_lambdaProducersBox.GetComponent<VariablesBox>().variableList;
             
-            if (correctLambdaProducers.Count != currentVariablesOnLambdaProducersBox.Count) print("Número errado de variaveis que produzem vazio!");
+            
+            if (correctLambdaProducers.Count > currentVariablesOnLambdaProducersBox.Count)
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis que produzem vazio do que o esperado!");
+            else if (correctLambdaProducers.Count < currentVariablesOnLambdaProducersBox.Count)
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis que produzem vazio do que o esperado!");
             else
             {
                 foreach (var variable in currentVariablesOnLambdaProducersBox)
                 {
                     if (!correctLambdaProducers.Contains(variable))
                     {
-                        print("A variavel " + variable + " não faz parte da lista de variáveis produtoras de lambda!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não é produtora de vazio!");
                         return false;
                     } 
                 }
-                print("Correto! Pode prosseguir para a próxima fase!");
+                
+                // Victory screen and fanfare
                 return true;
             }
             return false;
@@ -536,10 +553,14 @@ namespace Resources.Scripts
         private bool Phase2Part2()
         {
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            if (productionList.Count != _grammar.ProductionsPhase2.Count)
+            if (productionList.Count > _grammar.ProductionsPhase2.Count)
             {
-                print("Numero incorreto de produções!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!");
                 return false;
+            }
+            if (productionList.Count < _grammar.ProductionsPhase2.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!");
             }
             foreach (var production in productionList)
             {
@@ -558,11 +579,12 @@ namespace Resources.Scripts
 
                 if (!productionExists)
                 {
-                    print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
+                    canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "->" + production._out + " não é esperada");
                     return false;
                 }
             }
 
+            // Victory screen and fanfare
             return true;
         }
         
@@ -597,9 +619,14 @@ namespace Resources.Scripts
         {
             var lambdaProduction = new GrammarScript.Production(_grammar.StartVariable, "λ");
             var currentProductionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            return (currentProductionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) !=
+            if ((currentProductionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) !=
                 null && _grammar.StartVariableCanProduceLambda) || (currentProductionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) ==
-                null && !_grammar.StartVariableCanProduceLambda) ;
+                null && !_grammar.StartVariableCanProduceLambda))
+            {
+                // Victory screen and fanfare
+                return true;
+            }
+            return false;
         }
 
         private void SetupPhase3Part1()
@@ -635,11 +662,18 @@ namespace Resources.Scripts
             // {
             //     print(production._in + "->" + production._out);
             // }
-            if (productionList.Count != _grammar.NonUselessUnitProductions.Count) // VER SE É ESSA LISTA MESMO
+            if (productionList.Count > _grammar.NonUselessUnitProductions.Count)
             {
-                print("Numero incorreto de produções!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!");
                 return false;
             }
+            
+            if (productionList.Count < _grammar.NonUselessUnitProductions.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!");
+                return false;
+            }
+
             foreach (var production in productionList)
             {
                 var productionExists = false;
@@ -656,10 +690,11 @@ namespace Resources.Scripts
                 }
 
                 if (productionExists) continue;
-                print("A produção " + production._in + "->" + production._out + " não está na lista de produções corretas");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "->" + production._out + " não é esperada");
                 return false;
             }
 
+            // Victory screen and fanfare
             return true;
         }
 
@@ -685,19 +720,26 @@ namespace Resources.Scripts
         private bool Phase3Part2()
         {
             var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            if (_grammar.NonUnitProductions.Count != productionsBoxList.Count)
+            if (_grammar.NonUnitProductions.Count < productionsBoxList.Count)
             {
-                print("Número de produções não unidade inesperado! Recebeu: " + productionsBoxList.Count + "; Esperava: " +
-                      _grammar.NonUnitProductions.Count);
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções unidade do que o esperado!");
                 return false;
             }
+            if (_grammar.NonUnitProductions.Count > productionsBoxList.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções unidade do que o esperado!");
+                return false;
+            }
+
             foreach (var production in productionsBoxList.Where(production =>
                 !_grammar.NonUnitProductions.Exists(x => x._in == production._in && x._out == production._out)))
             {
-                print("A produção " + production._in + "=>" + production._out +
-                      " não faz parte das produções unidade!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!","A produção " + production._in + "=>" + production._out +
+                                                                     " não faz parte das produções unidade!");
                 return false;
             }
+            
+            // Victory screen and fanfare
             return true;
         }
 
@@ -731,21 +773,25 @@ namespace Resources.Scripts
         private bool Phase3Part3()
         {
             var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            if (_grammar.ResultingProductions.Count != productionsBoxList.Count)
+            if (_grammar.ResultingProductions.Count < productionsBoxList.Count)
             {
-                print("Número de produções finais inesperado! Recebeu: " + productionsBoxList.Count + "; Esperava: " +
-                      _grammar.ResultingProductions.Count);
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!");
+                return false;
+            }
+            if (_grammar.ResultingProductions.Count > productionsBoxList.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!");
                 return false;
             }
             
             foreach (var production in productionsBoxList.Where(production =>
                 !_grammar.ResultingProductions.Exists(x => x._in == production._in && x._out == production._out)))
             {
-                print("A produção " + production._in + "=>" + production._out +
-                      " não faz parte das produções resultantes da fase 3!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "=>" + production._out + " não é esperada!");
                 return false;
             }
             
+            // Victory screen and fanfare
             return true; 
         }
 
@@ -792,29 +838,36 @@ namespace Resources.Scripts
             var currentVariablesOnVariablesBox = p1_variablesBox.GetComponent<VariablesBox>().variableList;
             if (currentVariablesOnVariablesBox.Count > 0)
             {
-                print("Ainda há variáveis que devem ser movidas!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "Ainda há variáveis que devem ser movidas!");
                 return false;
             }
+            
+            
             
             var currentVariablesOnUsefulBox = p1_usefulVariablesBox.GetComponent<VariablesBox>().variableList;
             var correctVariables = _grammar.UsefulVariablesPhase4;
 
-            if (correctVariables.Count != currentVariablesOnUsefulBox.Count) print("ERRADO PELO NUM DE ELEMENTOS!");
+            if (correctVariables.Count > currentVariablesOnUsefulBox.Count) 
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis úteis do que o esperado!");
+            else if (correctVariables.Count < currentVariablesOnUsefulBox.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis úteis do que o esperado!");
+            }
             else
             {
                 foreach (var variable in currentVariablesOnUsefulBox)
                 {
                     if (!correctVariables.Contains(variable))
                     {
-                        print("A variavel " + variable + " não faz parte da lista de variáveis corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não faz parte da lista de variáveis corretas!");
                         return false;
                     } 
                 }
                 print("Correto! Pode prosseguir para a próxima fase!");
                 return true;
             }
+            // Victory screen and fanfare
             return false;
-            
         }
 
         private void SetupPhase4Part2()
@@ -853,27 +906,31 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                print("É necessário que alguma produção exista na linguagem");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
                 return false;
             }
             
             var correctProductions = _grammar.UsefulProductionsPhase4;
             
-            if (correctProductions.Count != currentProductionsOnProductionsBox.Count) print("Número errado de produções úteis!");
-            else
+            if (correctProductions.Count > currentProductionsOnProductionsBox.Count) 
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções corretas do que o esperado!");
+            else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
+            {
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções corretas do que o esperado!");
+            } 
+            else 
             {
                 foreach (var production in currentProductionsOnProductionsBox)
                 {
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        print("A producao " + production._in + " -> " + production._out +
-                              " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
                         return false;
                     }
                 }
 
-                print("Correto! Pode prosseguir para a próxima fase!");
+                // Victory screen and fanfare
                 return true;
             }
             return false;
@@ -906,13 +963,16 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                print("É necessário que alguma produção exista na linguagem");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
                 return false;
             }
             
             var correctProductions = _grammar.usefulAndReachableProductionsPhase4;
             
-            if (correctProductions.Count != currentProductionsOnProductionsBox.Count) print("Número errado de produções úteis e alcançáveis!");
+            if (correctProductions.Count > currentProductionsOnProductionsBox.Count)
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções úteis e alcançáveis do que o esperado!");
+            else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções úteis e alcançáveis do que o esperado!");
             else
             {
                 foreach (var production in currentProductionsOnProductionsBox)
@@ -920,13 +980,11 @@ namespace Resources.Scripts
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        print("A producao " + production._in + " -> " + production._out +
-                              " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
                         return false;
                     }
                 }
-
-                print("Correto! Pode prosseguir para a próxima fase!");
+                // Victory screen and fanfare
                 return true;
             }
             return false;

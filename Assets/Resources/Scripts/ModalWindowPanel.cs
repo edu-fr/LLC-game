@@ -132,12 +132,14 @@ namespace Resources.Scripts
                if (imageToShow != null)
                {
                   verticalVideoTutorial.gameObject.SetActive(false);
+                  verticalImage.gameObject.SetActive(true);
                   verticalImage.sprite = imageToShow;
                }
-               else if (videoTutorial != null)
+               if (videoTutorial != null)
                {
                   verticalImage.gameObject.SetActive(false);
-                  verticalVideoTutorial = videoTutorial;
+                  verticalVideoTutorial.gameObject.SetActive(true);
+                  verticalVideoTutorial.texture = videoTutorial.texture;
                }
                verticalText.text = message;
                break;
@@ -146,12 +148,14 @@ namespace Resources.Scripts
                if (imageToShow != null)
                {
                   horizontalVideoTutorial.gameObject.SetActive(false);
+                  horizontalImage.gameObject.SetActive(true);
                   horizontalImage.sprite = imageToShow;
                }
-               else if (videoTutorial != null)
+               if (videoTutorial != null)
                {
+                  horizontalVideoTutorial.gameObject.SetActive(true);
+                  horizontalVideoTutorial.texture = videoTutorial.texture;
                   horizontalImage.gameObject.SetActive(false);
-                  horizontalVideoTutorial = videoTutorial;
                }
                horizontalText.text = message;
                break;
@@ -160,12 +164,14 @@ namespace Resources.Scripts
                if (imageToShow != null)
                {
                   horizontalVideoTutorial.gameObject.SetActive(false);
+                  horizontalIcon.gameObject.SetActive(true);
                   horizontalIcon.sprite = imageToShow;
                }
                else if (videoTutorial != null)
                {
                   horizontalIcon.gameObject.SetActive(false);
-                  horizontalIconVideoTutorial = videoTutorial;
+                  horizontalIconVideoTutorial.gameObject.SetActive(true);
+                  horizontalIconVideoTutorial.texture = videoTutorial.texture;
                }
                horizontalIconText.text = message;
                break;

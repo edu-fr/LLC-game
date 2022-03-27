@@ -1380,6 +1380,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 894881771}
     m_Modifications:
+    - target: {fileID: 1137863475995558470, guid: 0de3c19f07b8ffe4e90f6b9fff8bbb7f, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1137863475995558470, guid: 0de3c19f07b8ffe4e90f6b9fff8bbb7f, type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1234330586400816900, guid: 0de3c19f07b8ffe4e90f6b9fff8bbb7f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1475,6 +1483,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: 677cea1eddb577945ae99c70b4db399e, type: 3}
   m_PrefabInstance: {fileID: 1857441110}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &199319275 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: 677cea1eddb577945ae99c70b4db399e, type: 3}
+  m_PrefabInstance: {fileID: 1857441110}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &200008728 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5415751858977925233, guid: a12e0a78479e0a7479ebd07cc41a4710, type: 3}
@@ -1536,6 +1555,10 @@ PrefabInstance:
     - target: {fileID: 8866967923734034424, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: title
+      value: "Restaurar caixa de produ\xE7\xF5es"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -1846,11 +1869,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Aceita\xE7\xE3o da palavra vazia na linguagem"
+      value: "Parte 2, Etapa 3 -Aceita\xE7\xE3o da palavra vazia na linguagem"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Verifique se a linguagem pode produzir \u03BB a partir do estado inicial."
+      value: "Verifique se a linguagem consegue produzir a palavra vazia <b>\u03BB</b>
+        a partir do estado inicial."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -1864,6 +1892,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 1090182159}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -2156,6 +2188,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: title
+      value: "Restaurar caixa de produ\xE7\xF5es"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
       objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
@@ -2335,6 +2371,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: 464aa2b1777792a41a2e51ac3f960212, type: 3}
   m_PrefabInstance: {fileID: 609798779}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &369673230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: 464aa2b1777792a41a2e51ac3f960212, type: 3}
+  m_PrefabInstance: {fileID: 609798779}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &375585765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2437,6 +2484,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: 5b540bf1354b4f44786cc9b320a039b1, type: 3}
   m_PrefabInstance: {fileID: 2019091675}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &396348945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: 5b540bf1354b4f44786cc9b320a039b1, type: 3}
+  m_PrefabInstance: {fileID: 2019091675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &399419729 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3416035759196089905, guid: 66289bfd1b3a20b4bba27f29885fa349, type: 3}
@@ -2767,6 +2825,10 @@ PrefabInstance:
     - target: {fileID: 8866967923734034424, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: title
+      value: "Restaurar caixa de produ\xE7\xF5es"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -3328,12 +3390,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Cria\xE7\xE3o do conjunto de produtoras de vazio"
+      value: "Parte 2, Etapa 1 - Vari\xE1veis produtoras de vazio"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Crie um conjunto com todas as vari\xE1veis que produzem a palavra vazia
-        \u03BB (diretamente ou indiretamente).  "
+        <b>\u03BB</b> (diretamente ou indiretamente)."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -3347,6 +3413,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 396348945}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -3661,6 +3731,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: title
+      value: "Restaurar caixa de produ\xE7\xF5es"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
       objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
@@ -3955,6 +4029,14 @@ PrefabInstance:
     - target: {fileID: 5616757887561575306, guid: 464aa2b1777792a41a2e51ac3f960212, type: 3}
       propertyPath: m_Name
       value: RawImage Tutorial Create new productions considering unit producitons
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066124063262694905, guid: 464aa2b1777792a41a2e51ac3f960212, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066124063262694905, guid: 464aa2b1777792a41a2e51ac3f960212, type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 464aa2b1777792a41a2e51ac3f960212, type: 3}
@@ -5453,15 +5535,23 @@ PrefabInstance:
       value: "Separa\xE7\xE3o de vari\xE1veis em \xFAteis e in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis!\n\nVari\xE1veis \xFAteis
-        tem produ\xE7\xF5es onde produzem s\xF3 simbolos terminais (diretamente ou
-        indiretamente). \n"
+      value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis!\nVari\xE1veis \xFAteis
+        possuem produ\xE7\xF5es onde produzem SOMENTE simbolos terminais (diretamente
+        ou indiretamente)."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 1034079938}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -5565,11 +5655,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Cria\xE7\xE3o do conjunto de produ\xE7\xF5es unidade"
+      value: "Parte 3, Etapa 2 - Conjunto de produ\xE7\xF5es unidade"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Crie um conjunto com as produ\xE7\xF5es unidade."
+      value: "Crie um conjunto com as produ\xE7\xF5es unidade.\nProdu\xE7\xF5es unidades
+        s\xE3o produ\xE7\xF5es do tipo <b>A -> B</b> (onde o lado direito \xE9 composto
+        apenas por uma vari\xE1vel). "
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -5583,6 +5679,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 1049132929}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -5812,6 +5912,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1234330586400816900, guid: 5a6df90ff10109044ab07b5b2368866a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559334850611440946, guid: 5a6df90ff10109044ab07b5b2368866a, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559334850611440946, guid: 5a6df90ff10109044ab07b5b2368866a, type: 3}
+      propertyPath: m_AudioOutputMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5616757887561575306, guid: 5a6df90ff10109044ab07b5b2368866a, type: 3}
@@ -6364,7 +6472,6 @@ Transform:
   - {fileID: 570559299}
   - {fileID: 1364677065}
   - {fileID: 123183961}
-  - {fileID: 1667010486}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6373,6 +6480,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
   m_PrefabInstance: {fileID: 1524059011}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1034079938 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
+  m_PrefabInstance: {fileID: 1524059011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1037313688
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,11 +6561,33 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: c6879450e2e125b4290f0daf944f7ce5, type: 3}
   m_PrefabInstance: {fileID: 1152583200}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1039415110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: c6879450e2e125b4290f0daf944f7ce5, type: 3}
+  m_PrefabInstance: {fileID: 1152583200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1049132927 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: 5a6df90ff10109044ab07b5b2368866a, type: 3}
   m_PrefabInstance: {fileID: 963571857}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1049132929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: 5a6df90ff10109044ab07b5b2368866a, type: 3}
+  m_PrefabInstance: {fileID: 963571857}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1062872433 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5139680645002489290, guid: c4730b5ca06d77e4ab796fa6d2f7c0cf, type: 3}
@@ -6637,6 +6777,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: 0de3c19f07b8ffe4e90f6b9fff8bbb7f, type: 3}
   m_PrefabInstance: {fileID: 177704031}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1090182159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: 0de3c19f07b8ffe4e90f6b9fff8bbb7f, type: 3}
+  m_PrefabInstance: {fileID: 177704031}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1094366726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7031,6 +7182,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1234330586400816900, guid: c6879450e2e125b4290f0daf944f7ce5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638909846747482552, guid: c6879450e2e125b4290f0daf944f7ce5, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638909846747482552, guid: c6879450e2e125b4290f0daf944f7ce5, type: 3}
+      propertyPath: m_AudioOutputMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5616757887561575306, guid: c6879450e2e125b4290f0daf944f7ce5, type: 3}
@@ -7784,6 +7943,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: title
+      value: "Restaurar caixa de produ\xE7\xF5es"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
       objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
@@ -7978,6 +8141,10 @@ PrefabInstance:
       value: "Remo\xE7\xE3o de produ\xE7\xF5es in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Remova as produ\xE7\xF5es que possuem vari\xE1veis in\xFAteis na origem
         e/ou no destino. \nCaso n\xE3o exista nenhuma, prossiga."
@@ -7994,6 +8161,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 1463795756}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -8118,6 +8289,10 @@ PrefabInstance:
     - target: {fileID: 8866967923734034424, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: title
+      value: "Restaurar caixa de produ\xE7\xF5es"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -8733,9 +8908,14 @@ PrefabInstance:
       value: "Exemplo de cria\xE7\xE3o do conjunto"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9dc403825958ff943a64f6480494f6d2, type: 3}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Dada a linguagem:\n\nS -> Aa\nA -> B\nB -> b\nB -> S\n\nA -> B e B
-        -> S s\xE3o produ\xE7\xF5es unidade."
+      value: "Considerando as produ\xE7\xF5es ao lado, temos que:\n\u2022 <b>A ->
+        B</b> \xE9 uma produ\xE7\xE3o unidade;\n\u2022 Nenhuma das outras produ\xE7\xF5es
+        s\xE3o produ\xE7\xF5es unidade."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -9434,6 +9614,10 @@ PrefabInstance:
       value: Repetindo rapidamente o primeiro passo
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Algumas linguagens necessitam que a remo\xE7\xE3o de vari\xE1veis in\xFAteis
         seja feita novamente ao final do processo de simplifica\xE7\xE3o."
@@ -9511,6 +9695,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: 1457afc6e17727143afb95a7476ddc01, type: 3}
   m_PrefabInstance: {fileID: 1519611027}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1463795756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: 1457afc6e17727143afb95a7476ddc01, type: 3}
+  m_PrefabInstance: {fileID: 1519611027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1464117209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9564,7 +9759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Remo\xE7\xE3o de produ\xE7\xF5es inalcan\xE7\xE1veis"
+      value: "Parte 1, Etapa 3 -Remo\xE7\xE3o de produ\xE7\xF5es inalcan\xE7\xE1veis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -10085,6 +10280,10 @@ PrefabInstance:
       value: "Remo\xE7\xE3o de produ\xE7\xF5es inalcan\xE7\xE1veis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Remova as produ\xE7\xF5es que s\xE3o inancan\xE7\xE1veis a partir da
         vari\xE1vel de in\xEDcio.\nCaso n\xE3o exista nenhuma, prossiga."
@@ -10101,6 +10300,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 1463795756}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -10391,6 +10594,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2839256037162434557, guid: 1457afc6e17727143afb95a7476ddc01, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839256037162434557, guid: 1457afc6e17727143afb95a7476ddc01, type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5616757887561575306, guid: 1457afc6e17727143afb95a7476ddc01, type: 3}
       propertyPath: m_Name
       value: RawImage Tutorial Remove production
@@ -10522,6 +10733,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914324542561659991, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914324542561659991, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
+      propertyPath: m_AudioOutputMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5616757887561575306, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
@@ -10801,12 +11020,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Remo\xE7\xE3o de produ\xE7\xF5es unidade \xF3bvias"
+      value: "Parte 3, Etapa 1 - Produ\xE7\xF5es unidades evidentes"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Removas as produ\xE7\xF5es do tipo A -> A ou B -> B. Caso n\xE3o exista
-        nenhuma, prossiga."
+      value: "Removas as produ\xE7\xF5es unit\xE1rias do tipo <b>A -> A</b> ou <b>B
+        -> B</b>. Caso n\xE3o exista nenhuma, prossiga."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -10820,6 +11043,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 199319275}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -11200,22 +11427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1667010486 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-  m_PrefabInstance: {fileID: 1742452290}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1667010488 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4980056698901453142, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-  m_PrefabInstance: {fileID: 1742452290}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1675394878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11272,13 +11483,17 @@ PrefabInstance:
       value: "Exemplo de substitui\xE7\xE3o considerando o vazio"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dcf199fd15ea7d04f8120648924b4eea, type: 3}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Dada a linguaguem que possui as produ\xE7\xF5es:\n\nS -> AB\nS -> Aa\nS
-        -> c\nA -> a\nA -> \u03BB\nB -> b\nB -> \u03BB\n\nNovas produ\xE7\xF5es seriam:\nS
-        -> A (se B = \u03BB na 1a regra)\nS -> B (se A = \u03BB na 1a regra)\nS ->
-        a (Se A = \u03BB na 2a regra)\n\nObs: se A = B = \u03BB saindo da vari\xE1vel
-        de in\xEDcio veremos no pr\xF3ximo passo, ent\xE3o por enquanto n\xE3o se
-        deve criar uma produ\xE7\xE3o pra esse caso."
+      value: "Considerando as produ\xE7\xF5es ao lado (parte superior), temos que:\n\u2022
+        Caso <b>A</b> fosse vazio, a 1a produ\xE7\xE3o seria <b>S -> b</b>;\n\u2022
+        Caso <b>A</b> fosse vazio, a 2a produ\xE7\xE3o seria <b>S -> bb</b>;\nPortanto,
+        essas novas produ\xE7\xF5es devem ser criadas e a produ\xE7\xE3o <b>A ->
+        \u03BB</b> deve ser exclu\xEDda.\nAo lado (parte inferior), pode-se ver como
+        dever\xE3o ficar as produ\xE7\xF5es da linguagem."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -11613,103 +11828,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3416035759196089905, guid: 66289bfd1b3a20b4bba27f29885fa349, type: 3}
   m_PrefabInstance: {fileID: 1795386094}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1742452290
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1022518622}
-    m_Modifications:
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_RootOrder
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.81726074
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 4.1827087
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234330586400816900, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5616757887561575306, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
-      propertyPath: m_Name
-      value: RawImage Tutorial Move useful variables
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d3b1d67ead9414540b605d3fbc3647a9, type: 3}
 --- !u!1 &1757355851 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8866967923734034426, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
@@ -11778,7 +11896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Remo\xE7\xE3o de produ\xE7\xF5es in\xFAteis"
+      value: "Parte 1, Etapa 2 - Remo\xE7\xE3o de produ\xE7\xF5es in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -11929,6 +12047,10 @@ PrefabInstance:
     - target: {fileID: 8866967923734034424, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: title
+      value: "Restaurar caixa de produ\xE7\xF5es"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -12125,12 +12247,14 @@ PrefabInstance:
       value: "Exemplo de cria\xE7\xE3o do conjunto"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0c525b4b9a6a4a047ae8981b2a264fca, type: 3}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Dada a linguaguem que possui as produ\xE7\xF5es:\n\nS -> Aa\nA -> B\nB
-        -> b\nB -> \u03BB\n\nTemos que:\nB produz vazio diretamente;\nA produz vazio
-        indiretamente (pois pode ser substitu\xEDdo por B); e \nS n\xE3o produz vazio,
-        pois mesmo que  a produza vazio, S produz a letra terminal \"a\" na mesma
-        produ\xE7\xE3o."
+      value: "Considerando as produ\xE7\xF5es ao lado, temos que:\n\u2022 <b>A</b>
+        produz <b>\u03BB</b> diretamente;\n\u2022 <b>S</b> produz <b>\u03BB</b> indiretamente
+        (pois produz <b>A</b>);\n\u2022 <b>B</b> n\xE3o produz <b>\u03BB</b>."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -12409,6 +12533,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 894881771}
     m_Modifications:
+    - target: {fileID: 204011231774657682, guid: 677cea1eddb577945ae99c70b4db399e, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 204011231774657682, guid: 677cea1eddb577945ae99c70b4db399e, type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1234330586400816900, guid: 677cea1eddb577945ae99c70b4db399e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12927,11 +13059,15 @@ PrefabInstance:
       value: "Cria\xE7\xE3o do conjunto de produtoras de vazio"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 032146affa259d64d9d5d81d0cdf2b9a, type: 3}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Considerando a linguagem com as produ\xE7\xF5es:\n\nA -> B \nB -> b\nC
-        -> CC\n\nTemos que B \xE9 uma vari\xE1vel \xFAtil direta; \nA \xE9 \xFAtil
-        indireta (j\xE1 que produz B, que \xE9 \xFAtil); e\nC \xE9 uma vari\xE1vel
-        in\xFAtil."
+      value: "Considerando as produ\xE7\xF5es ao lado, temos que:\n\u2022 \"A\" \xE9
+        uma var\xEDavel \xFAtil direta, dado A -> a;\n\u2022 \"S\" \xE9 \xFAtil indireta,
+        pois produz \"A\", que \xE9 \xFAtil; \n\u2022 \"B\" \xE9 \xFAtil indireta,
+        pois \"bA\" pode se tornar \"ba\";\n\u2022 \"C\" \xE9 in\xFAtil."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -13147,11 +13283,18 @@ PrefabInstance:
       value: "Exemplo de substitui\xE7\xE3o"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc2e09f452b3aa41a826311eb81737a, type: 3}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Dada a linguagem:\n\nS -> Aa\nA -> B\nB -> b\nB -> S\n\nA produ\xE7\xE3o
-        A -> B deve ser substituida por A -> b (pois B produz b) e B -> S deve ser
-        substituida por B -> Aa (dado que S produz Aa).  \nPor sua vez, A -> S j\xE1
-        deve ser substitu\xEDda por A -> Aa (tamb\xE9m por S produzir Aa). "
+      value: "Considerando a linguagem ao lado (parte superior), temos que:\n\u2022
+        Se na primeira produ\xE7\xE3o (<b>S -> A</b>), a vari\xE1vel <b>A</b> assumisse
+        o valor de suas produ\xE7\xF5es que tem como lado direito <b>a</b> e <b>aA</b>,
+        ter\xEDamos as produ\xE7\xF5es <b>S -> a</b> e <b>S -> aA</b>, respectivamente;
+        \n\u2022 Portanto essas produ\xE7\xF5es devem ser criadas e substituirem
+        a produ\xE7\xE3o unit\xE1ria (<b>S -> A</b>).\n\nAo lado (parte inferior),
+        \xE9 como dever\xE3o ficar as produ\xE7\xF5es da linguagem ao final do processo."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -13402,14 +13545,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Exemplo de separa\xE7\xE3o entre \xFAteis e in\xFAteis"
+      value: "Exemplo vari\xE1veis \xFAteis e in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 032146affa259d64d9d5d81d0cdf2b9a, type: 3}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Considerando a linguagem com as produ\xE7\xF5es:\n\nA -> B \nB -> b\nC
-        -> CC\n\nTemos que B \xE9 uma vari\xE1vel \xFAtil direta; \nA \xE9 \xFAtil
-        indireta (j\xE1 que produz B, que \xE9 \xFAtil); e\nC \xE9 uma vari\xE1vel
-        in\xFAtil."
+      value: "Considerando as produ\xE7\xF5es ao lado, temos que:\n\n\u2022 <b>A</b>
+        \xE9 uma var\xEDavel \xFAtil direta, dado <b>A -> a</b>;\n\u2022 <b>S</b>
+        \xE9 \xFAtil indireta, pois produz <b>A</b>, que \xE9 \xFAtil;\n\u2022 <b>B</b>
+        \xE9 \xFAtil indireta, pois <b>bA</b> pode se tornar <b>ba</b>;\n\u2022 <b>C</b>
+        \xE9 in\xFAtil."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -14146,6 +14294,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2996019687901481059, guid: 5b540bf1354b4f44786cc9b320a039b1, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996019687901481059, guid: 5b540bf1354b4f44786cc9b320a039b1, type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5616757887561575306, guid: 5b540bf1354b4f44786cc9b320a039b1, type: 3}
       propertyPath: m_Name
       value: RawImage Tutorial Move lambda producers
@@ -14205,7 +14361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Substitui\xE7\xE3o das produ\xE7\xF5es unidade"
+      value: "Parte 3, Etapa 3 - Substitui\xE7\xE3o das produ\xE7\xF5es unidade"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
@@ -14224,6 +14384,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 369673230}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -14895,13 +15059,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Substitui\xE7\xE3o considerando o vazio"
+      value: "Parte 2, Etapa 2 - Substitui\xE7\xE3o substituindo pelo vazio"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Crie novas produ\xE7\xF5es considerando que as vari\xE1veis produtoras
         de vazio ter\xE3o valor vazio em todas as produ\xE7\xF5es em que aparecem.\n\nAo
-        final, exclua as produ\xE7\xF5es vazias diretas (do tipo A -> \u03BB)"
+        final, exclua as produ\xE7\xF5es vazias diretas (do tipo <b>A -> \u03BB</b>)."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -14915,6 +15083,10 @@ PrefabInstance:
       propertyPath: levelScript
       value: 
       objectReference: {fileID: 499284021}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: videoTutorial
+      value: 
+      objectReference: {fileID: 1039415110}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -15175,7 +15347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Separa\xE7\xE3o de vari\xE1veis em \xFAteis e in\xFAteis"
+      value: "Parte 1, Etapa 1 - Vari\xE1veis \xFAteis e in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -15183,9 +15355,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis!\n\nVari\xE1veis \xFAteis
-        tem produ\xE7\xF5es onde produzem s\xF3 simbolos terminais (diretamente ou
-        indiretamente). \n"
+      value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis. \nVari\xE1veis \xFAteis
+        possuem produ\xE7\xF5es onde produzem <b>somente</b> simbolos terminais (diretamente
+        ou indiretamente)."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: windowType
@@ -15202,7 +15374,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: videoTutorial
       value: 
-      objectReference: {fileID: 1667010488}
+      objectReference: {fileID: 1034079938}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -15278,7 +15450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1251907656189721666, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 136.79726
+      value: 248.32558
       objectReference: {fileID: 0}
     - target: {fileID: 1251907656189721666, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_SizeDelta.y
@@ -15286,7 +15458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1251907656189721666, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 83.39863
+      value: 139.16278
       objectReference: {fileID: 0}
     - target: {fileID: 1251907656189721666, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -15295,6 +15467,38 @@ PrefabInstance:
     - target: {fileID: 1746868533430787825, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_Texture
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088866118111681676, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredWidth
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088866118111681676, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredHeight
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3425628761662139086, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredWidth
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3425628761662139086, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredHeight
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682965483031866810, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_MinWidth
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682965483031866810, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_MinHeight
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682965483031866810, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 532
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682965483031866810, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredHeight
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 4749863591410129973, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_Texture
@@ -15370,7 +15574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185011993413, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 172.01
+      value: 147.91
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185011993413, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -15379,6 +15583,54 @@ PrefabInstance:
     - target: {fileID: 8893071185011993413, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -25.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185011993414, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185446262682, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredWidth
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185446262682, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredHeight
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185446262683, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -15390,7 +15642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185446262683, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 136.79726
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185446262683, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_SizeDelta.y
@@ -15398,7 +15650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185446262683, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 235.19589
+      value: 293.32556
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185446262683, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -15451,6 +15703,10 @@ PrefabInstance:
     - target: {fileID: 8893071185993464464, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071185993464469, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_Spacing
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8893071185995102484, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_Name
@@ -15574,7 +15830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186323952974, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 337.4055
+      value: 332.6744
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186323952974, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_SizeDelta.y
@@ -15582,11 +15838,107 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186323952974, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 487.29724
+      value: 489.66278
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186323952974, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_text
+      value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSuspendisse
+        a rutrum sapien. \nSuspendisse a egestas tellus, non egestas est. \nMaecenas
+        efficitur elit turpis."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_overflowMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_lineSpacingMax
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_charWidthMaxAdj
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_horizontalMapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_wordWrappingRatios
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_text
+      value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSuspendisse
+        a rutrum sapien. \nSuspendisse a egestas tellus, non egestas est. \nMaecenas
+        efficitur elit turpis."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSize
+      value: 34.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_overflowMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_charWidthMaxAdj
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_horizontalMapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_wordWrappingRatios
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186489600021, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -15644,6 +15996,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -35.11
       objectReference: {fileID: 0}
+    - target: {fileID: 8893071186529076644, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186529076644, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186529076644, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8893071186779210417, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -15663,6 +16027,48 @@ PrefabInstance:
     - target: {fileID: 8893071186779210417, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -25.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_text
+      value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSuspendisse
+        a rutrum sapien. \nSuspendisse a egestas tellus, non egestas est. \nMaecenas
+        efficitur elit turpis."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_overflowMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_charWidthMaxAdj
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_horizontalMapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_wordWrappingRatios
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186793184935, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}

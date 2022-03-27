@@ -79,7 +79,7 @@ namespace Resources.Scripts
          headerArea.gameObject.SetActive(hasTitle);
          titleField.text = title;
          
-         SetContent(windowType, imageToShow, videoTutorial, message);
+         SetContent(windowType, message, imageToShow, videoTutorial);
 
          // Setting buttons
          confirmButton.GetComponentInChildren<TextMeshProUGUI>().text = confirmText;
@@ -124,7 +124,7 @@ namespace Resources.Scripts
          }
       }
       
-      private void SetContent(WindowType windowType, [CanBeNull] Sprite imageToShow, [CanBeNull] RawImage videoTutorial, string message)
+      private void SetContent(WindowType windowType, string message, Sprite imageToShow = null, RawImage videoTutorial = null)
       {
          switch (windowType)
          {

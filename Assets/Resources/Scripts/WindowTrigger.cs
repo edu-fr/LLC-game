@@ -54,8 +54,8 @@ namespace Resources.Scripts
             }
             
             UIController.Instance.ModalWindow.ShowMessage(windowType, title, message,
-                confirmText, declineText, alternateText, continueCallback, alternateAction: alternateCallback,
-                imageToShow: sprite, videoTutorial: videoTutorial, declineAction: cancelCallback);
+                confirmText, declineText, alternateText, confirmAction: continueCallback, alternateAction: alternateCallback, 
+                declineAction: cancelCallback, imageToShow: sprite, videoTutorial: videoTutorial);
         }
     }
 }

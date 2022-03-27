@@ -21,18 +21,21 @@ namespace Resources.Scripts
       [SerializeField] private Transform contentArea;
       
       [SerializeField] private Transform verticalLayoutArea;
-      [SerializeField] private RawImage verticalImage;
+      [SerializeField] private RawImage verticalVideoTutorial;
+      [SerializeField] private Image verticalImage;
       [SerializeField] private TextMeshProUGUI verticalText;
       
       [Space()] 
       [SerializeField] private Transform horizontalLayoutArea;
-      [SerializeField] private RawImage horizontalImage;
+      [SerializeField] private RawImage horizontalVideoTutorial;
+      [SerializeField] private Image horizontalImage;
       [SerializeField] private TextMeshProUGUI horizontalText;
 
       [Space()] 
       [SerializeField] private Transform horizontalLayoutIconArea;
       [SerializeField] private Transform iconArea;
-      [SerializeField] private RawImage horizontalIcon;
+      [SerializeField] private RawImage horizontalIconVideoTutorial;
+      [SerializeField] private Image horizontalIcon;
       [SerializeField] private TextMeshProUGUI horizontalIconText;
 
       [Header("Footer")] 
@@ -63,8 +66,9 @@ namespace Resources.Scripts
          // Close();
       }
 
-      public void ShowMessage(WindowType windowType, string title, Sprite imageToShow, string message, string confirmText, 
-         string declineText, string alternateText, Action confirmAction, Action declineAction = null, Action alternateAction = null)
+      public void ShowMessage(WindowType windowType, string title, string message, string confirmText, 
+         string declineText, string alternateText, Action confirmAction, Action declineAction = null,
+         Action alternateAction = null, Sprite imageToShow = null, RawImage videoTutorial = null)
       {
          gameObject.SetActive(true);
          
@@ -75,7 +79,7 @@ namespace Resources.Scripts
          headerArea.gameObject.SetActive(hasTitle);
          titleField.text = title;
          
-         SetContent(windowType, imageToShow, message);
+         SetContent(windowType, imageToShow, videoTutorial, message);
 
          // Setting buttons
          confirmButton.GetComponentInChildren<TextMeshProUGUI>().text = confirmText;
@@ -120,22 +124,49 @@ namespace Resources.Scripts
          }
       }
       
-      private void SetContent(WindowType windowType, Sprite imageToShow, string message)
+      private void SetContent(WindowType windowType, [CanBeNull] Sprite imageToShow, [CanBeNull] RawImage videoTutorial, string message)
       {
          switch (windowType)
          {
             case WindowType.Vertical:
-              // verticalImage.sprite = imageToShow;
+               if (imageToShow != null)
+               {
+                  verticalVideoTutorial.gameObject.SetActive(false);
+                  verticalImage.sprite = imageToShow;
+               }
+               else if (videoTutorial != null)
+               {
+                  verticalImage.gameObject.SetActive(false);
+                  verticalVideoTutorial = videoTutorial;
+               }
                verticalText.text = message;
                break;
             
             case WindowType.Horizontal:
-//               horizontalImage.sprite = imageToShow;
+               if (imageToShow != null)
+               {
+                  horizontalVideoTutorial.gameObject.SetActive(false);
+                  horizontalImage.sprite = imageToShow;
+               }
+               else if (videoTutorial != null)
+               {
+                  horizontalImage.gameObject.SetActive(false);
+                  horizontalVideoTutorial = videoTutorial;
+               }
                horizontalText.text = message;
                break;
             
             case WindowType.HorizontalIcon:
-              // horizontalIcon.sprite = imageToShow;
+               if (imageToShow != null)
+               {
+                  horizontalVideoTutorial.gameObject.SetActive(false);
+                  horizontalIcon.sprite = imageToShow;
+               }
+               else if (videoTutorial != null)
+               {
+                  horizontalIcon.gameObject.SetActive(false);
+                  horizontalIconVideoTutorial = videoTutorial;
+               }
                horizontalIconText.text = message;
                break;
             

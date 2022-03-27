@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Resources.Scripts
 {
@@ -9,6 +10,7 @@ namespace Resources.Scripts
     {
         public string title;
         public Sprite sprite;
+        public RawImage videoTutorial; 
         [TextArea(10, 30)] public string message;
         public string confirmText;
         public string declineText;
@@ -51,8 +53,9 @@ namespace Resources.Scripts
                 alternateCallback = onAlternateEvent.Invoke;
             }
             
-            UIController.Instance.ModalWindow.ShowMessage(windowType, title, sprite, message,
-                confirmText, declineText, alternateText, continueCallback, cancelCallback, alternateCallback);
+            UIController.Instance.ModalWindow.ShowMessage(windowType, title, message,
+                confirmText, declineText, alternateText, continueCallback, alternateAction: alternateCallback,
+                imageToShow: sprite, videoTutorial: videoTutorial, declineAction: cancelCallback);
         }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1360634332653594073}
   - component: {fileID: 1735411345935330387}
   m_Layer: 0
-  m_Name: VideoObject
+  m_Name: Tutorial Move useful variables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,11 +46,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7742471669886206576}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: a0a323aa097e79044a701de2c8bf5e18, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 584b9420cdc991344acfafbe85c3dfa8, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 3c7b6af6998f07640ac5e0dd7f253ed6, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>

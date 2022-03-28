@@ -154,6 +154,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase1Part1())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 2;
                                 SetupPhase1Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -163,6 +164,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase1Part2())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase1Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -172,6 +174,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase1Part3())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 1;
                                 currentPhase = 2;
                                 canvasController.Transition(currentPhase);
@@ -188,6 +191,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase2Part1())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 2;
                                 SetupPhase2Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -197,6 +201,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase2Part2())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase2Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -205,6 +210,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase2Part3())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPhase = 3;
                                 currentPart = 1;
                                 canvasController.Transition(currentPhase);
@@ -220,6 +226,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase3Part1())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 2;
                                 SetupPhase3Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -229,6 +236,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase3Part2())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase3Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -238,6 +246,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase3Part3())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPhase = 4;
                                 currentPart = 1; 
                                 canvasController.Transition(currentPhase);
@@ -253,6 +262,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase4Part1())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 2; 
                                 SetupPhase4Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -262,6 +272,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase4Part2())
                             {
+                                SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase4Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
@@ -271,6 +282,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase4Part3())
                             {
+                                SoundManager.instance.Play("Right");
                                 print("VENCEU!!");
                             }
                             break;

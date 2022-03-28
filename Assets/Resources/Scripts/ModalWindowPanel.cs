@@ -141,6 +141,12 @@ namespace Resources.Scripts
                   verticalVideoTutorial.gameObject.SetActive(true);
                   verticalVideoTutorial.texture = videoTutorial.texture;
                }
+
+               if (imageToShow == null && videoTutorial == null)
+               {
+                  verticalImage.gameObject.SetActive(false);
+                  verticalVideoTutorial.gameObject.SetActive(false);
+               }
                verticalText.text = message;
                break;
             
@@ -157,6 +163,13 @@ namespace Resources.Scripts
                   horizontalVideoTutorial.texture = videoTutorial.texture;
                   horizontalImage.gameObject.SetActive(false);
                }
+               
+               if (imageToShow == null && videoTutorial == null)
+               {
+                  horizontalImage.gameObject.SetActive(false);
+                  horizontalVideoTutorial.gameObject.SetActive(false);
+               }
+               verticalText.text = message;
                horizontalText.text = message;
                break;
             

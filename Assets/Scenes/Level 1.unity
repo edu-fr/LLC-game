@@ -1869,7 +1869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Parte 2, Etapa 3 -Aceita\xE7\xE3o da palavra vazia na linguagem"
+      value: "Parte 2, Etapa 3 - Aceita\xE7\xE3o da palavra vazia"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -5532,7 +5532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Separa\xE7\xE3o de vari\xE1veis em \xFAteis e in\xFAteis"
+      value: "Parte 4, Etapa 1 - Vari\xE1veis \xFAteis e in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -5540,8 +5540,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis!\nVari\xE1veis \xFAteis
-        possuem produ\xE7\xF5es onde produzem SOMENTE simbolos terminais (diretamente
+      value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis. \nVari\xE1veis \xFAteis
+        possuem produ\xE7\xF5es onde produzem <b>somente</b> simbolos terminais (diretamente
         ou indiretamente)."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
@@ -5726,7 +5726,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1628119333}
+      objectReference: {fileID: 1387631239}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -8138,7 +8138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Remo\xE7\xE3o de produ\xE7\xF5es in\xFAteis"
+      value: "Parte 4, Etapa 2 - Remo\xE7\xE3o de in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -8984,7 +8984,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1628119333}
+      objectReference: {fileID: 482888209}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -9042,6 +9042,10 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: Resources.Scripts.LevelScript, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -9059,11 +9063,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: onAlternateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onAlternateEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -9611,7 +9619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: Repetindo rapidamente o primeiro passo
+      value: Repetindo rapidamente a primeira parte
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -9759,7 +9767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Parte 1, Etapa 3 -Remo\xE7\xE3o de produ\xE7\xF5es inalcan\xE7\xE1veis"
+      value: "Parte 1, Etapa 3 - Remo\xE7\xE3o de inalcan\xE7\xE1veis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -10277,7 +10285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Remo\xE7\xE3o de produ\xE7\xF5es inalcan\xE7\xE1veis"
+      value: "Parte 4, Etapa 3 - Remo\xE7\xE3o de inalcan\xE7\xE1veis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -11480,7 +11488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Exemplo de substitui\xE7\xE3o considerando o vazio"
+      value: "Exemplo de substitui\xE7\xE3o do vazio"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -11492,8 +11500,8 @@ PrefabInstance:
         Caso <b>A</b> fosse vazio, a 1a produ\xE7\xE3o seria <b>S -> b</b>;\n\u2022
         Caso <b>A</b> fosse vazio, a 2a produ\xE7\xE3o seria <b>S -> bb</b>;\nPortanto,
         essas novas produ\xE7\xF5es devem ser criadas e a produ\xE7\xE3o <b>A ->
-        \u03BB</b> deve ser exclu\xEDda.\nAo lado (parte inferior), pode-se ver como
-        dever\xE3o ficar as produ\xE7\xF5es da linguagem."
+        \u03BB</b> deve ser exclu\xEDda.\nAo lado (parte inferior), como ficaria
+        o resultado final."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -11896,7 +11904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Parte 1, Etapa 2 - Remo\xE7\xE3o de produ\xE7\xF5es in\xFAteis"
+      value: "Parte 1, Etapa 2 - Remo\xE7\xE3o de in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -13056,7 +13064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Cria\xE7\xE3o do conjunto de produtoras de vazio"
+      value: "Exemplo vari\xE1veis \xFAteis e in\xFAteis"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -13064,10 +13072,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 032146affa259d64d9d5d81d0cdf2b9a, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Considerando as produ\xE7\xF5es ao lado, temos que:\n\u2022 \"A\" \xE9
-        uma var\xEDavel \xFAtil direta, dado A -> a;\n\u2022 \"S\" \xE9 \xFAtil indireta,
-        pois produz \"A\", que \xE9 \xFAtil; \n\u2022 \"B\" \xE9 \xFAtil indireta,
-        pois \"bA\" pode se tornar \"ba\";\n\u2022 \"C\" \xE9 in\xFAtil."
+      value: "Considerando as produ\xE7\xF5es ao lado, temos que:\n\n\u2022 <b>A</b>
+        \xE9 uma var\xEDavel \xFAtil direta, dado <b>A -> a</b>;\n\u2022 <b>S</b>
+        \xE9 \xFAtil indireta, pois produz <b>A</b>, que \xE9 \xFAtil;\n\u2022 <b>B</b>
+        \xE9 \xFAtil indireta, pois <b>bA</b> pode se tornar <b>ba</b>;\n\u2022 <b>C</b>
+        \xE9 in\xFAtil."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -13288,13 +13297,12 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 4fc2e09f452b3aa41a826311eb81737a, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Considerando a linguagem ao lado (parte superior), temos que:\n\u2022
-        Se na primeira produ\xE7\xE3o (<b>S -> A</b>), a vari\xE1vel <b>A</b> assumisse
-        o valor de suas produ\xE7\xF5es que tem como lado direito <b>a</b> e <b>aA</b>,
+      value: "Considerando a linguagem ao lado (parte superior):\n\u2022 Se na primeira
+        produ\xE7\xE3o a vari\xE1vel <b>A</b> assumisse o valor de suas produ\xE7\xF5es,
         ter\xEDamos as produ\xE7\xF5es <b>S -> a</b> e <b>S -> aA</b>, respectivamente;
-        \n\u2022 Portanto essas produ\xE7\xF5es devem ser criadas e substituirem
-        a produ\xE7\xE3o unit\xE1ria (<b>S -> A</b>).\n\nAo lado (parte inferior),
-        \xE9 como dever\xE3o ficar as produ\xE7\xF5es da linguagem ao final do processo."
+        \nPortanto essas produ\xE7\xF5es devem ser criadas e substituirem a produ\xE7\xE3o
+        unit\xE1ria (<b>S -> A</b>).\nAo lado (parte inferior), como ficaria o resultado
+        final."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -13363,7 +13371,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1628119333}
+      objectReference: {fileID: 482888209}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -13421,6 +13429,10 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
+      propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: Resources.Scripts.LevelScript, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -13438,7 +13450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
@@ -14361,7 +14373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Parte 3, Etapa 3 - Substitui\xE7\xE3o das produ\xE7\xF5es unidade"
+      value: "Parte 3, Etapa 3 - Substitui\xE7\xE3o de produ\xE7\xF5es unidade"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -14431,7 +14443,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onContinueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1628119333}
+      objectReference: {fileID: 1909100476}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: onCancelEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -15059,7 +15071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: title
-      value: "Parte 2, Etapa 2 - Substitui\xE7\xE3o substituindo pelo vazio"
+      value: "Parte 2, Etapa 2 - Substitui\xE7\xE3o do vazio"
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
@@ -15864,7 +15876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_fontSizeMin
-      value: 25
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_overflowMode
@@ -15893,6 +15905,10 @@ PrefabInstance:
     - target: {fileID: 8893071186323953072, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893071186323953073, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 390
       objectReference: {fileID: 0}
     - target: {fileID: 8893071186442696595, guid: a6bed1f2afdd26f43a17206cab87f7ae, type: 3}
       propertyPath: m_text

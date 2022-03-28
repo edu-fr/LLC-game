@@ -32,6 +32,16 @@ namespace Resources.Scripts
             SceneManager.LoadScene("Level " + level);
         }
 
+        public void ResetLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void LoadMenu()
+        {
+            SceneManager.LoadScene("Menu");
+        }
+
     }
     
 }

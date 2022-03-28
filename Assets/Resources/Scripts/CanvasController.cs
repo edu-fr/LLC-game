@@ -11,7 +11,9 @@ using UnityEngine;
 public class CanvasController : MonoBehaviour
 {
     public LevelScript levelScript;
+    private LevelSelectController levelSelectControllerReference;
     public CanvasRenderer transitionPanel;
+    public CanvasRenderer tryAgainPanel;
     public TextMeshProUGUI transitionPanelContentText;
     public TextMeshProUGUI transitionPanelFooterText;
     private bool _waitingForKey = false;
@@ -50,9 +52,11 @@ public class CanvasController : MonoBehaviour
     public GameObject resetProductionBox_f4p3;
 
     public CanvasRenderer PausePanel;
-
+    
+    
     private void Start()
     {
+        levelSelectControllerReference = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelSelectController>();
         remainingLife = initialLife;
         remainingTime = initialTime;
     }
@@ -84,6 +88,12 @@ public class CanvasController : MonoBehaviour
         }
         var currentLifeString = currentLife.ToArray().ArrayToString();
         HUDLife.SetText(currentLifeString);
+    }
+
+    public void PlayerMistake()
+    {
+        SoundManager.instance.Play("Player mistake");
+        remainingLife -= 1;
     }
     
     public void Transition(int phase)
@@ -191,6 +201,23 @@ public class CanvasController : MonoBehaviour
         mistakeHelpModal.GetComponent<WindowTrigger>().message = message;
         mistakeHelpModal.SetActive(true);
         
+    }
+
+    public void ActivateTryAgainScreen()
+    {
+        transitionPanel.gameObject.SetActive(false);
+        PausePanel.gameObject.SetActive(false);
+        tryAgainPanel.gameObject.SetActive(true);
+    }
+
+    public void RestartLevel()
+    {
+        levelSelectControllerReference.ResetLevel();
+    }
+
+    public void GoToMainMenu()
+    {
+        levelSelectControllerReference.LoadMenu();
     }
 
 }

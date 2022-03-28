@@ -13,7 +13,7 @@ namespace Resources.Scripts
     public class LevelScript : MonoBehaviour
     {
         public enum GameState {
-            Running, Paused, PopUp
+            Running, Paused, PopUp, Lost
         }
 
         public GameState currentGameState;
@@ -93,14 +93,18 @@ namespace Resources.Scripts
                    
                     break;
                 
+                case GameState.Lost:
+                    return;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             
-            if (canvasController.remainingTime <= 0)
+            if (canvasController.remainingTime <= 0 || canvasController.remainingLife <= 0)
             {
-                // game-over screen
-                print("GAME OVER!");
+                SoundManager.instance.Play("Player lose");
+                canvasController.ActivateTryAgainScreen();
+                currentGameState = GameState.Lost;
             }
         }
 
@@ -136,7 +140,7 @@ namespace Resources.Scripts
                     previouslyGameState = currentGameState;
                     currentGameState = GameState.PopUp;
                     break;
-                
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
             }
@@ -159,6 +163,9 @@ namespace Resources.Scripts
                                 SetupPhase1Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
+                            
                             break;
                         
                         case 2:
@@ -169,6 +176,8 @@ namespace Resources.Scripts
                                 SetupPhase1Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                         
                         case 3:
@@ -180,6 +189,8 @@ namespace Resources.Scripts
                                 canvasController.Transition(currentPhase);
                                 SetupPhase2Part1();
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                     }
                     
@@ -196,6 +207,8 @@ namespace Resources.Scripts
                                 SetupPhase2Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                         
                         case 2:
@@ -206,6 +219,8 @@ namespace Resources.Scripts
                                 SetupPhase2Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                         case 3:
                             if (Phase2Part3())
@@ -216,6 +231,8 @@ namespace Resources.Scripts
                                 canvasController.Transition(currentPhase);
                                 SetupPhase3Part1();
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                     }
                     break;
@@ -231,6 +248,8 @@ namespace Resources.Scripts
                                 SetupPhase3Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                         
                         case 2:
@@ -241,6 +260,8 @@ namespace Resources.Scripts
                                 SetupPhase3Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                         
                         case 3:
@@ -252,6 +273,8 @@ namespace Resources.Scripts
                                 canvasController.Transition(currentPhase);
                                 SetupPhase4Part1();
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                     }
                     break;
@@ -267,6 +290,8 @@ namespace Resources.Scripts
                                 SetupPhase4Part2();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                         
                         case 2:
@@ -277,6 +302,8 @@ namespace Resources.Scripts
                                 SetupPhase4Part3();
                                 canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                         
                         case 3:
@@ -285,6 +312,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 print("VENCEU!!");
                             }
+                            else
+                                canvasController.PlayerMistake();   
                             break;
                     }
                     break; 

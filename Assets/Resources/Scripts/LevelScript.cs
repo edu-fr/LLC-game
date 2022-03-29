@@ -103,7 +103,7 @@ namespace Resources.Scripts
             if (canvasController.remainingTime <= 0 || canvasController.remainingLife <= 0)
             {
                 SoundManager.instance.Play("Player lose");
-                canvasController.ActivateTryAgainScreen();
+                canvasController.OpenTryAgainScreen();
                 currentGameState = GameState.Lost;
             }
         }
@@ -1026,6 +1026,7 @@ namespace Resources.Scripts
                     }
                 }
                 // Victory screen and fanfare
+                canvasController.OpenYouWinScreen();
                 return true;
             }
             return false;

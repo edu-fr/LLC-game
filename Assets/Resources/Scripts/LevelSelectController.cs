@@ -42,6 +42,14 @@ namespace Resources.Scripts
             SceneManager.LoadScene("Menu");
         }
 
+        public void NextLevel()
+        {
+            if(SceneManager.GetActiveScene().buildIndex < 6)
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            else 
+                LoadMenu();
+        }
+
     }
     
 }

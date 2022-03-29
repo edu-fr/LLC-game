@@ -12,8 +12,13 @@ public class CanvasController : MonoBehaviour
 {
     public LevelScript levelScript;
     private LevelSelectController levelSelectControllerReference;
-    public CanvasRenderer transitionPanel;
+    
     public CanvasRenderer tryAgainPanel;
+    public CanvasRenderer youWinPanel;
+    public CanvasRenderer transitionPanel;
+    public CanvasRenderer pausePanel;
+    public CanvasRenderer windowPanel;
+    
     public TextMeshProUGUI transitionPanelContentText;
     public TextMeshProUGUI transitionPanelFooterText;
     private bool _waitingForKey = false;
@@ -51,7 +56,6 @@ public class CanvasController : MonoBehaviour
     public GameObject resetProductionBox_f4p2;
     public GameObject resetProductionBox_f4p3;
 
-    public CanvasRenderer PausePanel;
     
     
     private void Start()
@@ -192,7 +196,7 @@ public class CanvasController : MonoBehaviour
 
     public void ShowPausePanel(bool boolean)
     {
-        PausePanel.gameObject.SetActive(boolean);
+        pausePanel.gameObject.SetActive(boolean);
     }
 
     public void ConfigureAndCallHelpModal(string title, string message)
@@ -203,11 +207,22 @@ public class CanvasController : MonoBehaviour
         
     }
 
-    public void ActivateTryAgainScreen()
+    public void OpenTryAgainScreen()
     {
         transitionPanel.gameObject.SetActive(false);
-        PausePanel.gameObject.SetActive(false);
+        pausePanel.gameObject.SetActive(false);
+        windowPanel.gameObject.SetActive(false);
+        youWinPanel.gameObject.SetActive(false);
         tryAgainPanel.gameObject.SetActive(true);
+    }
+
+    public void OpenYouWinScreen()
+    {
+        transitionPanel.gameObject.SetActive(false);
+        pausePanel.gameObject.SetActive(false);
+        windowPanel.gameObject.SetActive(false);
+        tryAgainPanel.gameObject.SetActive(false);
+        youWinPanel.gameObject.SetActive(true);
     }
 
     public void RestartLevel()
@@ -218,6 +233,16 @@ public class CanvasController : MonoBehaviour
     public void GoToMainMenu()
     {
         levelSelectControllerReference.LoadMenu();
+    }
+
+    public void GoToNextLevel()
+    {
+        levelSelectControllerReference.NextLevel();
+    }
+
+    public void ActivateCurrentTutorial()
+    {
+        ActivateTutorial(levelScript.currentPhase, levelScript.currentPart);
     }
 
 }

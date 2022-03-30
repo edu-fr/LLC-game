@@ -161,7 +161,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 2;
                                 SetupPhase1Part2();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -174,7 +175,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase1Part3();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -205,7 +207,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 2;
                                 SetupPhase2Part2();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -217,7 +220,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase2Part3();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -246,7 +250,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 2;
                                 SetupPhase3Part2();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -258,7 +263,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase3Part3();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -288,7 +294,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 2; 
                                 SetupPhase4Part2();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -300,7 +307,8 @@ namespace Resources.Scripts
                                 SoundManager.instance.Play("Right");
                                 currentPart = 3;
                                 SetupPhase4Part3();
-                                canvasController.ActivateTutorial(currentPhase, currentPart);
+                                if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                                    canvasController.ActivateTutorial(currentPhase, currentPart);
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -323,8 +331,6 @@ namespace Resources.Scripts
 
         private void SetupPhase1Part1()
         {
-            print("Setting up phase 1 part 1");
-            
             // Setting positions
             p1_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_ProductionsBox_gray.position;
             p1_variablesBox.transform.position = _boxPositionsManager.Anchor_Phase1Part1_variablesBox.position;
@@ -383,7 +389,6 @@ namespace Resources.Scripts
 
         private void SetupPhase1Part2()
         {
-            print("Setting up phase 1 part 2");
             // Saving the original production box content
             p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.Productions.ToList());
             // Saving the original production box content
@@ -448,7 +453,6 @@ namespace Resources.Scripts
 
         private void SetupPhase1Part3()
         {
-            print("Setting up phase 1 part 3");
             // Filling box independently of other phases
             p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.UsefulProductionsPhase1);
             // Saving the original production box content
@@ -500,8 +504,6 @@ namespace Resources.Scripts
         
         private void SetupPhase2Part1()
         {
-            print("Setting up Phase 2 Part 1");
-            
             // Removing from camera vision unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p1_uselessVariablesBox.transform.position = outOfBoundsPosition; 
@@ -838,8 +840,6 @@ namespace Resources.Scripts
 
         private void SetupPhase4Part1()
         {
-            print("Setting up phase 4 part 1");
-            
             // Removing useless boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p2_productionsBox.transform.position = outOfBoundsPosition;
@@ -913,7 +913,6 @@ namespace Resources.Scripts
 
         private void SetupPhase4Part2()
         {
-            print("Setting up phase 4 part 2");
             // Removing from camera unused boxes
             var outOfBoundsPosition = _boxPositionsManager.Anchor_OutOfBounds.position;
             p1_variablesBox.transform.position = outOfBoundsPosition;
@@ -979,7 +978,6 @@ namespace Resources.Scripts
 
         private void SetupPhase4Part3()
         {
-            print("Setting up phase 4 part 3");
             // Saving the original production box content
             p1_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.UsefulProductionsPhase4);
             // Saving the original production box content

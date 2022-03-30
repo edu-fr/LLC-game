@@ -31,6 +31,8 @@ namespace Resources.Scripts
         {
             base.Awake();
             _productionBoxHeight = productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y * Utils.ScreenDif;
+            print("SCREEN DIF: " + Utils.ScreenDif);
+            print("PRODUCTION BOX HEIGHT: " + _productionBoxHeight);
             _productionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
@@ -67,8 +69,6 @@ namespace Resources.Scripts
             {
                 // Expanding boxes container
                 productionBoxes.GetComponent<RectTransform>().sizeDelta += new Vector2(0, _productionBoxHeight / Utils.ScreenDif);
-                print("TAMANHO: " + productionBoxesRectTransform.sizeDelta.x + "/" + productionBoxesRectTransform.sizeDelta.y);
-                print("PRODUCTION BOX HEIGHT! :" + _productionBoxHeight);
                 // Instantiate a new production box
                 var productionsBoxTransform = productionBoxes.transform;
                 var productionsBoxPosition = productionsBoxTransform.position;
@@ -184,7 +184,6 @@ namespace Resources.Scripts
             {
                 productionBox.GetComponent<Draggable>().CanBeDeleted = (bool) boolean;
             }
-            print("DELETABILITY SETADA PARA " + (bool) boolean);
         }
         
         public void SetAllProductionsDraggability(bool? boolean)
@@ -195,7 +194,6 @@ namespace Resources.Scripts
             {
                 productionBox.GetComponent<Draggable>().CanBeDragged = (bool) boolean;
             }
-            print("DRAGGABILITY SETADA PARA " + (bool) boolean);
         }
 
         public void ResetButtonPress()

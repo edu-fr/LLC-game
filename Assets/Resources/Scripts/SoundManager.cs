@@ -1,29 +1,28 @@
 using System;
 using System.Linq;
-using UnityEditor.Audio;
 using UnityEngine;
 
 namespace Resources.Scripts
 {
    public class SoundManager : MonoBehaviour
    {
+      
       public static SoundManager instance;
-
+      
       public Sound[] SoundEffects;
 
       public Sound[] BackgroundMusics;
       private void Awake()
       {
-         if (instance == null)
-         {
-            instance = this;
-         }
-         else
+         if (instance != null)
          {
             Destroy(gameObject);
             return;
          }
+         instance = this;
+         DontDestroyOnLoad(gameObject);
          
+         // Initializing all the sounds
          foreach (var sound in SoundEffects.Concat(BackgroundMusics))
          {
             sound.source = gameObject.AddComponent<AudioSource>();

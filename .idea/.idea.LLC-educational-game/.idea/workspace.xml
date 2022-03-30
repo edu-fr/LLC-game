@@ -45,6 +45,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/New build/TCC.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\Dudu\Unity Projects\LLC-educational-game\Builds\New build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -139,7 +147,9 @@
       <workItem from="1648391977485" duration="1762000" />
       <workItem from="1648501355033" duration="6726000" />
       <workItem from="1648553372951" duration="2074000" />
-      <workItem from="1648588328411" duration="3121000" />
+      <workItem from="1648588328411" duration="3328000" />
+      <workItem from="1648640492724" duration="16090000" />
+      <workItem from="1648674683994" duration="1301000" />
     </task>
     <servers />
   </component>

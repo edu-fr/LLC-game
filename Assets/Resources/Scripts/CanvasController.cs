@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Resources.Scripts;
 using TMPro;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 // ReSharper disable InconsistentNaming
 
@@ -18,6 +16,7 @@ public class CanvasController : MonoBehaviour
     public CanvasRenderer transitionPanel;
     public CanvasRenderer pausePanel;
     public CanvasRenderer windowPanel;
+    public CanvasRenderer optionsPanel;
     
     public TextMeshProUGUI transitionPanelContentText;
     public TextMeshProUGUI transitionPanelFooterText;
@@ -71,9 +70,11 @@ public class CanvasController : MonoBehaviour
         if (!_waitingForKey) return;
         if (Input.anyKeyDown)
         {
+            levelScript.ChangeGameState(LevelScript.GameState.Running);
             transitionPanel.gameObject.SetActive(false);
             _waitingForKey = false;
-            ActivateTutorial(levelScript.currentPhase, levelScript.currentPart);
+            if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
+                ActivateTutorial(levelScript.currentPhase, levelScript.currentPart);
         }
     }
 
@@ -111,9 +112,12 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator WaitToShowFooter()
     {
+        print("Now I will wait");
+        print("TIME TO SHOW FOOTER: " + timeToShowFooter);
         yield return new WaitForSeconds(timeToShowFooter);
+        print("Done waiting!");
         transitionPanelFooterText.gameObject.SetActive(true);
-        _waitingForKey = true; 
+        _waitingForKey = true;
     }
 
     public void ActivateTutorial(int phase, int part)
@@ -197,6 +201,7 @@ public class CanvasController : MonoBehaviour
     public void ShowPausePanel(bool boolean)
     {
         pausePanel.gameObject.SetActive(boolean);
+        optionsPanel.gameObject.SetActive(false);
     }
 
     public void ConfigureAndCallHelpModal(string title, string message)
@@ -227,16 +232,19 @@ public class CanvasController : MonoBehaviour
 
     public void RestartLevel()
     {
+        Time.timeScale = 1f; 
         levelSelectControllerReference.ResetLevel();
     }
 
     public void GoToMainMenu()
     {
+        Time.timeScale = 1f; 
         levelSelectControllerReference.LoadMenu();
     }
 
     public void GoToNextLevel()
     {
+        Time.timeScale = 1f; 
         levelSelectControllerReference.NextLevel();
     }
 

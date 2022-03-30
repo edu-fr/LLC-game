@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b77e267400d7594baf3af40094325f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Terminals: 6100630064006c00
+  Terminals: 610063006400
   Variables: 530041004200
   Productions:
   - _in: 83

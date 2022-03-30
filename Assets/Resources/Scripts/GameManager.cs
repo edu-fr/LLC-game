@@ -5,28 +5,27 @@ namespace Resources.Scripts
     public class GameManager : MonoBehaviour
     {
         private static GameManager _instance;
+        private SoundManager _soundManager;
+        public PlayerData playerData;
+        public int reachedLevel;
+        public int[] score;
 
         private void Awake()
         {
             if (_instance != null)
             {
                 Destroy(gameObject);
+                return;
             }
-            else
-            {
-                _instance = this;
-                DontDestroyOnLoad(gameObject);
-                print("Trying to load saved data");
-                LoadGame();
-            }
+            _instance = this;
+
+            _soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+            
+            DontDestroyOnLoad(gameObject);
+            print("Trying to load saved data");
+            LoadGame();
+            RestorePlayerPrefs();
         }
-        
-        public PlayerData playerData;
-        
-        public int reachedLevel;
-        
-        public int[] score;
-    
 
         public void SaveGame()
         {
@@ -53,5 +52,13 @@ namespace Resources.Scripts
             reachedLevel = givenPlayerData.reachedLevel;
             score = givenPlayerData.score;
         }
+        
+        public void RestorePlayerPrefs()
+        {
+            print("RESTORING PLAYER PREFS");
+            _soundManager.SetBGMVolume(PlayerPrefs.GetFloat("BGMVolume", 1f));
+            _soundManager.SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume", 1f));
+        }
+
     }
 }

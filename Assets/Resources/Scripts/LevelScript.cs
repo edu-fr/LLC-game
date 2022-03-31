@@ -65,6 +65,10 @@ namespace Resources.Scripts
 
             canvasController.Transition(currentPhase);
             SetupPhase1Part1();
+            
+            // music
+            SoundManager.instance.PlayBGM("pause-menu-music");
+            SoundManager.instance.PlayBGM("level-music");
         }
 
         private void Update()
@@ -102,7 +106,7 @@ namespace Resources.Scripts
             
             if (canvasController.remainingTime <= 0 || canvasController.remainingLife <= 0)
             {
-                SoundManager.instance.Play("Player lose");
+                SoundManager.instance.Play("level-lose");
                 canvasController.OpenTryAgainScreen();
                 currentGameState = GameState.Lost;
             }
@@ -127,6 +131,7 @@ namespace Resources.Scripts
                     currentGameState = GameState.Running;
                     Time.timeScale = 1f;
                     canvasController.ShowPausePanel(false);
+                    SoundManager.instance.UnPauseBGM("level-music");
                     break;
                 
                 case GameState.Paused:
@@ -134,6 +139,7 @@ namespace Resources.Scripts
                     currentGameState = GameState.Paused;
                     Time.timeScale = 0f;
                     canvasController.ShowPausePanel(true);
+                    SoundManager.instance.UnPauseBGM("pause-menu-music");
                     break;
                 
                 case GameState.PopUp:
@@ -158,7 +164,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase1Part1())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 2;
                                 SetupPhase1Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -172,7 +178,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase1Part2())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 3;
                                 SetupPhase1Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -185,7 +191,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase1Part3())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("phase-win");
                                 currentPart = 1;
                                 currentPhase = 2;
                                 canvasController.Transition(currentPhase);
@@ -204,7 +210,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase2Part1())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 2;
                                 SetupPhase2Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -217,7 +223,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase2Part2())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 3;
                                 SetupPhase2Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -229,7 +235,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase2Part3())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("phase-win");
                                 currentPhase = 3;
                                 currentPart = 1;
                                 canvasController.Transition(currentPhase);
@@ -247,7 +253,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase3Part1())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 2;
                                 SetupPhase3Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -260,7 +266,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase3Part2())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 3;
                                 SetupPhase3Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -273,7 +279,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase3Part3())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("phase-win");
                                 currentPhase = 4;
                                 currentPart = 1; 
                                 canvasController.Transition(currentPhase);
@@ -291,7 +297,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase4Part1())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 2; 
                                 SetupPhase4Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -304,7 +310,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase4Part2())
                             {
-                                SoundManager.instance.Play("Right");
+                                SoundManager.instance.Play("part-win");
                                 currentPart = 3;
                                 SetupPhase4Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -317,8 +323,8 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase4Part3())
                             {
-                                SoundManager.instance.Play("Right");
-                                print("VENCEU!!");
+                                SoundManager.instance.Play("level-win");
+                                canvasController.OpenYouWinScreen();
                             }
                             else
                                 canvasController.PlayerMistake();   
@@ -357,7 +363,8 @@ namespace Resources.Scripts
             var currentVariablesOnVariablesBox = p1_variablesBox.GetComponent<VariablesBox>().variableList;
             if (currentVariablesOnVariablesBox.Count > 0)
             {
-                canvasController.ConfigureAndCallHelpModal("Dica", "Ainda há variáveis que devem ser movidas!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "Ainda há variáveis que devem ser movidas!", CanvasController.HelpWindowType.Attention);
+                canvasController.HelpModalRecoverLife();
                 return false;
             }
             
@@ -365,10 +372,10 @@ namespace Resources.Scripts
             var correctVariables = _grammar.UsefulVariablesPhase1;
 
             if (correctVariables.Count > currentVariablesOnUsefulBox.Count) 
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis úteis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis úteis do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctVariables.Count < currentVariablesOnUsefulBox.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis úteis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis úteis do que o esperado!", CanvasController.HelpWindowType.Error);
             }
             else
             {
@@ -376,7 +383,7 @@ namespace Resources.Scripts
                 {
                     if (!correctVariables.Contains(variable))
                     {
-                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não faz parte da lista de variáveis corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não faz parte da lista de variáveis corretas!", CanvasController.HelpWindowType.Error);
                         return false;
                     } 
                 }
@@ -421,17 +428,18 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!", CanvasController.HelpWindowType.Attention);
+                canvasController.HelpModalRecoverLife();
                 return false;
             }
             
             var correctProductions = _grammar.UsefulProductionsPhase1;
             
             if (correctProductions.Count > currentProductionsOnProductionsBox.Count) 
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções corretas do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções corretas do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções corretas do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções corretas do que o esperado!", CanvasController.HelpWindowType.Error);
             } 
             else 
             {
@@ -440,7 +448,7 @@ namespace Resources.Scripts
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!", CanvasController.HelpWindowType.Error);
                         return false;
                     }
                 }
@@ -474,16 +482,17 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!", CanvasController.HelpWindowType.Attention);
+                canvasController.HelpModalRecoverLife();
                 return false;
             }
             
             var correctProductions = _grammar.usefulAndReachableProductionsPhase1;
             
             if (correctProductions.Count > currentProductionsOnProductionsBox.Count)
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções úteis e alcançáveis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções úteis e alcançáveis do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções úteis e alcançáveis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções úteis e alcançáveis do que o esperado!", CanvasController.HelpWindowType.Error);
             else
             {
                 foreach (var production in currentProductionsOnProductionsBox)
@@ -491,7 +500,7 @@ namespace Resources.Scripts
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!", CanvasController.HelpWindowType.Error);
                         return false;
                     }
                 }
@@ -541,16 +550,16 @@ namespace Resources.Scripts
             
             
             if (correctLambdaProducers.Count > currentVariablesOnLambdaProducersBox.Count)
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis que produzem vazio do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis que produzem vazio do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctLambdaProducers.Count < currentVariablesOnLambdaProducersBox.Count)
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis que produzem vazio do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis que produzem vazio do que o esperado!", CanvasController.HelpWindowType.Error);
             else
             {
                 foreach (var variable in currentVariablesOnLambdaProducersBox)
                 {
                     if (!correctLambdaProducers.Contains(variable))
                     {
-                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não é produtora de vazio!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não é produtora de vazio!", CanvasController.HelpWindowType.Error);
                         return false;
                     } 
                 }
@@ -598,12 +607,12 @@ namespace Resources.Scripts
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (productionList.Count > _grammar.ProductionsPhase2.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!", CanvasController.HelpWindowType.Error);
                 return false;
             }
             if (productionList.Count < _grammar.ProductionsPhase2.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!", CanvasController.HelpWindowType.Error);
             }
             foreach (var production in productionList)
             {
@@ -622,7 +631,7 @@ namespace Resources.Scripts
 
                 if (!productionExists)
                 {
-                    canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "->" + production._out + " não é esperada");
+                    canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "->" + production._out + " não é esperada", CanvasController.HelpWindowType.Error);
                     return false;
                 }
             }
@@ -707,13 +716,13 @@ namespace Resources.Scripts
             // }
             if (productionList.Count > _grammar.NonUselessUnitProductions.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!", CanvasController.HelpWindowType.Error);
                 return false;
             }
             
             if (productionList.Count < _grammar.NonUselessUnitProductions.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!", CanvasController.HelpWindowType.Error);
                 return false;
             }
 
@@ -733,7 +742,7 @@ namespace Resources.Scripts
                 }
 
                 if (productionExists) continue;
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "->" + production._out + " não é esperada");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "->" + production._out + " não é esperada", CanvasController.HelpWindowType.Error);
                 return false;
             }
 
@@ -765,12 +774,12 @@ namespace Resources.Scripts
             var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (_grammar.NonUnitProductions.Count < productionsBoxList.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções unidade do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções unidade do que o esperado!", CanvasController.HelpWindowType.Error);
                 return false;
             }
             if (_grammar.NonUnitProductions.Count > productionsBoxList.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções unidade do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções unidade do que o esperado!", CanvasController.HelpWindowType.Error);
                 return false;
             }
 
@@ -778,7 +787,7 @@ namespace Resources.Scripts
                 !_grammar.NonUnitProductions.Exists(x => x._in == production._in && x._out == production._out)))
             {
                 canvasController.ConfigureAndCallHelpModal("Resposta incorreta!","A produção " + production._in + "=>" + production._out +
-                                                                     " não faz parte das produções unidade!");
+                                                                     " não faz parte das produções unidade!", CanvasController.HelpWindowType.Error);
                 return false;
             }
             
@@ -818,19 +827,19 @@ namespace Resources.Scripts
             var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (_grammar.ResultingProductions.Count < productionsBoxList.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!", CanvasController.HelpWindowType.Error);
                 return false;
             }
             if (_grammar.ResultingProductions.Count > productionsBoxList.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!", CanvasController.HelpWindowType.Error);
                 return false;
             }
             
             foreach (var production in productionsBoxList.Where(production =>
                 !_grammar.ResultingProductions.Exists(x => x._in == production._in && x._out == production._out)))
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "=>" + production._out + " não é esperada!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A produção " + production._in + "=>" + production._out + " não é esperada!", CanvasController.HelpWindowType.Error);
                 return false;
             }
             
@@ -879,7 +888,8 @@ namespace Resources.Scripts
             var currentVariablesOnVariablesBox = p1_variablesBox.GetComponent<VariablesBox>().variableList;
             if (currentVariablesOnVariablesBox.Count > 0)
             {
-                canvasController.ConfigureAndCallHelpModal("Dica", "Ainda há variáveis que devem ser movidas!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "Ainda há variáveis que devem ser movidas!", CanvasController.HelpWindowType.Attention);
+                canvasController.HelpModalRecoverLife();
                 return false;
             }
             
@@ -889,10 +899,10 @@ namespace Resources.Scripts
             var correctVariables = _grammar.UsefulVariablesPhase4;
 
             if (correctVariables.Count > currentVariablesOnUsefulBox.Count) 
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis úteis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis úteis do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctVariables.Count < currentVariablesOnUsefulBox.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis úteis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais variáveis úteis do que o esperado!", CanvasController.HelpWindowType.Error);
             }
             else
             {
@@ -900,7 +910,7 @@ namespace Resources.Scripts
                 {
                     if (!correctVariables.Contains(variable))
                     {
-                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não faz parte da lista de variáveis corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A variável " + variable + " não faz parte da lista de variáveis corretas!", CanvasController.HelpWindowType.Error);
                         return false;
                     } 
                 }
@@ -946,17 +956,18 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!", CanvasController.HelpWindowType.Attention);
+                canvasController.HelpModalRecoverLife();
                 return false;
             }
             
             var correctProductions = _grammar.UsefulProductionsPhase4;
             
             if (correctProductions.Count > currentProductionsOnProductionsBox.Count) 
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções corretas do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções corretas do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
             {
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções corretas do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções corretas do que o esperado!", CanvasController.HelpWindowType.Error);
             } 
             else 
             {
@@ -965,7 +976,7 @@ namespace Resources.Scripts
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!", CanvasController.HelpWindowType.Error);
                         return false;
                     }
                 }
@@ -1002,16 +1013,17 @@ namespace Resources.Scripts
             var currentProductionsOnProductionsBox = p1_productionsBox.GetComponent<ProductionsBox>().productionList;
             if (currentProductionsOnProductionsBox.Count < 1)
             {
-                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!");
+                canvasController.ConfigureAndCallHelpModal("Dica", "É necessário que alguma produção exista na linguagem!", CanvasController.HelpWindowType.Attention);
+                canvasController.HelpModalRecoverLife();
                 return false;
             }
             
             var correctProductions = _grammar.usefulAndReachableProductionsPhase4;
             
             if (correctProductions.Count > currentProductionsOnProductionsBox.Count)
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções úteis e alcançáveis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções na janela de produções úteis e alcançáveis do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctProductions.Count < currentProductionsOnProductionsBox.Count)
-                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções úteis e alcançáveis do que o esperado!");
+                canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções na janela de produções úteis e alcançáveis do que o esperado!", CanvasController.HelpWindowType.Error);
             else
             {
                 foreach (var production in currentProductionsOnProductionsBox)
@@ -1019,12 +1031,11 @@ namespace Resources.Scripts
                     if (!correctProductions.Any(correctProduction =>
                         correctProduction._in == production._in && correctProduction._out == production._out))
                     {
-                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!");
+                        canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A producao " + production._in + " -> " + production._out + " não faz parte da lista de producoes corretas!", CanvasController.HelpWindowType.Error);
                         return false;
                     }
                 }
-                // Victory screen and fanfare
-                canvasController.OpenYouWinScreen();
+                
                 return true;
             }
             return false;

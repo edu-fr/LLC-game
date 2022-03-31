@@ -61,5 +61,39 @@ namespace Resources.Scripts
          }
          sound.source.Play();
       }
+
+      public void PlayBGM(string name)
+      {
+         foreach (var music in BackgroundMusics)
+         {
+            if (music.name == name)
+            {
+               music.source.Play();
+            }
+            else
+               music.source.Pause();
+         }
+      }
+
+      public void UnPauseBGM(string name)
+      {
+         foreach (var music in BackgroundMusics)
+         {
+            if (music.name == name)
+            {
+               music.source.UnPause();
+            }
+            else
+               music.source.Pause();
+         }
+      }
+
+      public void StopMusic()
+      {
+         foreach (var music in BackgroundMusics)
+         {
+            music.source.Stop();
+         }
+      }
    }
 }

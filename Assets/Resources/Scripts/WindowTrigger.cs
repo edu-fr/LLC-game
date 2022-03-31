@@ -23,6 +23,10 @@ namespace Resources.Scripts
         public UnityEvent onCancelEvent;
         public UnityEvent onAlternateEvent;
 
+        // Help modal only
+        public Sprite exclamationMark;
+        public Sprite errorMark;
+
         public void Awake()
         {
             levelScript = GameObject.FindGameObjectWithTag("Level Controller").GetComponent<LevelScript>();

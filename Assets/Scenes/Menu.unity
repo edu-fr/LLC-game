@@ -3582,31 +3582,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: ffc284cbf9e242c45826cc865c6b8b5e, type: 3}
+      objectReference: {fileID: 8300000, guid: ebdaf68d84b687145afa89d0f4a131b0, type: 3}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[0].name
-      value: Player lose
+      value: attention
       objectReference: {fileID: 0}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 214ab866ca9cabd40856c46c8b96a7b2, type: 3}
+      objectReference: {fileID: 8300000, guid: 7d907063a25cd3d47a4ab53359304968, type: 3}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[1].name
-      value: Player mistake
+      value: level-lose
       objectReference: {fileID: 0}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[2].clip
       value: 
-      objectReference: {fileID: 8300000, guid: c48570f489aec2f48ba7f280868c0c19, type: 3}
+      objectReference: {fileID: 8300000, guid: 30aebc7334d511b4a837e98bc6f010da, type: 3}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[2].name
-      value: Right
+      value: level-win
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0aeed985ab84784e9a939ad1f4affad, type: 3}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[3].name
+      value: mistake
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a6e1499bbcc67754d8cfecf7d90232a1, type: 3}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[4].name
+      value: part-win
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: dc7dc7b072446e245b172404b9ba577c, type: 3}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[5].name
+      value: phase-win
       objectReference: {fileID: 0}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[0].volume
@@ -3618,6 +3646,66 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
       propertyPath: SoundEffects.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[3].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[4].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: SoundEffects.Array.data[5].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e234afb22f92fdb4582e11da584e25f0, type: 3}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[0].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[0].name
+      value: pause-menu-music
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 014bd290251bf564896e259badd70026, type: 3}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[1].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[1].name
+      value: level-music
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: eab013899077da649b831542ff8d176a, type: 3}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[2].name
+      value: menu-music
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531766255498423279, guid: ecad9b96164b51240901d5f544cdf0a0, type: 3}
+      propertyPath: BackgroundMusics.Array.data[2].volume
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

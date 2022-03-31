@@ -8,6 +8,12 @@ using UnityEngine;
 
 public class CanvasController : MonoBehaviour
 {
+    public enum HelpWindowType
+    {
+       Attention,
+       Error
+    } 
+   
     public LevelScript levelScript;
     private LevelSelectController levelSelectControllerReference;
     
@@ -17,6 +23,7 @@ public class CanvasController : MonoBehaviour
     public CanvasRenderer pausePanel;
     public CanvasRenderer windowPanel;
     public CanvasRenderer optionsPanel;
+    public CanvasRenderer effectPanel;
     
     public TextMeshProUGUI transitionPanelContentText;
     public TextMeshProUGUI transitionPanelFooterText;
@@ -24,12 +31,14 @@ public class CanvasController : MonoBehaviour
     public float timeToShowFooter;
 
     public TextMeshProUGUI HUDTime; 
-    public TextMeshProUGUI HUDLife; 
-    
+    public TextMeshProUGUI HUDLife;
+    public TextMeshProUGUI HUDCurrentPart;
+
     [SerializeField] internal float initialTime;
     [SerializeField] internal float remainingTime;
     [SerializeField] internal int initialLife;
     [SerializeField] internal int remainingLife;
+    
     
     public string[] phaseTexts;
     public GameObject tutorial_1_1;
@@ -93,12 +102,23 @@ public class CanvasController : MonoBehaviour
         }
         var currentLifeString = currentLife.ToArray().ArrayToString();
         HUDLife.SetText(currentLifeString);
+        if (remainingLife == 0)
+        {
+            HUDLife.SetText(" ");
+        }
+        
+        var currentPhasePartString = "Parte " + (levelScript.currentPhase != 4 ? levelScript.currentPhase +  "/3" : "Bônus") + " - Etapa " + levelScript.currentPart + "/3";
+        HUDCurrentPart.SetText(currentPhasePartString);
     }
 
     public void PlayerMistake()
     {
-        SoundManager.instance.Play("Player mistake");
         remainingLife -= 1;
+    }
+
+    public void HelpModalRecoverLife()
+    {
+        remainingLife += 1;
     }
     
     public void Transition(int phase)
@@ -204,13 +224,30 @@ public class CanvasController : MonoBehaviour
         optionsPanel.gameObject.SetActive(false);
     }
 
-    public void ConfigureAndCallHelpModal(string title, string message)
+    public void ConfigureAndCallHelpModal(string title, string message, HelpWindowType type)
     {
+        var modal = mistakeHelpModal.GetComponent<WindowTrigger>();
+        if (type == HelpWindowType.Attention)
+        {
+            modal.sprite = modal.exclamationMark;
+            SoundManager.instance.Play("attention");
+        }
+        else
+        {
+            modal.sprite = modal.errorMark;
+            SoundManager.instance.Play("mistake");
+            // StartCoroutine(BlinkScreenRed());
+        }
         mistakeHelpModal.GetComponent<WindowTrigger>().title = title;
         mistakeHelpModal.GetComponent<WindowTrigger>().message = message;
         mistakeHelpModal.SetActive(true);
-        
     }
+
+    // private IEnumerator BlinkScreenRed()
+    // {
+    //     
+    //     yield return new WaitForSeconds(0.1f);
+    // }
 
     public void OpenTryAgainScreen()
     {
@@ -239,6 +276,7 @@ public class CanvasController : MonoBehaviour
     public void GoToMainMenu()
     {
         Time.timeScale = 1f; 
+        SoundManager.instance.StopMusic();
         levelSelectControllerReference.LoadMenu();
     }
 

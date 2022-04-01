@@ -1513,6 +1513,7 @@ MonoBehaviour:
   Anchor_Phase3Part3_productionsBox: {fileID: 1762120759}
   Anchor_Phase3Part3_unitProductionsBox: {fileID: 1074108193}
   Anchor_Phase3Part3_productionMaker: {fileID: 1419477300}
+  Anchor_Phase3Part3_trashBin: {fileID: 8226740051546639410}
 --- !u!114 &499284023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8571,6 +8572,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
+--- !u!224 &8226740051546639410 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3200649751729743316, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
+  m_PrefabInstance: {fileID: 8226740051546639409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8866967922617033795
 PrefabInstance:
   m_ObjectHideFlags: 0

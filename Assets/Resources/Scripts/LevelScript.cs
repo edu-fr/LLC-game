@@ -549,7 +549,6 @@ namespace Resources.Scripts
             var correctLambdaProducers = _grammar.LambdaProducers;
             var currentVariablesOnLambdaProducersBox = p2_lambdaProducersBox.GetComponent<VariablesBox>().variableList;
             
-            
             if (correctLambdaProducers.Count > currentVariablesOnLambdaProducersBox.Count)
                 canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos variáveis que produzem vazio do que o esperado!", CanvasController.HelpWindowType.Error);
             else if (correctLambdaProducers.Count < currentVariablesOnLambdaProducersBox.Count)
@@ -607,10 +606,17 @@ namespace Resources.Scripts
         private bool Phase2Part2()
         {
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            var expectedProductions = _grammar.ProductionsPhase2;
+            var expectedProductions = _grammar.ProductionsPhase2WithoutLambdaProductions.DeepClone();
+           
             if (expectedProductions.Find(x => x._in == _grammar.StartVariable && x._out == "λ") != null)
             {
                 expectedProductions.Remove(expectedProductions.Find(x => x._in == _grammar.StartVariable && x._out == "λ"));
+            }
+
+            print("Expected productions phase 2 part 2 AFTER THE FORCED REMOVE");
+            foreach (var expectedProduction in expectedProductions)
+            {
+                print(expectedProduction._in + "->" + expectedProduction._out);
             }
             
             if (productionList.Count > expectedProductions.Count)
@@ -655,7 +661,7 @@ namespace Resources.Scripts
             p2_productionMaker.transform.position = outOfBoundsPosition;
             trashBin.transform.position = outOfBoundsPosition;
             // Filling boxes independently of other phases
-            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.ProductionsPhase2);
+            p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart);
             p2_lambdaProducersBox.GetComponent<VariablesBox>().FillWithVariables(_grammar.LambdaProducers);
             // Moving some useful boxes
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase2Part3_productionsBox_gray.position;
@@ -720,11 +726,6 @@ namespace Resources.Scripts
         private bool Phase3Part1()
         {
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            // print("NON USELESS UNIT PRODUCTIONS!");
-            // foreach(var production in _grammar.NonUselessUnitProductions)
-            // {
-            //     print(production._in + "->" + production._out);
-            // }
             if (productionList.Count > _grammar.NonUselessUnitProductions.Count)
             {
                 canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!", CanvasController.HelpWindowType.Error);
@@ -838,6 +839,13 @@ namespace Resources.Scripts
         private bool Phase3Part3()
         {
             var productionsBoxList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
+            // DEBUG
+            foreach (var expectedProduction in _grammar.ResultingProductions)
+            {
+                print(expectedProduction._in + "->" + expectedProduction._out);
+            };
+            
+            
             if (_grammar.ResultingProductions.Count < productionsBoxList.Count)
             {
                 canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!", CanvasController.HelpWindowType.Error);

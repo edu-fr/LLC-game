@@ -1575,6 +1575,7 @@ MonoBehaviour:
   Anchor_Phase3Part3_productionsBox: {fileID: 1762120759}
   Anchor_Phase3Part3_unitProductionsBox: {fileID: 1074108193}
   Anchor_Phase3Part3_productionMaker: {fileID: 1419477300}
+  Anchor_Phase3Part3_trashBin: {fileID: 676274097}
 --- !u!114 &499284023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2331,6 +2332,11 @@ GameObject:
 --- !u!224 &670804700 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8226740051951822573, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
+  m_PrefabInstance: {fileID: 8226740051546639409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &676274097 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3200649751729743316, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
   m_PrefabInstance: {fileID: 8226740051546639409}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &704157206 stripped

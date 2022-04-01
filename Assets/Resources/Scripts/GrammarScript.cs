@@ -42,7 +42,9 @@ namespace Resources.Scripts
         [NonSerialized] public List<Production> ProductionsPhase2;
         [NonSerialized] public List<char> RemovablePhase2;
         [NonSerialized] public bool StartVariableCanProduceLambda;
+        [NonSerialized] public List<Production> ProductionsPhase2WithoutLambdaProductions;
         [NonSerialized] public List<Production> ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart;
+        
 
         /* Phase 3 variables */
         [NonSerialized] public List<Production> NonUselessUnitProductions;
@@ -117,6 +119,9 @@ namespace Resources.Scripts
             uselessProductions = GetRemovableProductions(givenProductions, usefulVariables);
             usefulProductions = GetUsefulProductions(givenProductions, uselessProductions);
             usefulAndReachableProductions = GetUsefulAndReachableProductions(usefulVariables, usefulProductions);
+            ProductionsPhase2.Clear();
+            ProductionsPhase2 = usefulAndReachableProductions.DeepClone();
+            
             // DEBUG
             // print("Quantidades!\n Given Productions : " + givenProductions.Length + "\nUseful Variables " +
             //       usefulVariables.Count + "\nUseless Productions: " + uselessProductions.Count +
@@ -338,7 +343,7 @@ namespace Resources.Scripts
                     }
                 }
             }
-            // DebugPrintListProduction(ProductionsPhase1AfterRemoveUnreachable, "After remove unreachable variables: ");
+            
             return usefulAndReachableProductions;
         }
 
@@ -368,9 +373,15 @@ namespace Resources.Scripts
             SetLambdaProducers(); 
             // DebugPrintListChar(LambdaProducers, "Lambda producers: ");
             SetInsertablePhase2();
-            // DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after inserting new productions: ");
+            
+            DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after inserting new variations (from removing lambdas): ");
+            
             SetRemovablePhase2();
-            ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart = RemoveLambdaProductionsFromPhase2AndAddLambdaFromStart();
+            
+            ProductionsPhase2WithoutLambdaProductions = RemoveLambdaProductionsFromPhase2();
+            DebugPrintListProduction(ProductionsPhase2WithoutLambdaProductions, "Phase 2 productions after removing the '_ -> lambda' productions");
+
+            ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart = AddLambdaFromStartOnProductionsPhase2WithoutLambdas();
             // DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after removing");
         }
 
@@ -381,6 +392,7 @@ namespace Resources.Scripts
                 where production._out[0] == 'λ' && !LambdaProducers.Contains(production._in)
                 select production._in).ToList();
             var newLambdaProducers = new List<char>();
+            newLambdaProducers.AddRange(LambdaProducers);
             // Discover Variables that produces lambda productions
             foreach (var lambdaProducer in LambdaProducers)
             {
@@ -394,6 +406,7 @@ namespace Resources.Scripts
                 }
             }
 
+            LambdaProducers.Clear();
             LambdaProducers.AddRange(newLambdaProducers);
 
             SetStartVariableProduceLambda();
@@ -447,11 +460,9 @@ namespace Resources.Scripts
 
         private void SetInsertablePhase2()
         {
-            ProductionsPhase2 = usefulAndReachableProductionsPhase1.DeepClone();
-            
             foreach (var lambdaProducer in LambdaProducers)
             {
-                foreach (var production in Productions)
+                foreach (var production in usefulAndReachableProductionsPhase1)
                 {
                     if (!production._out.Contains(lambdaProducer)) continue;
                     var characterChain = production._out.ToCharArray();
@@ -553,18 +564,26 @@ namespace Resources.Scripts
             }
         }
 
-        private List<Production> RemoveLambdaProductionsFromPhase2AndAddLambdaFromStart()
+        private List<Production> RemoveLambdaProductionsFromPhase2()
         {
-            if (RemovablePhase2.Count < 1) return ProductionsPhase2;
-            var removeList = ProductionsPhase2.Where(production => production._out == "λ").ToList();
+            var productionsPhase2WithoutLambdas = ProductionsPhase2.DeepClone();
+            if (RemovablePhase2.Count < 1) return productionsPhase2WithoutLambdas;
+            var removeList = productionsPhase2WithoutLambdas.Where(production => production._out == "λ").ToList();
             foreach (var removable in removeList)
             {
-                ProductionsPhase2.Remove(removable);
+                productionsPhase2WithoutLambdas.Remove(removable);
             }
-            
+
+            return productionsPhase2WithoutLambdas;
+        }
+        
+        private List<Production> AddLambdaFromStartOnProductionsPhase2WithoutLambdas()
+        {
+            var productionsPhase2WithLambdaFromStartAndWithoutLambdas =
+                ProductionsPhase2WithoutLambdaProductions.DeepClone();
             if (StartVariableCanProduceLambda)
-                ProductionsPhase2.Add(new Production(StartVariable, "λ"));
-            return ProductionsPhase2.DeepClone();
+                productionsPhase2WithLambdaFromStartAndWithoutLambdas.Add(new Production(StartVariable, "λ"));
+            return productionsPhase2WithLambdaFromStartAndWithoutLambdas;
         }
         
         
@@ -584,7 +603,7 @@ namespace Resources.Scripts
 
         private List<Production> RemoveUselessUnitProductions()
         {
-            ProductionsPhase3 = ProductionsPhase2.DeepClone();
+            ProductionsPhase3 = ProductionsPhase2WithoutLambdaProductionsAndWithLambdaFromStart.DeepClone();
             ProductionsPhase3.RemoveAll(production => production._out.Length == 1 &&
                         production._out.ToCharArray()[0] == production._in);
             return ProductionsPhase3.DeepClone();
@@ -672,8 +691,12 @@ namespace Resources.Scripts
                                 resultingProduction._out == production._out)
                                 isEqual = true; 
                         }
-                        if(!isEqual) 
-                            ResultingProductions.Add(new Production(unitProductionTuple.Item1, production._out));
+
+                        if (!isEqual)
+                        {
+                            if (production._out != "λ")
+                                ResultingProductions.Add(new Production(unitProductionTuple.Item1, production._out));
+                        }
                     }
                 }
             }

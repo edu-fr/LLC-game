@@ -14,7 +14,7 @@ namespace Resources.Scripts
             {
                 eventData.pointerDrag.gameObject.GetComponent<Draggable>().IsOnValidPositionToDrop = true;
                 Destroy(eventData.pointerDrag.gameObject);
-                print("Deletado com sucesso!");
+              
             }
         }
 

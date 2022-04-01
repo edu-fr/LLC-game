@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Terminals: 610062006300
-  Variables: 5300410042004300440045004600
+  Variables: 530041004200430044004500
   Productions:
   - _in: 83
     _out: abABC

@@ -420,6 +420,10 @@ namespace Resources.Scripts
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
             
+            // Making useless variables box not draggable or deletable
+            p1_uselessVariablesBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(false);
+            p1_uselessVariablesBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
+            
             // Setting on reset button
             p1_productionsBox_resetButton.SetActive(true);
         }
@@ -476,6 +480,10 @@ namespace Resources.Scripts
             // Setting draggability and deletability
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
             p1_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
+            
+            // Making useless variables box not draggable or deletable
+            p1_uselessVariablesBox.GetComponent<VariablesBox>().SetAllVariablesDraggability(false);
+            p1_uselessVariablesBox.GetComponent<VariablesBox>().SetAllVariablesDeletability(false);
         }
 
         private bool Phase1Part3()
@@ -823,6 +831,7 @@ namespace Resources.Scripts
             trashBin.transform.position = _boxPositionsManager.Anchor_Phase3Part3_trashBin.position;
             // Turning on deletability from Productions Box
             p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
+           
             // Turning off deletability
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
             // Turning off unit productions box drop acceptance
@@ -831,7 +840,8 @@ namespace Resources.Scripts
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(false);
             // Turning gray
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetGrayScale(true);
-            // Setting off reset button
+            
+            // Setting reset button
             p3_unitProductionsBox_resetButton.SetActive(false);
             p2_productionsBox_resetButton.SetActive(true);
         }

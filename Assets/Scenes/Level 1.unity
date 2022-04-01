@@ -164,6 +164,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &76023975
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231082, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657860838087231084, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+      propertyPath: m_Name
+      value: Grammar 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+--- !u!1 &76023976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2657860838087231084, guid: 9e19bb2b122700f4196119fd1238a1e2, type: 3}
+  m_PrefabInstance: {fileID: 76023975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &105302290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   previouslyGameState: 0
-  grammarObject: {fileID: 1797201117}
+  grammarObject: {fileID: 76023976}
   canvasController: {fileID: 499284023}
   p1_productionsBox: {fileID: 1623148161}
   p1_productionsBox_resetButton: {fileID: 1012080686}
@@ -1513,6 +1575,7 @@ MonoBehaviour:
   Anchor_Phase3Part3_productionsBox: {fileID: 1762120759}
   Anchor_Phase3Part3_unitProductionsBox: {fileID: 1074108193}
   Anchor_Phase3Part3_productionMaker: {fileID: 1419477300}
+  Anchor_Phase3Part3_trashBin: {fileID: 676274097}
 --- !u!114 &499284023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2271,6 +2334,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8226740051951822573, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
   m_PrefabInstance: {fileID: 8226740051546639409}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &676274097 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3200649751729743316, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
+  m_PrefabInstance: {fileID: 8226740051546639409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &704157206 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3127046922368831760, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
@@ -2414,7 +2482,8 @@ PrefabInstance:
       propertyPath: message
       value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis. \nVari\xE1veis \xFAteis
         possuem produ\xE7\xF5es onde produzem <b>somente</b> simbolos terminais (diretamente
-        ou indiretamente)."
+        ou indiretamente). Se a vari\xE1vel produz <b>\u03BB</b> ela tamb\xE9m \xE9
+        considerada \xFAtil."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: levelScript
@@ -3345,8 +3414,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Remova as produ\xE7\xF5es que possuem vari\xE1veis in\xFAteis na origem
-        e/ou no destino. \nCaso n\xE3o exista nenhuma, prossiga."
+      value: "Remova as produ\xE7\xF5es que possuem vari\xE1veis in\xFAteis na <b>origem</b>
+        (lado esquerdo da produ\xE7\xE3o). \nCaso n\xE3o exista nenhuma, prossiga."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -4214,8 +4283,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Remova as produ\xE7\xF5es que s\xE3o inancan\xE7\xE1veis a partir da
-        vari\xE1vel de in\xEDcio.\nCaso n\xE3o exista nenhuma, prossiga."
+      value: "Remova as produ\xE7\xF5es que possuem vari\xE1veis \xEDnuteis no <b>destino</b>
+        (lado direito da produ\xE7\xE3o) e\ntamb\xE9m as produ\xE7\xF5es que s\xE3o
+        <b>inalcan\xE7\xE1veis</b> a partir da vari\xE1vel de in\xEDcio.\nCaso n\xE3o
+        exista nenhuma, prossiga."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -4378,8 +4449,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Remova as produ\xE7\xF5es que s\xE3o inancan\xE7\xE1veis a partir da
-        vari\xE1vel de in\xEDcio.\nCaso n\xE3o exista nenhuma, prossiga."
+      value: "Remova as produ\xE7\xF5es que possuem vari\xE1veis \xEDnuteis no <b>destino</b>
+        (lado direito da produ\xE7\xE3o) e\ntamb\xE9m as produ\xE7\xF5es que s\xE3o
+        <b>inalcan\xE7\xE1veis</b> a partir da vari\xE1vel de in\xEDcio.\nCaso n\xE3o
+        exista nenhuma, prossiga."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -4850,8 +4923,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Removas as produ\xE7\xF5es unit\xE1rias do tipo <b>A -> A</b> ou <b>B
-        -> B</b>. Caso n\xE3o exista nenhuma, prossiga."
+      value: "Removas as produ\xE7\xF5es unit\xE1rias in\xFAteis do tipo <b>A ->
+        A</b> ou <b>B -> B</b>. Caso n\xE3o exista nenhuma, prossiga."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -5431,8 +5504,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Remova as produ\xE7\xF5es que possuem vari\xE1veis in\xFAteis na origem
-        e/ou no destino. \nCaso n\xE3o exista nenhuma, prossiga."
+      value: "Remova as produ\xE7\xF5es que possuem vari\xE1veis in\xFAteis na <b>origem</b>
+        (lado esquerdo da produ\xE7\xE3o). \nCaso n\xE3o exista nenhuma, prossiga."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -5941,68 +6014,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
---- !u!1001 &1797201116
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151591, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287685184809151593, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-      propertyPath: m_Name
-      value: Grammar 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
---- !u!1 &1797201117 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7287685184809151593, guid: 6a93596df0f8f1045b9644a95942088d, type: 3}
-  m_PrefabInstance: {fileID: 1797201116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1830332193 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6720340490210517796, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
@@ -7275,8 +7286,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Substitua as produ\xE7\xF5es unidade pelas respectivas produ\xE7\xF5es
-        do destino."
+      value: "Substitua as produ\xE7\xF5es unidade por todas as produ\xE7\xF5es que
+        a var\xEDavel destino produz."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -7552,9 +7563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
-      value: "Crie novas produ\xE7\xF5es considerando que as vari\xE1veis produtoras
-        de vazio ter\xE3o valor vazio em todas as produ\xE7\xF5es em que aparecem.\n\nAo
-        final, exclua as produ\xE7\xF5es vazias diretas (do tipo <b>A -> \u03BB</b>)."
+      value: "Crie novas produ\xE7\xF5es considerando que cada vari\xE1vel produtora
+        de vazio ter\xE1 valor vazio em todas as produ\xE7\xF5es em que aparecem
+        (uma vari\xE1vel por vez). \nAo final, exclua as produ\xE7\xF5es vazias diretas
+        (do tipo <b>A -> \u03BB</b>).\nSe existir <b>S -> \u03BB</b>, pode exclu\xED-la,
+        pois ela ser\xE1 adicionada novamente no pr\xF3ximo passo, caso necess\xE1rio."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: confirmText
@@ -7955,7 +7968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912495721786358760, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912495721913709624, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8211,7 +8224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7615282421581169123, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23.067322
+      value: 23.067383
       objectReference: {fileID: 0}
     - target: {fileID: 7615282421581169123, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8634,7 +8647,8 @@ PrefabInstance:
       propertyPath: message
       value: "Separe as vari\xE1veis em \xFAteis e in\xFAteis. \nVari\xE1veis \xFAteis
         possuem produ\xE7\xF5es onde produzem <b>somente</b> simbolos terminais (diretamente
-        ou indiretamente)."
+        ou indiretamente). Se a vari\xE1vel produz <b>\u03BB</b> ela tamb\xE9m \xE9
+        considerada \xFAtil."
       objectReference: {fileID: 0}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: windowType

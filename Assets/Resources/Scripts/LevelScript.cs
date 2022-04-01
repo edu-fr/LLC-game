@@ -21,7 +21,7 @@ namespace Resources.Scripts
         
         public GameObject grammarObject;
         private GrammarScript _grammar;
-        [SerializeField] private CanvasController canvasController;
+        [SerializeField] public CanvasController canvasController;
 
         [SerializeField] private GameObject p1_productionsBox;
         [SerializeField] private GameObject p1_productionsBox_resetButton;
@@ -232,6 +232,7 @@ namespace Resources.Scripts
                             else
                                 canvasController.PlayerMistake();   
                             break;
+                        
                         case 3:
                             if (Phase2Part3())
                             {
@@ -578,6 +579,7 @@ namespace Resources.Scripts
             
             // Filling productions box independently of other phases
             p2_productionsBox.GetComponent<ProductionsBox>().FillWithProductions(_grammar.usefulAndReachableProductionsPhase1);
+           
             // Saving the original production box content
             p2_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.usefulAndReachableProductionsPhase1;
 
@@ -605,19 +607,26 @@ namespace Resources.Scripts
         private bool Phase2Part2()
         {
             var productionList = p2_productionsBox.GetComponent<ProductionsBox>().productionList;
-            if (productionList.Count > _grammar.ProductionsPhase2.Count)
+            var expectedProductions = _grammar.ProductionsPhase2;
+            if (expectedProductions.Find(x => x._in == _grammar.StartVariable && x._out == "λ") != null)
+            {
+                expectedProductions.Remove(expectedProductions.Find(x => x._in == _grammar.StartVariable && x._out == "λ"));
+            }
+            
+            if (productionList.Count > expectedProductions.Count)
             {
                 canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há mais produções do que o esperado!", CanvasController.HelpWindowType.Error);
-                return false;
+                return false; 
             }
-            if (productionList.Count < _grammar.ProductionsPhase2.Count)
+            if (productionList.Count < expectedProductions.Count)
             {
                 canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "Há menos produções do que o esperado!", CanvasController.HelpWindowType.Error);
+                return false;
             }
             foreach (var production in productionList)
             {
                 var productionExists = false;
-                foreach (var correctProduction in _grammar.ProductionsPhase2)
+                foreach (var correctProduction in expectedProductions)
                 {
                     if (production._in == correctProduction._in)
                     {
@@ -636,7 +645,6 @@ namespace Resources.Scripts
                 }
             }
 
-            // Victory screen and fanfare
             return true;
         }
         
@@ -661,7 +669,9 @@ namespace Resources.Scripts
             // Turning productions box gray
             p2_productionsBox.GetComponent<ProductionsBox>().SetGrayScale(false);
             p2_lambdaProducersBox.GetComponent<VariablesBox>().SetGrayScale(true);
-            // Setting accept lambda question box starting variable
+            
+            // Removing the S -> lambda production from the box
+            p2_acceptLambdaQuestionBox.GetComponent<AcceptLambdaQuestionBox>().RemoveEmptyWordFromProductions();
             
             // Setting off reset button
             p2_productionsBox_resetButton.SetActive(false);
@@ -678,6 +688,7 @@ namespace Resources.Scripts
                 // Victory screen and fanfare
                 return true;
             }
+            canvasController.ConfigureAndCallHelpModal("Resposta incorreta!", "A linguagem " + (_grammar.StartVariableCanProduceLambda ? "" : "não ") + "produz a palavra vazia.", CanvasController.HelpWindowType.Error);
             return false;
         }
 
@@ -803,13 +814,15 @@ namespace Resources.Scripts
             p2_productionsBox.GetComponent<ProductionsBox>().originalProductionList = _grammar.NonUnitProductions;
             
             // p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
-            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true); // verificar?
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDraggability(true);
             // Moving useful boxes
             p2_productionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part3_productionsBox.position;
             p3_unitProductionsBox.transform.position = _boxPositionsManager.Anchor_Phase3Part3_unitProductionsBox.position;
             p2_productionMaker.transform.position = _boxPositionsManager.Anchor_Phase3Part3_productionMaker.position;
+            trashBin.transform.position = _boxPositionsManager.Anchor_Phase3Part3_trashBin.position;
+            // Turning on deletability from Productions Box
+            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(true);
             // Turning off deletability
-            p2_productionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
             p3_unitProductionsBox.GetComponent<ProductionsBox>().SetAllProductionsDeletability(false);
             // Turning off unit productions box drop acceptance
             p3_unitProductionsBox.GetComponent<ProductionsBox>().acceptDrop = false;
@@ -854,6 +867,7 @@ namespace Resources.Scripts
             p2_productionsBox.transform.position = outOfBoundsPosition;
             p2_productionMaker.transform.position = outOfBoundsPosition;
             p3_unitProductionsBox.transform.position = outOfBoundsPosition;
+            trashBin.transform.position = outOfBoundsPosition;
             
             // Filling boxes
             p1_productionsBox.GetComponent<ProductionsBox>().ClearList();
@@ -893,8 +907,6 @@ namespace Resources.Scripts
                 return false;
             }
             
-            
-            
             var currentVariablesOnUsefulBox = p1_usefulVariablesBox.GetComponent<VariablesBox>().variableList;
             var correctVariables = _grammar.UsefulVariablesPhase4;
 
@@ -914,10 +926,9 @@ namespace Resources.Scripts
                         return false;
                     } 
                 }
-                print("Correto! Pode prosseguir para a próxima fase!");
                 return true;
             }
-            // Victory screen and fanfare
+            
             return false;
         }
 

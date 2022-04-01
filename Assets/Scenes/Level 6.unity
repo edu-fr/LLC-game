@@ -467,7 +467,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+      objectReference: {fileID: 21300000, guid: 0b1df877fe7645043acf522b2318a574, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Deseja voltar a caixa de produ\xE7\xF5es a como estava no in\xEDcio
@@ -980,7 +980,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+      objectReference: {fileID: 21300000, guid: 0b1df877fe7645043acf522b2318a574, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Deseja voltar a caixa de produ\xE7\xF5es a como estava no in\xEDcio
@@ -1263,7 +1263,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+      objectReference: {fileID: 21300000, guid: 0b1df877fe7645043acf522b2318a574, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Deseja voltar a caixa de produ\xE7\xF5es a como estava no in\xEDcio
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   previouslyGameState: 0
-  grammarObject: {fileID: 1695896807}
+  grammarObject: {fileID: 712587719}
   canvasController: {fileID: 499284023}
   p1_productionsBox: {fileID: 1623148161}
   p1_productionsBox_resetButton: {fileID: 1012080686}
@@ -1906,7 +1906,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+      objectReference: {fileID: 21300000, guid: 0b1df877fe7645043acf522b2318a574, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Deseja voltar a caixa de produ\xE7\xF5es a como estava no in\xEDcio
@@ -2275,6 +2275,68 @@ RectTransform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3127046922368831760, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
   m_PrefabInstance: {fileID: 8226740051546639409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &712587718
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899638607551565727, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+      propertyPath: m_Name
+      value: Grammar Material 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+--- !u!1 &712587719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1899638607551565727, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
+  m_PrefabInstance: {fileID: 712587718}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &773804731 stripped
 RectTransform:
@@ -3148,7 +3210,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+      objectReference: {fileID: 21300000, guid: 0b1df877fe7645043acf522b2318a574, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Deseja voltar a caixa de produ\xE7\xF5es a como estava no in\xEDcio
@@ -3496,7 +3558,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+      objectReference: {fileID: 21300000, guid: 0b1df877fe7645043acf522b2318a574, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Deseja voltar a caixa de produ\xE7\xF5es a como estava no in\xEDcio
@@ -5301,68 +5363,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
---- !u!1001 &1695896806
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565713, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1899638607551565727, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-      propertyPath: m_Name
-      value: Grammar Material 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
---- !u!1 &1695896807 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1899638607551565727, guid: eddbf8ae21daf964fb43573dca50aabe, type: 3}
-  m_PrefabInstance: {fileID: 1695896806}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1700322515
 GameObject:
   m_ObjectHideFlags: 0
@@ -5644,7 +5644,7 @@ PrefabInstance:
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+      objectReference: {fileID: 21300000, guid: 0b1df877fe7645043acf522b2318a574, type: 3}
     - target: {fileID: 8866967923734034425, guid: fc73de5bad89992449c6a383ad90ac43, type: 3}
       propertyPath: message
       value: "Deseja voltar a caixa de produ\xE7\xF5es a como estava no in\xEDcio
@@ -8564,6 +8564,10 @@ PrefabInstance:
     - target: {fileID: 8275469576952835697, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177118250651171661, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEmptyWordFromProductions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6522c4f65024cf64fb43a06de6bdf13a, type: 3}

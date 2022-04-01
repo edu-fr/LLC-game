@@ -132,10 +132,7 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator WaitToShowFooter()
     {
-        print("Now I will wait");
-        print("TIME TO SHOW FOOTER: " + timeToShowFooter);
         yield return new WaitForSeconds(timeToShowFooter);
-        print("Done waiting!");
         transitionPanelFooterText.gameObject.SetActive(true);
         _waitingForKey = true;
     }

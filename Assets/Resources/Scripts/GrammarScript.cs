@@ -66,21 +66,21 @@ namespace Resources.Scripts
             InitializeLists();
             ExecutePhase1(Productions, ref UsefulVariablesPhase1, ref UselessProductionsPhase1, ref UsefulProductionsPhase1,
                ref usefulAndReachableProductionsPhase1);
-            DebugPrintListProduction(UsefulProductionsPhase1.OrderBy(x => x._in).ToList(), "Useful productions phase 1: ");
-            DebugPrintListProduction(usefulAndReachableProductionsPhase1.OrderBy(x => x._in).ToList(), "Productions phase 1 after removing unreachable: ");
+            // DebugPrintListProduction(UsefulProductionsPhase1.OrderBy(x => x._in).ToList(), "Useful productions phase 1: ");
+            // DebugPrintListProduction(usefulAndReachableProductionsPhase1.OrderBy(x => x._in).ToList(), "Productions phase 1 after removing unreachable: ");
             
-            Debug.Log(" ============================= PHASE 2 ==================================== ");
+            // Debug.Log(" ============================= PHASE 2 ==================================== ");
             ExecutePhase2();
-            DebugPrintListProduction(ProductionsPhase2.OrderBy(x => x._in).ToList(), "Productions phase 2: ");
+            // DebugPrintListProduction(ProductionsPhase2.OrderBy(x => x._in).ToList(), "Productions phase 2: ");
             
-            Debug.Log(" ================================ PHASE 3 ================================= ");
+            // Debug.Log(" ================================ PHASE 3 ================================= ");
             ExecutePhase3();
-            DebugPrintListProduction(ResultingProductions.OrderBy(x => x._in).ToList(), "Productions phase 3 after removing unit: ");
+            // DebugPrintListProduction(ResultingProductions.OrderBy(x => x._in).ToList(), "Productions phase 3 after removing unit: ");
             
-            Debug.Log(" ================================= PHASE 4 ================================ ");
+            // Debug.Log(" ================================= PHASE 4 ================================ ");
             SetPhase4Variables();
             ExecutePhase1(ResultingProductions.ToArray(), ref UsefulVariablesPhase4, ref UselessProductionsPhase4, ref  UsefulProductionsPhase4, ref usefulAndReachableProductionsPhase4); // Yes, again
-            DebugPrintListProduction(usefulAndReachableProductionsPhase4.OrderBy(x => x._in).ToList(), "Productions phase 4 after removing unreachable: ");
+            // DebugPrintListProduction(usefulAndReachableProductionsPhase4.OrderBy(x => x._in).ToList(), "Productions phase 4 after removing unreachable: ");
 
         }
 
@@ -113,15 +113,15 @@ namespace Resources.Scripts
         private void ExecutePhase1(Production[] givenProductions, ref List<char> usefulVariables, ref List<Production> uselessProductions, ref List<Production> usefulProductions, ref List<Production> usefulAndReachableProductions)
         {
             usefulVariables = GetUsefulVariables(givenProductions);
-            DebugPrintListChar(usefulVariables, "Variáveis ÚTEIS: ");
+            // DebugPrintListChar(usefulVariables, "Variáveis ÚTEIS: ");
             uselessProductions = GetRemovableProductions(givenProductions, usefulVariables);
             usefulProductions = GetUsefulProductions(givenProductions, uselessProductions);
             usefulAndReachableProductions = GetUsefulAndReachableProductions(usefulVariables, usefulProductions);
             // DEBUG
-            print("Quantidades!\n Given Productions : " + givenProductions.Length + "\nUseful Variables " +
-                  usefulVariables.Count + "\nUseless Productions: " + uselessProductions.Count +
-                  "\nUsefulProductions: " + usefulProductions.Count + "\nUseful and Reachable variables: " +
-                  usefulAndReachableProductions.Count);
+            // print("Quantidades!\n Given Productions : " + givenProductions.Length + "\nUseful Variables " +
+            //       usefulVariables.Count + "\nUseless Productions: " + uselessProductions.Count +
+            //       "\nUsefulProductions: " + usefulProductions.Count + "\nUseful and Reachable variables: " +
+            //       usefulAndReachableProductions.Count);
         }
 
         private List<Char> GetUsefulVariables(Production[] givenProductions)
@@ -366,7 +366,7 @@ namespace Resources.Scripts
         private void ExecutePhase2()
         {
             SetLambdaProducers(); 
-            DebugPrintListChar(LambdaProducers, "Lambda producers: ");
+            // DebugPrintListChar(LambdaProducers, "Lambda producers: ");
             SetInsertablePhase2();
             // DebugPrintListProduction(ProductionsPhase2, "Phase 2 productions after inserting new productions: ");
             SetRemovablePhase2();
@@ -397,7 +397,7 @@ namespace Resources.Scripts
             LambdaProducers.AddRange(newLambdaProducers);
 
             SetStartVariableProduceLambda();
-            print("PRODUZ LAMBDA?? " + StartVariableCanProduceLambda);
+            // print("PRODUZ LAMBDA?? " + StartVariableCanProduceLambda);
         }
 
         private void SetStartVariableProduceLambda()
@@ -410,11 +410,11 @@ namespace Resources.Scripts
                 StartVariableCanProduceLambda = true;
                 return;
             }
-            print("================= OLA ===============");
+            // print("================= OLA ===============");
             
             foreach (var production in startVariableProductions)
             {
-                print("Production: " + production);
+                // print("Production: " + production);
                 var possible = true; 
                 foreach (var character in production.ToCharArray())
                 {
@@ -575,10 +575,10 @@ namespace Resources.Scripts
             
             // deve retornar uma lista de producoes!
             SetUnitProductions();
-            Debug.Log("UNIT PRODUCTIONS: ");
-            DebugPrintUnitProductions();
+            // Debug.Log("UNIT PRODUCTIONS: ");
+            // DebugPrintUnitProductions();
             SetNonUnitProductions();
-            DebugPrintListProduction(NonUnitProductions, "Non unit productions: ");
+            // DebugPrintListProduction(NonUnitProductions, "Non unit productions: ");
             SetResultingProductions();
         }
 

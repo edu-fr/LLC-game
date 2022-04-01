@@ -38,7 +38,6 @@ namespace Resources.Scripts
          {
             sound.source.volume = volume;
          }
-         print("Volume BGM setado para " + volume);
       }
 
       // ReSharper disable once InconsistentNaming
@@ -48,7 +47,6 @@ namespace Resources.Scripts
          {
             sound.source.volume = volume;
          }
-         print("Volume SFX setado para " + volume);
       }
 
       public void Play(string name)

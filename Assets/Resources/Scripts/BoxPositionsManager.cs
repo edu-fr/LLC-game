@@ -53,5 +53,6 @@ namespace Resources.Scripts
         public Transform Anchor_Phase3Part3_productionsBox;
         public Transform Anchor_Phase3Part3_unitProductionsBox;
         public Transform Anchor_Phase3Part3_productionMaker;
+        public Transform Anchor_Phase3Part3_trashBin;
     }
 }

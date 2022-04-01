@@ -29,19 +29,20 @@ namespace Resources.Scripts
         {
             if (_variableText.text.Length < 2)
             {
-                print("Nâo é possível criar uma produção sem uma variável na esquerda.");
+                levelController.GetComponent<LevelScript>().canvasController.ConfigureAndCallHelpModal("Erro", "Nâo é possível criar uma produção sem uma variável na esquerda.", CanvasController.HelpWindowType.Attention);
                 return;
             }
 
             if (_productionText.text.Length < 2)
             {
-                print("Não é possível criar uma produção sem nada na direita.");
+                levelController.GetComponent<LevelScript>().canvasController.ConfigureAndCallHelpModal("Erro", "Nâo é possível criar uma produção sem conteúdo no lado direito.", CanvasController.HelpWindowType.Attention);
                 return;
             }
             
             if (!_currentGrammar.Variables.Contains(_variableText.text[0]))
             {
-                print("ERRO! Variável inválida!");
+                levelController.GetComponent<LevelScript>().canvasController.ConfigureAndCallHelpModal("Erro", "Variável existe na linguagem.", CanvasController.HelpWindowType.Attention);
+
                 return;
             }
 
@@ -49,18 +50,20 @@ namespace Resources.Scripts
             {
                 if (char.IsNumber(_productionText.text[i]))
                 {
-                    print("Numeros nao sao permitidos!");
+                    levelController.GetComponent<LevelScript>().canvasController.ConfigureAndCallHelpModal("Erro", "Números não são permitidos.", CanvasController.HelpWindowType.Attention);
+
                     return;
                 }
                 
                 if (_productionText.text[i] is '\n' or ' ' or '\0' or '/')
                 {
-                    print("VAZIO!");
+                    levelController.GetComponent<LevelScript>().canvasController.ConfigureAndCallHelpModal("Erro", "Vazio não permitido.", CanvasController.HelpWindowType.Attention);
+
                     continue;
                 }
                 if (!_currentGrammar.Variables.Contains(_productionText.text[i]) && !_currentGrammar.Terminals.Contains(_productionText.text[i]))
                 {
-                    print("Produção inválida! Não contem o char: " + _productionText.text[i]);
+                    levelController.GetComponent<LevelScript>().canvasController.ConfigureAndCallHelpModal("Erro", "Produção inválida! A linguagem não produz " + _productionText.text[i] + ".", CanvasController.HelpWindowType.Attention);
                     return;
                 }
             }
@@ -91,7 +94,7 @@ namespace Resources.Scripts
                 variableTextFieldObject.GetComponent<TMP_InputField>().text = "";
             }
             else
-                print("Produção repetida!");
+                levelController.GetComponent<LevelScript>().canvasController.ConfigureAndCallHelpModal("Erro", "A produção já está na lista de produções.", CanvasController.HelpWindowType.Attention);
 
         }
     }

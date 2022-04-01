@@ -31,8 +31,6 @@ namespace Resources.Scripts
         {
             base.Awake();
             _productionBoxHeight = productionBoxPrefab.GetComponent<RectTransform>().sizeDelta.y * Utils.ScreenDif;
-            print("SCREEN DIF: " + Utils.ScreenDif);
-            print("PRODUCTION BOX HEIGHT: " + _productionBoxHeight);
             _productionBoxesOriginalSize = productionBoxes.GetComponent<RectTransform>().sizeDelta;
         }
 
@@ -61,8 +59,6 @@ namespace Resources.Scripts
             {
                 ClearList();
             }
-            var productionBoxesRectTransform = productionBoxes.GetComponent<RectTransform>();
-            print("GAME OBJECT" + productionBoxesRectTransform.gameObject);
             var productionCounter = 0;
             productions.Sort(ExtensionMethods.SortProductions);
             foreach (var production in productions)

@@ -22,7 +22,7 @@ namespace Resources.Scripts
             }
         }
 
-        public void RemoveEmptyWordForProductions()
+        public void RemoveEmptyWordFromProductions()
         {
             var lambdaProduction = new GrammarScript.Production(startVariableText.text.ToCharArray()[0], "λ");
             if (productionsBoxObject.GetComponent<ProductionsBox>().productionList.Find(x => x._in == lambdaProduction._in && x._out == lambdaProduction._out) != null)

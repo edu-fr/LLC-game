@@ -10,6 +10,7 @@ namespace Resources.Scripts
 
         private void Awake()
         {
+            Screen.SetResolution(1280, 720, false, 60);
             _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
 

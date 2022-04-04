@@ -217,6 +217,7 @@ public class CanvasController : MonoBehaviour
 
     public void ShowPausePanel(bool boolean)
     {
+        SoundManager.instance.StopSFX("clock-ticking");
         pausePanel.gameObject.SetActive(boolean);
         optionsPanel.gameObject.SetActive(false);
     }
@@ -227,14 +228,14 @@ public class CanvasController : MonoBehaviour
         if (type == HelpWindowType.Attention)
         {
             modal.sprite = modal.exclamationMark;
-            SoundManager.instance.Play("attention");
+            SoundManager.instance.PlayOneShot("attention");
         }
         else
         {
             modal.sprite = modal.errorMark;
             if (remainingLife > 1)
             {
-                SoundManager.instance.Play("mistake");
+                SoundManager.instance.PlayOneShot("mistake");
                 StartCoroutine(BlinkRed());
             } 
         }
@@ -246,6 +247,8 @@ public class CanvasController : MonoBehaviour
 
     public void OpenTryAgainScreen()
     {
+        SoundManager.instance.StopSFX("heart-beat");
+        SoundManager.instance.StopSFX("clock-ticking");
         transitionPanel.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
         windowPanel.gameObject.SetActive(false);
@@ -255,6 +258,8 @@ public class CanvasController : MonoBehaviour
 
     public void OpenYouWinScreen()
     {
+        SoundManager.instance.StopSFX("heart-beat");
+        SoundManager.instance.StopSFX("clock-ticking");
         transitionPanel.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
         windowPanel.gameObject.SetActive(false);
@@ -264,7 +269,9 @@ public class CanvasController : MonoBehaviour
 
     public void RestartLevel()
     {
-        Time.timeScale = 1f; 
+        SoundManager.instance.StopMusic();
+        SoundManager.instance.StopSFX();
+        Time.timeScale = 1f;
         levelSelectControllerReference.ResetLevel();
     }
 
@@ -272,6 +279,7 @@ public class CanvasController : MonoBehaviour
     {
         Time.timeScale = 1f; 
         SoundManager.instance.StopMusic();
+        SoundManager.instance.StopSFX();
         levelSelectControllerReference.LoadMenu();
     }
 

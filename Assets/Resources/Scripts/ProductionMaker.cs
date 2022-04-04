@@ -90,6 +90,7 @@ namespace Resources.Scripts
             if (!alreadyExists)
             {
                 productionsBox.InsertAndReconstructList(newProduction, true, true, false);
+                SoundManager.instance.PlayOneShot("insert-list");
                 productionTextFieldObject.GetComponent<TMP_InputField>().text = "";
                 variableTextFieldObject.GetComponent<TMP_InputField>().text = "";
             }

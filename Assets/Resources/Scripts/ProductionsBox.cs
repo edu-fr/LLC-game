@@ -18,7 +18,6 @@ namespace Resources.Scripts
         public List<Transform> productionBoxList;
         public Transform productionBoxPrefab;
         private float _productionBoxHeight;
-        private GrammarScript.Production _lastProductionInserted;
         private Vector2 _productionBoxesOriginalSize;
         public Button resetButton;
         public CanvasController canvasController;
@@ -80,7 +79,6 @@ namespace Resources.Scripts
                 // Change it's text
                 newProductionBox.GetComponentInChildren<TextMeshProUGUI>().SetText(production._in + "→" + production._out);
                 AddToLists(newProductionBox.gameObject);
-                _lastProductionInserted = production;
                 productionCounter++;
             }
             SetGrayScale(false);
@@ -268,6 +266,7 @@ namespace Resources.Scripts
         
         public void ResetToOriginalList()
         {
+            SoundManager.instance.PlayOneShot("reset-box");
             FillWithProductions(originalProductionList);
             SetAllProductionsDeletability(currentDeletability);
             SetAllProductionsDraggability(currentDraggability);

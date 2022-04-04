@@ -1,3 +1,5 @@
+using System;
+using Coffee.UIEffects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +25,14 @@ namespace Resources.Scripts
                 _levelButtons[i] = transform.GetChild(i).GetComponent<Button>();
                 _levelButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
                 _levelButtons[i].interactable = i + 1 <= reachedLevel;
+                if (!_levelButtons[i].interactable)
+                {
+                    _levelButtons[i].GetComponent<UIEffect>().effectMode = EffectMode.Grayscale;
+                    _levelButtons[i].GetComponent<UIEffect>().colorFactor = 0;
+                } else {
+                    _levelButtons[i].GetComponent<UIEffect>().effectMode = EffectMode.None;
+                    _levelButtons[i].GetComponent<UIEffect>().colorFactor = 1;
+                }
             }
             
         }
@@ -44,8 +54,15 @@ namespace Resources.Scripts
 
         public void NextLevel()
         {
-            if(SceneManager.GetActiveScene().buildIndex < 6)
+            if (SceneManager.GetActiveScene().buildIndex < 6)
+            {
+                if (SceneManager.GetActiveScene().buildIndex + 1 > _gameManager.reachedLevel)
+                {
+                    _gameManager.reachedLevel = SceneManager.GetActiveScene().buildIndex + 1;
+                    _gameManager.SaveGame();
+                }
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
             else 
                 LoadMenu();
         }

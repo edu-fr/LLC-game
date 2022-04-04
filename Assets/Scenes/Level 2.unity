@@ -1540,7 +1540,7 @@ MonoBehaviour:
   HUDTime: {fileID: 1984976217}
   HUDLife: {fileID: 406726257}
   HUDCurrentPart: {fileID: 1562753049}
-  initialTime: 300
+  initialTime: 400
   remainingTime: 0
   initialLife: 5
   remainingLife: 0

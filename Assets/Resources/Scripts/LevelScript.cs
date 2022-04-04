@@ -38,7 +38,13 @@ namespace Resources.Scripts
         [SerializeField] private GameObject p3_unitProductionsBox_resetButton;
             
         [SerializeField] private GameObject trashBin;
-        
+
+        private bool alreadyPlayed100TimeSound,
+            alreadyPlayed50TimeSound,
+            alreadyPlayed30TimeSound,
+            alreadyPlayed10TimeSound;
+
+        private bool alreadyStartedHeartBeatSound = false;
         public int currentPhase { private set; get; }
         public int currentPart { private set; get; }
         
@@ -104,11 +110,40 @@ namespace Resources.Scripts
                     throw new ArgumentOutOfRangeException();
             }
             
+            SoundTimeObserver();
+
+            if (!alreadyStartedHeartBeatSound && canvasController.remainingLife == 1)
+            {
+                SoundManager.instance.Play("heart-beat");
+                alreadyStartedHeartBeatSound = true;
+            }
+                
             if (canvasController.remainingTime <= 0 || canvasController.remainingLife <= 0)
             {
-                SoundManager.instance.Play("level-lose");
+                SoundManager.instance.PlayOneShot("level-lose");
                 canvasController.OpenTryAgainScreen();
                 currentGameState = GameState.Lost;
+            }
+        }
+
+        private void SoundTimeObserver()
+        {
+            if (!alreadyPlayed100TimeSound && canvasController.remainingTime <= 100)
+            {
+                SoundManager.instance.PlayOneShot("time-ticking");
+                alreadyPlayed100TimeSound = true;
+            } else if (!alreadyPlayed50TimeSound && canvasController.remainingTime <= 50)
+            {
+                SoundManager.instance.PlayOneShot("time-ticking");
+                alreadyPlayed50TimeSound = true;
+            } else if (!alreadyPlayed30TimeSound && canvasController.remainingTime <= 30)
+            {
+                SoundManager.instance.PlayOneShot("time-ticking");
+                alreadyPlayed30TimeSound = true;
+            } else if (!alreadyPlayed10TimeSound && canvasController.remainingTime <= 10)
+            {
+                SoundManager.instance.PlayOneShot("time-ticking");
+                alreadyPlayed10TimeSound = true;
             }
         }
 
@@ -132,6 +167,7 @@ namespace Resources.Scripts
                     Time.timeScale = 1f;
                     canvasController.ShowPausePanel(false);
                     SoundManager.instance.UnPauseBGM("level-music");
+                    SoundManager.instance.UnPauseSFX("heart-beat");
                     break;
                 
                 case GameState.Paused:
@@ -139,6 +175,8 @@ namespace Resources.Scripts
                     currentGameState = GameState.Paused;
                     Time.timeScale = 0f;
                     canvasController.ShowPausePanel(true);
+                    
+                    SoundManager.instance.PauseSFX("heart-beat");
                     SoundManager.instance.UnPauseBGM("pause-menu-music");
                     break;
                 
@@ -164,7 +202,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase1Part1())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 2;
                                 SetupPhase1Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -178,7 +216,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase1Part2())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 3;
                                 SetupPhase1Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -191,7 +229,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase1Part3())
                             {
-                                SoundManager.instance.Play("phase-win");
+                                SoundManager.instance.PlayOneShot("phase-win");
                                 currentPart = 1;
                                 currentPhase = 2;
                                 canvasController.Transition(currentPhase);
@@ -210,7 +248,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase2Part1())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 2;
                                 SetupPhase2Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -223,7 +261,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase2Part2())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 3;
                                 SetupPhase2Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -236,7 +274,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase2Part3())
                             {
-                                SoundManager.instance.Play("phase-win");
+                                SoundManager.instance.PlayOneShot("phase-win");
                                 currentPhase = 3;
                                 currentPart = 1;
                                 canvasController.Transition(currentPhase);
@@ -254,7 +292,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase3Part1())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 2;
                                 SetupPhase3Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -267,7 +305,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase3Part2())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 3;
                                 SetupPhase3Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -280,7 +318,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase3Part3())
                             {
-                                SoundManager.instance.Play("phase-win");
+                                SoundManager.instance.PlayOneShot("phase-win");
                                 currentPhase = 4;
                                 currentPart = 1; 
                                 canvasController.Transition(currentPhase);
@@ -298,7 +336,7 @@ namespace Resources.Scripts
                         case 1:
                             if (Phase4Part1())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 2; 
                                 SetupPhase4Part2();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -311,7 +349,7 @@ namespace Resources.Scripts
                         case 2:
                             if (Phase4Part2())
                             {
-                                SoundManager.instance.Play("part-win");
+                                SoundManager.instance.PlayOneShot("part-win");
                                 currentPart = 3;
                                 SetupPhase4Part3();
                                 if (PlayerPrefs.GetInt("showTutorials", 1) == 1)
@@ -324,7 +362,7 @@ namespace Resources.Scripts
                         case 3:
                             if (Phase4Part3())
                             {
-                                SoundManager.instance.Play("level-win");
+                                SoundManager.instance.PlayOneShot("level-win");
                                 canvasController.OpenYouWinScreen();
                             }
                             else

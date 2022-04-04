@@ -59,6 +59,17 @@ namespace Resources.Scripts
          }
          sound.source.Play();
       }
+      
+      public void PlayOneShot(string name)
+      {
+         var sound = Array.Find(SoundEffects.Concat(BackgroundMusics).ToArray(), sound => sound.name == name);
+         if (sound == null)
+         {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+         }
+         sound.source.PlayOneShot(sound.clip, 1f);
+      }
 
       public void PlayBGM(string name)
       {
@@ -85,12 +96,55 @@ namespace Resources.Scripts
                music.source.Pause();
          }
       }
+      
+      public void UnPauseSFX(string name)
+      {
+         foreach (var music in SoundEffects)
+         {
+            if (music.name == name)
+            {
+               music.source.UnPause();
+            }
+            else
+               music.source.Pause();
+         }
+      }
 
+      public void PauseSFX(string name)
+      {
+         foreach (var music in SoundEffects)
+         {
+            if (music.name == name)
+            {
+               music.source.Pause();
+            }
+            else
+               music.source.UnPause();
+         }
+      }
+      
       public void StopMusic()
       {
          foreach (var music in BackgroundMusics)
          {
             music.source.Stop();
+         }
+      }
+
+      public void StopSFX()
+      {
+         foreach (var sfx in SoundEffects)
+         {
+            sfx.source.Stop();
+         }
+      }
+
+      public void StopSFX(string name)
+      {
+         foreach (var sfx in SoundEffects)
+         {
+            if(sfx.name == name)
+               sfx.source.Stop();
          }
       }
    }

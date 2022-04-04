@@ -7,7 +7,7 @@ namespace Resources.Scripts
 {
     public static class Utils
     {
-        public static readonly float ScreenDif = (float) Display.main.systemWidth / 1280;
+        public static readonly float ScreenDif = /* (float) Display.main.systemWidth / 1280 */ 1;
     }
     
     public static class ExtensionMethods

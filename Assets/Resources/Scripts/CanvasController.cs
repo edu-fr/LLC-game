@@ -232,19 +232,17 @@ public class CanvasController : MonoBehaviour
         else
         {
             modal.sprite = modal.errorMark;
-            SoundManager.instance.Play("mistake");
-            // StartCoroutine(BlinkScreenRed());
+            if (remainingLife > 1)
+            {
+                SoundManager.instance.Play("mistake");
+                StartCoroutine(BlinkRed());
+            } 
         }
         mistakeHelpModal.GetComponent<WindowTrigger>().title = title;
         mistakeHelpModal.GetComponent<WindowTrigger>().message = message;
         mistakeHelpModal.SetActive(true);
     }
-
-    // private IEnumerator BlinkScreenRed()
-    // {
-    //     
-    //     yield return new WaitForSeconds(0.1f);
-    // }
+    
 
     public void OpenTryAgainScreen()
     {
@@ -288,4 +286,19 @@ public class CanvasController : MonoBehaviour
         ActivateTutorial(levelScript.currentPhase, levelScript.currentPart);
     }
 
+    public IEnumerator BlinkRed()
+    {
+        effectPanel.gameObject.SetActive(true);        
+        yield return new WaitForSeconds(0.07f);
+        effectPanel.gameObject.SetActive(false);        
+        yield return new WaitForSeconds(0.07f);
+        effectPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.07f);
+        effectPanel.gameObject.SetActive(false);        
+        yield return new WaitForSeconds(0.07f);
+        effectPanel.gameObject.SetActive(true);   
+        yield return new WaitForSeconds(0.07f);
+        effectPanel.gameObject.SetActive(false);        
+    }
+    
 }

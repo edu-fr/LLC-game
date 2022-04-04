@@ -9,6 +9,7 @@ namespace Resources.Scripts
         public PlayerData playerData;
         public int reachedLevel;
         public int[] score;
+        public bool alreadyShowedIntroduction = false;
 
         private void Awake()
         {
